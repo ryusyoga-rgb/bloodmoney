@@ -87,7 +87,11 @@
             
             .meme-canvas {
                 width: 100%;
+                max-width: 350px;
                 height: 300px;
+                border: 3px solid var(--cute-blue);
+                border-radius: 15px;
+                touch-action: none; /* Prevents browser default touch actions */
             }
             
             .voting-buttons {
@@ -114,6 +118,25 @@
             .btn-custom {
                 touch-action: manipulation;
                 -webkit-tap-highlight-color: transparent;
+            }
+            
+            /* Mobile Canvas Container */
+            .meme-generator-mobile {
+                padding: 10px;
+            }
+            
+            .mobile-controls {
+                margin-top: 20px;
+            }
+            
+            /* Better touch targets */
+            .btn-custom {
+                min-height: 44px; /* Apple's recommended minimum touch target size */
+            }
+            
+            .form-control {
+                min-height: 44px;
+                padding: 12px;
             }
         }
 
@@ -566,10 +589,11 @@
                         <button class="btn btn-custom w-100 btn-lg" onclick="downloadMeme()">💾 Download Meme</button>
                         
                         <div class="mt-3 text-center">
-                            <small class="text-muted">💡 Tips: 
-                            • Tap text to select/edit
-                            • Drag to move text
-                            • Pinch to zoom on canvas
+                            <small class="text-muted">💡 Mobile Tips: 
+                            • <strong>Tap</strong> text to select it
+                            • <strong>Touch & drag</strong> to move text around
+                            • Use controls below to change size/color
+                            • Selected text has pink outline
                             </small>
                         </div>
                     </div>
@@ -944,6 +968,26 @@
                     addNewText();
                 }
             });
+            
+            // Show mobile tip if on mobile device
+            if (window.innerWidth <= 768) {
+                setTimeout(() => {
+                    if (textElements.length === 0) {
+                        // Add a sample text to demonstrate
+                        const sampleText = {
+                            text: "Tap me to move!",
+                            x: 200,
+                            y: 200,
+                            size: 24,
+                            color: '#ffffff'
+                        };
+                        textElements.push(sampleText);
+                        selectedTextIndex = 0;
+                        updateTextControls();
+                        drawMemeBackground();
+                    }
+                }, 2000);
+            }
         });
 
         function preloadImages() {
@@ -1280,27 +1324,64 @@
         function handleTouchStart(e) {
             e.preventDefault();
             const touch = e.touches[0];
-            const mouseEvent = new MouseEvent('mousedown', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            canvas.dispatchEvent(mouseEvent);
+            const rect = canvas.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+            
+            // Check if touching on a text element
+            for (let i = textElements.length - 1; i >= 0; i--) {
+                const element = textElements[i];
+                ctx.font = `bold ${element.size}px Comic Sans MS`;
+                const textWidth = ctx.measureText(element.text).width;
+                const textHeight = element.size;
+                
+                if (x >= element.x - textWidth/2 && x <= element.x + textWidth/2 &&
+                    y >= element.y - textHeight && y <= element.y) {
+                    
+                    // Select this text element
+                    selectedTextIndex = i;
+                    updateTextControls();
+                    
+                    isDragging = true;
+                    dragElement = element;
+                    dragOffset.x = x - element.x;
+                    dragOffset.y = y - element.y;
+                    
+                    // Visual feedback
+                    canvas.style.cursor = 'grabbing';
+                    drawMemeBackground();
+                    break;
+                }
+            }
         }
 
         function handleTouchMove(e) {
+            if (!isDragging || !dragElement) return;
             e.preventDefault();
+            
             const touch = e.touches[0];
-            const mouseEvent = new MouseEvent('mousemove', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            canvas.dispatchEvent(mouseEvent);
+            const rect = canvas.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+            
+            // Update text position
+            dragElement.x = x - dragOffset.x;
+            dragElement.y = y - dragOffset.y;
+            
+            // Keep text within canvas bounds
+            dragElement.x = Math.max(20, Math.min(canvas.width - 20, dragElement.x));
+            dragElement.y = Math.max(20, Math.min(canvas.height - 10, dragElement.y));
+            
+            drawMemeBackground();
         }
 
         function handleTouchEnd(e) {
+            if (isDragging) {
+                isDragging = false;
+                dragElement = null;
+                canvas.style.cursor = 'default';
+            }
             e.preventDefault();
-            const mouseEvent = new MouseEvent('mouseup', {});
-            canvas.dispatchEvent(mouseEvent);
         }
 
         function clearCanvas() {
