@@ -543,9 +543,16 @@
                             <div class="card-body">
                                 <h6 class="card-title">➕ Add Text</h6>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="newMemeText" placeholder="Enter your text" style="font-size: 16px;">
+                                    <textarea class="form-control" id="newMemeText" placeholder="Enter your text (supports multiline)" rows="2" style="font-size: 16px; resize: vertical;"></textarea>
                                     <button class="btn btn-custom" onclick="addNewText()">Add</button>
                                 </div>
+                                <small class="text-muted d-block mt-2">
+                                    💡 <strong>Tips:</strong><br>
+                                    • Desktop: Use mouse wheel to resize selected text<br>
+                                    • Mobile: Use pinch gesture to resize text<br>
+                                    • Click empty area to deselect text<br>
+                                    • Ctrl+Enter to quickly add text
+                                </small>
                             </div>
                         </div>
                         
@@ -945,6 +952,11 @@
         let dragOffset = { x: 0, y: 0 };
         let loadedImages = {};
         let selectedTextIndex = -1;
+        
+        // Pinch gesture variables for mobile text size control
+        let isPinching = false;
+        let initialPinchDistance = 0;
+        let initialTextSize = 0;
 
         // Initialize canvas
         window.addEventListener('load', function() {
@@ -970,21 +982,56 @@
                 for (let i = textElements.length - 1; i >= 0; i--) {
                     const element = textElements[i];
                     ctx.font = `bold ${element.size}px Comic Sans MS`;
-                    const textWidth = ctx.measureText(element.text).width;
-                    const textHeight = element.size;
+                    
+                    // Calculate text dimensions for multiline support
+                    const lines = element.text.split('\n');
+                    const lineHeight = element.size * 1.2;
+                    const totalHeight = lines.length * lineHeight;
+                    
+                    let textWidth = 0;
+                    lines.forEach(line => {
+                        const lineWidth = ctx.measureText(line).width;
+                        if (lineWidth > textWidth) {
+                            textWidth = lineWidth;
+                        }
+                    });
                     
                     const padding = 15;
                     if (x >= element.x - textWidth/2 - padding && 
                         x <= element.x + textWidth/2 + padding &&
-                        y >= element.y - textHeight - padding && 
-                        y <= element.y + padding) {
+                        y >= element.y - element.size - padding && 
+                        y <= element.y + totalHeight - element.size + padding) {
                         clickedOnText = true;
                         break;
                     }
                 }
                 
-                // If clicked outside any text, don't reset selection (keep current selection)
-                // This allows users to click and drag again without losing selection
+                // If clicked outside any text, deselect the current text
+                if (!clickedOnText) {
+                    selectedTextIndex = -1;
+                    updateTextControls();
+                    drawMemeBackground();
+                }
+            });
+            
+            // Add mouse wheel support for text size control (desktop)
+            canvas.addEventListener('wheel', function(e) {
+                if (selectedTextIndex >= 0 && selectedTextIndex < textElements.length) {
+                    e.preventDefault();
+                    
+                    const element = textElements[selectedTextIndex];
+                    const delta = e.deltaY > 0 ? -2 : 2; // Scroll down = smaller, up = larger
+                    
+                    // Update text size with limits
+                    element.size = Math.max(10, Math.min(100, element.size + delta));
+                    
+                    // Update UI controls
+                    document.getElementById('textSize').value = element.size;
+                    document.getElementById('sizeValue').textContent = element.size;
+                    
+                    // Redraw canvas
+                    drawMemeBackground();
+                }
             });
             
             // Add touch event listeners for mobile
@@ -993,8 +1040,9 @@
             canvas.addEventListener('touchend', handleTouchEnd, {passive: false});
             
             // Add enter key support for text input
-            document.getElementById('newMemeText').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
+            document.getElementById('newMemeText').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && e.ctrlKey) {
+                    e.preventDefault();
                     addNewText();
                 }
             });
@@ -1190,26 +1238,43 @@
             ctx.lineWidth = 2;
             ctx.textAlign = 'center';
             
+            // Split text into lines for multiline support
+            const lines = element.text.split('\n');
+            const lineHeight = element.size * 1.2;
+            
+            // Calculate total text dimensions for selection box
+            let totalWidth = 0;
+            let totalHeight = lines.length * lineHeight;
+            
+            // Find the widest line
+            lines.forEach(line => {
+                const lineWidth = ctx.measureText(line).width;
+                if (lineWidth > totalWidth) {
+                    totalWidth = lineWidth;
+                }
+            });
+            
             // Draw selection indicator if this text is selected
             if (index === selectedTextIndex) {
-                const textWidth = ctx.measureText(element.text).width;
-                const textHeight = element.size;
-                
                 // Draw selection box
                 ctx.strokeStyle = '#FF69B4';
                 ctx.lineWidth = 3;
                 ctx.setLineDash([5, 5]);
                 ctx.strokeRect(
-                    element.x - textWidth/2 - 5,
-                    element.y - textHeight - 5,
-                    textWidth + 10,
-                    textHeight + 15
+                    element.x - totalWidth/2 - 5,
+                    element.y - element.size - 5,
+                    totalWidth + 10,
+                    totalHeight + 10
                 );
                 ctx.setLineDash([]);
             }
             
-            ctx.strokeText(element.text, element.x, element.y);
-            ctx.fillText(element.text, element.x, element.y);
+            // Draw each line of text
+            lines.forEach((line, lineIndex) => {
+                const yOffset = element.y + (lineIndex * lineHeight);
+                ctx.strokeText(line, element.x, yOffset);
+                ctx.fillText(line, element.x, yOffset);
+            });
         }
 
         // Multi-Text Functions
@@ -1312,10 +1377,24 @@
                 
                 // Add some padding for easier clicking, similar to touch handling
                 const padding = 15;
+                
+                // Calculate text dimensions for multiline support
+                const lines = element.text.split('\n');
+                const lineHeight = element.size * 1.2;
+                const totalHeight = lines.length * lineHeight;
+                
+                let textWidth = 0;
+                lines.forEach(line => {
+                    const lineWidth = ctx.measureText(line).width;
+                    if (lineWidth > textWidth) {
+                        textWidth = lineWidth;
+                    }
+                });
+                
                 const leftBound = element.x - textWidth/2 - padding;
                 const rightBound = element.x + textWidth/2 + padding;
-                const topBound = element.y - textHeight - padding;
-                const bottomBound = element.y + padding;
+                const topBound = element.y - element.size - padding;
+                const bottomBound = element.y + totalHeight - element.size + padding;
                 
                 if (x >= leftBound && x <= rightBound &&
                     y >= topBound && y <= bottomBound) {
@@ -1368,6 +1447,20 @@
         // Touch event handlers for mobile - simplified and more reliable
         function handleTouchStart(e) {
             e.preventDefault();
+            
+            // Handle pinch gesture for text size control
+            if (e.touches.length === 2 && selectedTextIndex >= 0) {
+                isPinching = true;
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                initialPinchDistance = Math.hypot(
+                    touch2.clientX - touch1.clientX,
+                    touch2.clientY - touch1.clientY
+                );
+                initialTextSize = textElements[selectedTextIndex].size;
+                return;
+            }
+            
             const touch = e.touches[0];
             const rect = canvas.getBoundingClientRect();
             const x = touch.clientX - rect.left;
@@ -1377,8 +1470,19 @@
             for (let i = textElements.length - 1; i >= 0; i--) {
                 const element = textElements[i];
                 ctx.font = `bold ${element.size}px Comic Sans MS`;
-                const textWidth = ctx.measureText(element.text).width;
-                const textHeight = element.size;
+                
+                // Calculate text dimensions for multiline support
+                const lines = element.text.split('\n');
+                const lineHeight = element.size * 1.2;
+                const totalHeight = lines.length * lineHeight;
+                
+                let textWidth = 0;
+                lines.forEach(line => {
+                    const lineWidth = ctx.measureText(line).width;
+                    if (lineWidth > textWidth) {
+                        textWidth = lineWidth;
+                    }
+                });
                 
                 // Increased padding for much easier touch detection
                 const padding = Math.max(60, element.size / 1.2);
@@ -1386,8 +1490,8 @@
                 // Expanded touch area - make it much easier to grab text
                 const touchAreaLeft = element.x - textWidth/2 - padding;
                 const touchAreaRight = element.x + textWidth/2 + padding;
-                const touchAreaTop = element.y - textHeight - padding;
-                const touchAreaBottom = element.y + padding;
+                const touchAreaTop = element.y - element.size - padding;
+                const touchAreaBottom = element.y + totalHeight - element.size + padding;
                 
                 if (x >= touchAreaLeft && 
                     x <= touchAreaRight &&
@@ -1419,8 +1523,31 @@
         }
 
         function handleTouchMove(e) {
-            if (!isDragging || !dragElement) return;
             e.preventDefault();
+            
+            // Handle pinch gesture for text size control
+            if (e.touches.length === 2 && isPinching && selectedTextIndex >= 0) {
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const currentDistance = Math.hypot(
+                    touch2.clientX - touch1.clientX,
+                    touch2.clientY - touch1.clientY
+                );
+                
+                const scale = currentDistance / initialPinchDistance;
+                const newSize = Math.max(10, Math.min(100, initialTextSize * scale));
+                
+                textElements[selectedTextIndex].size = newSize;
+                
+                // Update UI controls
+                document.getElementById('textSize').value = newSize;
+                document.getElementById('sizeValue').textContent = newSize;
+                
+                drawMemeBackground();
+                return;
+            }
+            
+            if (!isDragging || !dragElement) return;
             
             const touch = e.touches[0];
             const rect = canvas.getBoundingClientRect();
@@ -1443,6 +1570,12 @@
         }
 
         function handleTouchEnd(e) {
+            if (isPinching) {
+                isPinching = false;
+                initialPinchDistance = 0;
+                initialTextSize = 0;
+            }
+            
             if (isDragging) {
                 isDragging = false;
                 dragElement = null;
