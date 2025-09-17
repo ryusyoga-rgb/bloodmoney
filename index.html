@@ -967,6 +967,10 @@
                 selectMemeImage('harvey1');
             }, 1000);
             
+            // Initialize vote display and leaderboard
+            updateVoteDisplay();
+            updateLeaderboard();
+            
             // Add event listeners for drag and drop (desktop)
             canvas.addEventListener('mousedown', startDrag);
             canvas.addEventListener('mousemove', drag);
@@ -1835,10 +1839,7 @@
         }
 
         // Initialize vote display and leaderboard on page load
-        window.addEventListener('load', function() {
-            updateVoteDisplay();
-            updateLeaderboard();
-        });
+        // (This is now included in the main load event above)
 
         // Comment System
         function postComment() {
