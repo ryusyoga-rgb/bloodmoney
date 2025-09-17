@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Play Blood Money Game Online Free - No download needed! Experience the thrilling human expenditure program featuring Harvey and Eun-mi. Complete challenges, make moral choices, and compete in the ultimate blood money game adventure. Play the full online version now!">
     <meta name="keywords" content="blood money game, harvey, eun-mi, human expenditure program, lovemoney game, bloodmoney, online game, no download needed, online version, free online game">
     <meta name="author" content="Blood Money Game">
@@ -63,6 +63,58 @@
             height: 100vh;
             border: none;
             display: block;
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .game-iframe {
+                height: 70vh;
+            }
+            
+            .hero-section {
+                padding: 30px 0;
+            }
+            
+            .feature-card, .meme-generator, .comment-section {
+                margin: 10px 0;
+                padding: 20px;
+            }
+            
+            .btn-custom {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+            
+            .meme-canvas {
+                width: 100%;
+                height: 300px;
+            }
+            
+            .voting-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .ending-btn {
+                width: 100%;
+                padding: 15px 20px;
+            }
+            
+            .navbar-nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            /* Mobile text input fixes */
+            .form-control, .form-select {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+            
+            /* Mobile-friendly buttons */
+            .btn-custom {
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: transparent;
+            }
         }
 
         .feature-card {
@@ -315,14 +367,15 @@
             <div class="game-container">
                 <div style="position: relative;">
                     <iframe src="https://bloodmoneygame.io/game/bloodmoney/" class="game-iframe" title="Blood Money Game" id="gameFrame"></iframe>
-                    <!-- Fullscreen button -->
-                    <button onclick="toggleFullscreen()" class="btn btn-custom btn-sm" style="position: absolute; bottom: 20px; right: 120px; z-index: 10; background: rgba(255,255,255,0.9); color: var(--cute-purple); border: 2px solid var(--cute-pink); border-radius: 25px; padding: 8px 15px; font-size: 0.9em;" title="Toggle Fullscreen">
-                        🔳 Fullscreen
-                    </button>
-                    <!-- Share button in bottom right corner -->
-                    <div style="position: absolute; bottom: 20px; right: 20px; z-index: 10;">
+                    <!-- Mobile-friendly game controls -->
+                    <div style="position: absolute; bottom: 20px; right: 20px; z-index: 10; display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end;">
+                        <!-- Fullscreen button -->
+                        <button onclick="toggleFullscreen()" class="btn btn-custom btn-sm" style="background: rgba(255,255,255,0.9); color: var(--cute-purple); border: 2px solid var(--cute-pink); border-radius: 25px; padding: 8px 15px; font-size: 0.9em; min-width: 80px;" title="Toggle Fullscreen">
+                            🔳 Full
+                        </button>
+                        <!-- Share button -->
                         <div class="dropdown">
-                            <button class="btn btn-custom btn-sm" type="button" data-bs-toggle="dropdown" style="background: rgba(255,255,255,0.9); color: var(--cute-purple); border: 2px solid var(--cute-pink); border-radius: 25px; padding: 8px 15px; font-size: 0.9em;">
+                            <button class="btn btn-custom btn-sm" type="button" data-bs-toggle="dropdown" style="background: rgba(255,255,255,0.9); color: var(--cute-purple); border: 2px solid var(--cute-pink); border-radius: 25px; padding: 8px 15px; font-size: 0.9em; min-width: 80px;">
                                 🌟 Share
                             </button>
                             <ul class="dropdown-menu" style="background: white; border: 3px solid var(--cute-pink);">
@@ -446,44 +499,92 @@
                     </div>
                 </div>
                 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div style="position: relative;">
+                <!-- Mobile-first Meme Generator Layout -->
+                <div class="meme-generator-mobile">
+                    <!-- Canvas Section -->
+                    <div class="text-center mb-4">
+                        <div style="position: relative; display: inline-block;">
                             <canvas id="memeCanvas" class="meme-canvas" width="400" height="400"></canvas>
                             <!-- Draggable text elements will be added here -->
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="memeText" class="form-label">📝 Your Text:</label>
-                            <input type="text" class="form-control" id="memeText" placeholder="Enter your meme text" oninput="updateMemeText()">
-                        </div>
-                        <div class="mb-3">
-                            <label for="textSize" class="form-label">📏 Text Size: <span id="sizeValue">24</span>px</label>
-                            <input type="range" class="form-range" id="textSize" min="12" max="48" value="24" oninput="updateMemeText()">
-                        </div>
-                        <div class="mb-3">
-                            <label for="textColor" class="form-label">🎨 Text Color:</label>
-                            <input type="color" class="form-control form-control-color" id="textColor" value="#ffffff" oninput="updateMemeText()">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">🖼️ Background Color:</label>
-                            <div class="btn-group" role="group">
-                                <input type="radio" class="btn-check" name="bgColor" id="bgNone" value="none" checked onchange="updateMemeText()">
-                                <label class="btn btn-outline-secondary" for="bgNone">🌈 None</label>
-                                
-                                <input type="radio" class="btn-check" name="bgColor" id="bgWhite" value="white" onchange="updateMemeText()">
-                                <label class="btn btn-outline-light" for="bgWhite">⚪ White</label>
-                                
-                                <input type="radio" class="btn-check" name="bgColor" id="bgBlack" value="black" onchange="updateMemeText()">
-                                <label class="btn btn-outline-dark" for="bgBlack">⚫ Black</label>
+                    
+                    <!-- Mobile-friendly Controls -->
+                    <div class="mobile-controls">
+                        <!-- Add New Text Section -->
+                        <div class="card mb-3" style="background: rgba(255,255,255,0.8); border: 2px solid var(--cute-purple);">
+                            <div class="card-body">
+                                <h6 class="card-title">➕ Add Text</h6>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="newMemeText" placeholder="Enter your text" style="font-size: 16px;">
+                                    <button class="btn btn-custom" onclick="addNewText()">Add</button>
+                                </div>
                             </div>
                         </div>
-                        <button class="btn btn-outline-secondary me-2" onclick="clearCanvas()">🗑️ Clear Text</button>
-                        <button class="btn btn-custom" onclick="downloadMeme()">💾 Download PNG</button>
                         
-                        <div class="mt-3">
-                            <small class="text-muted">💡 Tip: Click and drag text to move it around!</small>
+                        <!-- Text Controls -->
+                        <div class="card mb-3" style="background: rgba(255,255,255,0.8); border: 2px solid var(--cute-blue);">
+                            <div class="card-body">
+                                <h6 class="card-title">🎨 Text Settings</h6>
+                                <div class="mb-3">
+                                    <small>Selected: <span id="selectedTextInfo">Tap text to select</span></small>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="textSize" class="form-label">Size: <span id="sizeValue">24</span>px</label>
+                                        <input type="range" class="form-range" id="textSize" min="12" max="48" value="24" oninput="updateSelectedText()">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="textColor" class="form-label">Color:</label>
+                                        <input type="color" class="form-control form-control-color" id="textColor" value="#ffffff" oninput="updateSelectedText()" style="height: 40px;">
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2 mt-3">
+                                    <button class="btn btn-outline-danger btn-sm flex-fill" onclick="deleteSelectedText()">🗑️ Delete</button>
+                                    <button class="btn btn-outline-secondary btn-sm flex-fill" onclick="clearAllText()">🧹 Clear All</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Background Controls -->
+                        <div class="card mb-3" style="background: rgba(255,255,255,0.8); border: 2px solid var(--cute-green);">
+                            <div class="card-body">
+                                <h6 class="card-title">🖼️ Background</h6>
+                                <div class="btn-group w-100" role="group">
+                                    <input type="radio" class="btn-check" name="bgColor" id="bgNone" value="none" checked onchange="drawMemeBackground()">
+                                    <label class="btn btn-outline-secondary" for="bgNone">🌈 None</label>
+                                    
+                                    <input type="radio" class="btn-check" name="bgColor" id="bgWhite" value="white" onchange="drawMemeBackground()">
+                                    <label class="btn btn-outline-light" for="bgWhite">⚪ White</label>
+                                    
+                                    <input type="radio" class="btn-check" name="bgColor" id="bgBlack" value="black" onchange="drawMemeBackground()">
+                                    <label class="btn btn-outline-dark" for="bgBlack">⚫ Black</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-custom w-100 btn-lg" onclick="downloadMeme()">💾 Download Meme</button>
+                        
+                        <div class="mt-3 text-center">
+                            <small class="text-muted">💡 Tips: 
+                            • Tap text to select/edit
+                            • Drag to move text
+                            • Pinch to zoom on canvas
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Desktop Layout (hidden on mobile) -->
+                <div class="d-none d-md-block">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div style="position: relative;">
+                                <canvas id="memeCanvasDesktop" class="meme-canvas" width="400" height="400" style="display: none;"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- Desktop controls would go here -->
                         </div>
                     </div>
                 </div>
@@ -807,7 +908,7 @@
             shareToSocial(`Just unlocked "${text}" in Blood Money Game! ${stats}`);
         }
 
-        // Advanced Meme Generator with Image Selection and Draggable Text
+        // Advanced Meme Generator with Multi-Text Support
         let selectedImage = 'harvey1';
         let canvas, ctx;
         let textElements = [];
@@ -815,7 +916,7 @@
         let dragElement = null;
         let dragOffset = { x: 0, y: 0 };
         let loadedImages = {};
-        let currentText = null;
+        let selectedTextIndex = -1;
 
         // Initialize canvas
         window.addEventListener('load', function() {
@@ -826,11 +927,23 @@
                 selectMemeImage('harvey1');
             }, 1000);
             
-            // Add event listeners for drag and drop
+            // Add event listeners for drag and drop (desktop)
             canvas.addEventListener('mousedown', startDrag);
             canvas.addEventListener('mousemove', drag);
             canvas.addEventListener('mouseup', endDrag);
             canvas.addEventListener('mouseleave', endDrag);
+            
+            // Add touch event listeners for mobile
+            canvas.addEventListener('touchstart', handleTouchStart, {passive: false});
+            canvas.addEventListener('touchmove', handleTouchMove, {passive: false});
+            canvas.addEventListener('touchend', handleTouchEnd, {passive: false});
+            
+            // Add enter key support for text input
+            document.getElementById('newMemeText').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addNewText();
+                }
+            });
         });
 
         function preloadImages() {
@@ -902,7 +1015,7 @@
                 
                 // Redraw text elements if any
                 if (textElements && textElements.length > 0) {
-                    textElements.forEach(element => drawTextElement(element));
+                    textElements.forEach((element, index) => drawTextElement(element, index));
                 }
             };
             img.src = `image/${selectedImage}.png`;
@@ -953,7 +1066,7 @@
             
             // Draw all text elements
             if (textElements && textElements.length > 0) {
-                textElements.forEach(element => drawTextElement(element));
+                textElements.forEach((element, index) => drawTextElement(element, index));
             }
         }
         
@@ -1003,53 +1116,111 @@
             ctx.fillText(characters[selectedImage], 200, 200);
         }
 
-        function drawTextElement(element) {
+        function drawTextElement(element, index) {
             ctx.font = `bold ${element.size}px Comic Sans MS`;
             ctx.fillStyle = element.color;
             ctx.strokeStyle = '#000';
             ctx.lineWidth = 2;
             ctx.textAlign = 'center';
+            
+            // Draw selection indicator if this text is selected
+            if (index === selectedTextIndex) {
+                const textWidth = ctx.measureText(element.text).width;
+                const textHeight = element.size;
+                
+                // Draw selection box
+                ctx.strokeStyle = '#FF69B4';
+                ctx.lineWidth = 3;
+                ctx.setLineDash([5, 5]);
+                ctx.strokeRect(
+                    element.x - textWidth/2 - 5,
+                    element.y - textHeight - 5,
+                    textWidth + 10,
+                    textHeight + 15
+                );
+                ctx.setLineDash([]);
+            }
+            
             ctx.strokeText(element.text, element.x, element.y);
             ctx.fillText(element.text, element.x, element.y);
         }
 
-        function updateMemeText() {
-            const text = document.getElementById('memeText').value;
+        // Multi-Text Functions
+        function addNewText() {
+            const text = document.getElementById('newMemeText').value.trim();
+            if (!text) {
+                alert('💕 Please enter some text first!');
+                return;
+            }
+            
+            // Create new text element with random position
+            const newText = {
+                text: text,
+                x: Math.random() * 200 + 100, // Random position
+                y: Math.random() * 200 + 100,
+                size: 24,
+                color: '#ffffff'
+            };
+            
+            textElements.push(newText);
+            selectedTextIndex = textElements.length - 1;
+            
+            // Clear input and update UI
+            document.getElementById('newMemeText').value = '';
+            updateTextControls();
+            drawMemeBackground();
+        }
+
+        function updateTextControls() {
+            if (selectedTextIndex >= 0 && selectedTextIndex < textElements.length) {
+                const text = textElements[selectedTextIndex];
+                document.getElementById('selectedTextInfo').textContent = `"${text.text}"`;
+                document.getElementById('textSize').value = text.size;
+                document.getElementById('textColor').value = text.color;
+                document.getElementById('sizeValue').textContent = text.size;
+            } else {
+                document.getElementById('selectedTextInfo').textContent = 'Click on text to select';
+            }
+        }
+
+        function updateSelectedText() {
+            if (selectedTextIndex < 0 || selectedTextIndex >= textElements.length) return;
+            
             const size = parseInt(document.getElementById('textSize').value);
             const color = document.getElementById('textColor').value;
             
-            // Update size display
-            document.getElementById('sizeValue').textContent = size;
+            textElements[selectedTextIndex].size = size;
+            textElements[selectedTextIndex].color = color;
             
-            // Create or update current text (automatically appears on canvas)
-            if (text.trim()) {
-                let currentX = 200;
-                let currentY = 50;
-                
-                // If we have existing text, preserve its position
-                if (textElements.length > 0) {
-                    currentX = textElements[0].x;
-                    currentY = textElements[0].y;
-                }
-                
-                currentText = {
-                    text: text,
-                    x: currentX,
-                    y: currentY,
-                    size: size,
-                    color: color
-                };
-                
-                // Remove any existing text elements and replace with current
-                textElements = [];
-                textElements.push(currentText);
-            } else {
-                // Clear text if input is empty
-                currentText = null;
-                textElements = [];
+            document.getElementById('sizeValue').textContent = size;
+            drawMemeBackground();
+        }
+
+        function deleteSelectedText() {
+            if (selectedTextIndex < 0 || selectedTextIndex >= textElements.length) {
+                alert('💕 Please select a text first!');
+                return;
             }
             
+            textElements.splice(selectedTextIndex, 1);
+            selectedTextIndex = -1;
+            updateTextControls();
             drawMemeBackground();
+        }
+
+        function clearAllText() {
+            if (textElements.length === 0) return;
+            
+            if (confirm('💕 Are you sure you want to clear all text?')) {
+                textElements = [];
+                selectedTextIndex = -1;
+                updateTextControls();
+                drawMemeBackground();
+            }
+        }
+
+        function clearCanvas() {
+            clearAllText();
         }
 
         function startDrag(e) {
@@ -1066,11 +1237,17 @@
                 
                 if (x >= element.x - textWidth/2 && x <= element.x + textWidth/2 &&
                     y >= element.y - textHeight && y <= element.y) {
+                    
+                    // Select this text element
+                    selectedTextIndex = i;
+                    updateTextControls();
+                    
                     isDragging = true;
                     dragElement = element;
                     dragOffset.x = x - element.x;
                     dragOffset.y = y - element.y;
                     canvas.style.cursor = 'grabbing';
+                    drawMemeBackground(); // Redraw to show selection
                     break;
                 }
             }
@@ -1097,6 +1274,33 @@
             isDragging = false;
             dragElement = null;
             canvas.style.cursor = 'default';
+        }
+
+        // Touch event handlers for mobile
+        function handleTouchStart(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent('mousedown', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            canvas.dispatchEvent(mouseEvent);
+        }
+
+        function handleTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent('mousemove', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            canvas.dispatchEvent(mouseEvent);
+        }
+
+        function handleTouchEnd(e) {
+            e.preventDefault();
+            const mouseEvent = new MouseEvent('mouseup', {});
+            canvas.dispatchEvent(mouseEvent);
         }
 
         function clearCanvas() {
