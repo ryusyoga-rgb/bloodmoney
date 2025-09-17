@@ -960,6 +960,32 @@
             canvas.addEventListener('mousemove', drag);
             canvas.addEventListener('mouseup', endDrag);
             canvas.addEventListener('mouseleave', endDrag);
+            canvas.addEventListener('click', function(e) {
+                // Reset selection if clicking outside any text element
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                let clickedOnText = false;
+                for (let i = textElements.length - 1; i >= 0; i--) {
+                    const element = textElements[i];
+                    ctx.font = `bold ${element.size}px Comic Sans MS`;
+                    const textWidth = ctx.measureText(element.text).width;
+                    const textHeight = element.size;
+                    
+                    const padding = 5;
+                    if (x >= element.x - textWidth/2 - padding && 
+                        x <= element.x + textWidth/2 + padding &&
+                        y >= element.y - textHeight - padding && 
+                        y <= element.y + padding) {
+                        clickedOnText = true;
+                        break;
+                    }
+                }
+                
+                // If clicked outside any text, don't reset selection (keep current selection)
+                // This allows users to click and drag again without losing selection
+            });
             
             // Add touch event listeners for mobile
             canvas.addEventListener('touchstart', handleTouchStart, {passive: false});
@@ -1234,6 +1260,14 @@
             textElements[selectedTextIndex].color = color;
             
             document.getElementById('sizeValue').textContent = size;
+            
+            // Ensure the selected text remains draggable after modification
+            const currentElement = textElements[selectedTextIndex];
+            if (dragElement === currentElement) {
+                // If this element was being dragged, maintain the drag state
+                dragElement = currentElement;
+            }
+            
             drawMemeBackground();
         }
 
@@ -1276,8 +1310,15 @@
                 const textWidth = ctx.measureText(element.text).width;
                 const textHeight = element.size;
                 
-                if (x >= element.x - textWidth/2 && x <= element.x + textWidth/2 &&
-                    y >= element.y - textHeight && y <= element.y) {
+                // Add some padding for easier clicking, similar to touch handling
+                const padding = 5;
+                const leftBound = element.x - textWidth/2 - padding;
+                const rightBound = element.x + textWidth/2 + padding;
+                const topBound = element.y - textHeight - padding;
+                const bottomBound = element.y + padding;
+                
+                if (x >= leftBound && x <= rightBound &&
+                    y >= topBound && y <= bottomBound) {
                     
                     // Select this text element
                     selectedTextIndex = i;
@@ -1288,6 +1329,10 @@
                     dragOffset.x = x - element.x;
                     dragOffset.y = y - element.y;
                     canvas.style.cursor = 'grabbing';
+                    
+                    // Visual feedback
+                    canvas.style.transform = 'scale(1.01)';
+                    
                     drawMemeBackground(); // Redraw to show selection
                     break;
                 }
@@ -1315,6 +1360,9 @@
             isDragging = false;
             dragElement = null;
             canvas.style.cursor = 'default';
+            
+            // Reset visual feedback
+            canvas.style.transform = 'scale(1)';
         }
 
         // Touch event handlers for mobile - simplified and more reliable
