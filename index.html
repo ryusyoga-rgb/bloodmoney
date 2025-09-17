@@ -1071,12 +1071,9 @@
                 const img = new Image();
                 img.onload = function() {
                     loadedImages[name] = img;
-                    console.log(`Image ${name} loaded successfully`);
                 };
                 img.onerror = function() {
                     console.log(`Image ${name} not found, using placeholder`);
-                    // Create a placeholder entry so we know this image failed to load
-                    loadedImages[name] = null;
                 };
                 img.src = `image/${name}.png`;
             });
@@ -1167,22 +1164,16 @@
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
             
-            // Try to draw the selected image
+            // Draw the selected image if loaded
             if (loadedImages && loadedImages[selectedImage]) {
                 try {
                     const img = loadedImages[selectedImage];
-                    // Check if image is properly loaded
-                    if (img.complete && img.naturalWidth > 0) {
-                        const scale = Math.min(canvas.width / img.width, canvas.height / img.height);
-                        const x = (canvas.width - img.width * scale) / 2;
-                        const y = (canvas.height - img.height * scale) / 2;
-                        
-                        // Draw image on top of background
-                        ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-                    } else {
-                        // Image not properly loaded, show placeholder
-                        drawPlaceholder(selectedBg);
-                    }
+                    const scale = Math.min(canvas.width / img.width, canvas.height / img.height);
+                    const x = (canvas.width - img.width * scale) / 2;
+                    const y = (canvas.height - img.height * scale) / 2;
+                    
+                    // Draw image on top of background
+                    ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
                 } catch (e) {
                     // If image drawing fails, show placeholder
                     drawPlaceholder(selectedBg);
