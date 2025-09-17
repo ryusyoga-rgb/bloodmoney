@@ -331,6 +331,8 @@
 
         .meme-canvas {
             cursor: default;
+            transition: transform 0.15s ease;
+            touch-action: none;
         }
 
         .meme-canvas:hover {
@@ -1323,19 +1325,26 @@
             const x = touch.clientX - rect.left;
             const y = touch.clientY - rect.top;
             
-            // Check if touching on any text element
+            // Check if touching on any text element - increased sensitivity
             for (let i = textElements.length - 1; i >= 0; i--) {
                 const element = textElements[i];
                 ctx.font = `bold ${element.size}px Comic Sans MS`;
                 const textWidth = ctx.measureText(element.text).width;
                 const textHeight = element.size;
                 
-                // Check if touch is within text bounds (with some padding for easier touch)
-                const padding = 10;
-                if (x >= element.x - textWidth/2 - padding && 
-                    x <= element.x + textWidth/2 + padding &&
-                    y >= element.y - textHeight - padding && 
-                    y <= element.y + padding) {
+                // Increased padding for much easier touch detection
+                const padding = Math.max(25, element.size / 2);
+                
+                // Expanded touch area - make it much easier to grab text
+                const touchAreaLeft = element.x - textWidth/2 - padding;
+                const touchAreaRight = element.x + textWidth/2 + padding;
+                const touchAreaTop = element.y - textHeight - padding;
+                const touchAreaBottom = element.y + padding;
+                
+                if (x >= touchAreaLeft && 
+                    x <= touchAreaRight &&
+                    y >= touchAreaTop && 
+                    y <= touchAreaBottom) {
                     
                     // Select this text element
                     selectedTextIndex = i;
@@ -1343,8 +1352,16 @@
                     
                     isDragging = true;
                     dragElement = element;
+                    
+                    // Calculate offset from touch point to text center for more intuitive dragging
                     dragOffset.x = x - element.x;
                     dragOffset.y = y - element.y;
+                    
+                    // Visual feedback - add slight scale effect
+                    canvas.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        canvas.style.transform = 'scale(1)';
+                    }, 150);
                     
                     // Redraw to show selection
                     drawMemeBackground();
@@ -1362,23 +1379,33 @@
             const x = touch.clientX - rect.left;
             const y = touch.clientY - rect.top;
             
-            // Update text position based on touch
+            // Update text position based on touch - more responsive movement
             dragElement.x = x - dragOffset.x;
             dragElement.y = y - dragOffset.y;
             
-            // Keep text within canvas bounds with some margin
-            const margin = 30;
+            // Keep text within canvas bounds with reduced margin for more movement freedom
+            const margin = 15;
             dragElement.x = Math.max(margin, Math.min(canvas.width - margin, dragElement.x));
             dragElement.y = Math.max(margin, Math.min(canvas.height - margin, dragElement.y));
             
-            // Redraw canvas with new text position
-            drawMemeBackground();
+            // Immediate redraw without delay for better responsiveness
+            requestAnimationFrame(() => {
+                drawMemeBackground();
+            });
         }
 
         function handleTouchEnd(e) {
             if (isDragging) {
                 isDragging = false;
                 dragElement = null;
+                
+                // Visual feedback - return to normal scale
+                canvas.style.transform = 'scale(1)';
+                
+                // Final redraw to clean up any visual artifacts
+                setTimeout(() => {
+                    drawMemeBackground();
+                }, 50);
             }
             e.preventDefault();
         }
@@ -1472,15 +1499,35 @@
             const normalPercent = Math.round((voteData.normal / total) * 100);
             const badPercent = Math.round((voteData.bad / total) * 100);
 
-            // Update progress bars
-            document.querySelector('.progress-bar:nth-child(1)').style.width = goodPercent + '%';
-            document.querySelector('.progress-bar:nth-child(1)').textContent = goodPercent + '%';
+            // Find all progress containers and update the correct ones
+            const progressContainers = document.querySelectorAll('.progress');
             
-            document.querySelector('.progress-bar:nth-child(2)').style.width = normalPercent + '%';
-            document.querySelector('.progress-bar:nth-child(2)').textContent = normalPercent + '%';
+            // Good ending (first progress bar)
+            if (progressContainers[0]) {
+                const goodBar = progressContainers[0].querySelector('.progress-bar');
+                if (goodBar) {
+                    goodBar.style.width = goodPercent + '%';
+                    goodBar.textContent = goodPercent + '%';
+                }
+            }
             
-            document.querySelector('.progress-bar:nth-child(3)').style.width = badPercent + '%';
-            document.querySelector('.progress-bar:nth-child(3)').textContent = badPercent + '%';
+            // Normal ending (second progress bar)
+            if (progressContainers[1]) {
+                const normalBar = progressContainers[1].querySelector('.progress-bar');
+                if (normalBar) {
+                    normalBar.style.width = normalPercent + '%';
+                    normalBar.textContent = normalPercent + '%';
+                }
+            }
+            
+            // Bad ending (third progress bar)
+            if (progressContainers[2]) {
+                const badBar = progressContainers[2].querySelector('.progress-bar');
+                if (badBar) {
+                    badBar.style.width = badPercent + '%';
+                    badBar.textContent = badPercent + '%';
+                }
+            }
         }
 
         // Leaderboard System
