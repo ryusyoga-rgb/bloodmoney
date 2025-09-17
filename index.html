@@ -887,6 +887,108 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
+    <!-- Meme Generator Core Functions -->
+    <script>
+        // Global variables for meme generator
+        let selectedImage = 'harvey1';
+        let canvas, ctx;
+        let loadedImages = {};
+        
+        // Basic meme selection function
+        function selectMemeImage(imageId) {
+            console.log('Selecting image:', imageId);
+            selectedImage = imageId;
+            
+            // Update UI to show selected image
+            document.querySelectorAll('.image-option img, .image-option .placeholder-img').forEach(element => {
+                element.style.border = '3px solid transparent';
+                element.style.boxShadow = 'none';
+            });
+            
+            const selectedElement = document.querySelector(`#img-${imageId} img, #img-${imageId} .placeholder-img`);
+            if (selectedElement) {
+                selectedElement.style.border = '3px solid var(--cute-purple)';
+                selectedElement.style.boxShadow = '0 4px 15px rgba(221, 160, 221, 0.5)';
+            }
+            
+            // Try to draw on canvas if available
+            if (canvas && ctx) {
+                drawMemeBackground();
+            }
+        }
+        
+        // Basic canvas drawing function
+        function drawMemeBackground() {
+            if (!canvas || !ctx) {
+                console.log('Canvas not ready yet');
+                return;
+            }
+            
+            console.log('Drawing meme background for:', selectedImage);
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw gradient background based on selected image
+            const gradients = {
+                'harvey1': ['#FFB6C1', '#DDA0DD'],
+                'harvey2': ['#87CEEB', '#98FB98'],
+                'harvey3': ['#F0E68C', '#DDA0DD'],
+                'harvey4': ['#98FB98', '#87CEEB'],
+                'harvey5': ['#DDA0DD', '#FFB6C1'],
+                'harvey6': ['#87CEEB', '#F0E68C']
+            };
+            
+            const colors = gradients[selectedImage];
+            if (colors) {
+                const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                gradient.addColorStop(0, colors[0]);
+                gradient.addColorStop(1, colors[1]);
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+            
+            // Draw placeholder text
+            const characters = {
+                'harvey1': '🤗 HARVEY 1 🤗',
+                'harvey2': '😎 HARVEY 2 😎',
+                'harvey3': '🥳 HARVEY 3 🥳',
+                'harvey4': '🎭 HARVEY 4 🎭',
+                'harvey5': '🌟 HARVEY 5 🌟',
+                'harvey6': '🎨 HARVEY 6 🎨'
+            };
+            
+            // Draw placeholder box
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.fillRect(50, 100, 300, 200);
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(50, 100, 300, 200);
+            
+            // Draw text
+            ctx.fillStyle = '#000';
+            ctx.font = 'bold 24px Comic Sans MS';
+            ctx.textAlign = 'center';
+            const text = characters[selectedImage] || selectedImage.toUpperCase();
+            ctx.fillText(text, 200, 200);
+            
+            console.log('Placeholder drawn successfully for', selectedImage);
+        }
+        
+        // Initialize canvas when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            canvas = document.getElementById('memeCanvas');
+            if (canvas) {
+                ctx = canvas.getContext('2d');
+                console.log('Canvas initialized in early script');
+                // Draw initial placeholder
+                setTimeout(() => {
+                    drawMemeBackground();
+                }, 500);
+            }
+        });
+    </script>
+    
     <script>
         // Fullscreen functionality
         function toggleFullscreen() {
@@ -999,11 +1101,25 @@
             }
             
             canvas = document.getElementById('memeCanvas');
+            if (!canvas) {
+                console.error('Canvas element not found');
+                return;
+            }
+            
             ctx = canvas.getContext('2d');
+            if (!ctx) {
+                console.error('Canvas context not available');
+                return;
+            }
+            
+            console.log('Canvas initialized successfully');
             preloadImages();
+            
+            // Initialize with first image after a short delay
             setTimeout(() => {
+                console.log('Initializing with harvey1');
                 selectMemeImage('harvey1');
-            }, 1000);
+            }, 1500);
             
             // Vote display and leaderboard are now initialized in DOMContentLoaded event
             
@@ -1107,32 +1223,18 @@
                 const img = new Image();
                 img.onload = function() {
                     loadedImages[name] = img;
+                    console.log(`Image ${name} loaded successfully`);
                 };
                 img.onerror = function() {
                     console.log(`Image ${name} not found, using placeholder`);
+                    // Create placeholder for missing images
+                    loadedImages[name] = null;
                 };
                 img.src = `image/${name}.png`;
             });
         }
 
-        function selectMemeImage(imageId) {
-            selectedImage = imageId;
-            
-            // Update UI to show selected image
-            document.querySelectorAll('.image-option img, .image-option .placeholder-img').forEach(element => {
-                element.style.border = '3px solid transparent';
-                element.style.boxShadow = 'none';
-            });
-            
-            const selectedElement = document.querySelector(`#img-${imageId} img, #img-${imageId} .placeholder-img`);
-            if (selectedElement) {
-                selectedElement.style.border = '3px solid var(--cute-purple)';
-                selectedElement.style.boxShadow = '0 4px 15px rgba(221, 160, 221, 0.5)';
-            }
-            
-            // Update canvas using preloaded images
-            drawMemeBackground();
-        }
+        // selectMemeImage function moved to early script block to avoid undefined errors
         
         function updateMemePreview() {
             if (!canvas || !ctx) return;
@@ -1176,56 +1278,11 @@
             img.src = `image/${selectedImage}.png`;
         }
 
-        function drawMemeBackground() {
-            // Clear canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Try to get selected background, fall back to 'none' if not available
-            let selectedBg = 'none';
-            try {
-                const bgRadio = document.querySelector('input[name="bgColor"]:checked');
-                if (bgRadio) {
-                    selectedBg = bgRadio.value;
-                }
-            } catch (e) {
-                selectedBg = 'none';
-            }
-            
-            // Draw background if selected
-            if (selectedBg === 'black') {
-                ctx.fillStyle = '#000000';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-            } else if (selectedBg === 'white') {
-                ctx.fillStyle = '#FFFFFF';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-            }
-            
-            // Draw the selected image if loaded
-            if (loadedImages && loadedImages[selectedImage]) {
-                try {
-                    const img = loadedImages[selectedImage];
-                    const scale = Math.min(canvas.width / img.width, canvas.height / img.height);
-                    const x = (canvas.width - img.width * scale) / 2;
-                    const y = (canvas.height - img.height * scale) / 2;
-                    
-                    // Draw image on top of background
-                    ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-                } catch (e) {
-                    // If image drawing fails, show placeholder
-                    drawPlaceholder(selectedBg);
-                }
-            } else {
-                // Show placeholder if no image loaded
-                drawPlaceholder(selectedBg);
-            }
-            
-            // Draw all text elements
-            if (textElements && textElements.length > 0) {
-                textElements.forEach((element, index) => drawTextElement(element, index));
-            }
-        }
+        // drawMemeBackground function moved to early script block to ensure availability
         
         function drawPlaceholder(selectedBg) {
+            console.log('Drawing placeholder for:', selectedImage);
+            
             // Draw gradient placeholder
             const gradients = {
                 'harvey1': ['#FFB6C1', '#DDA0DD'],
@@ -1259,16 +1316,21 @@
             
             const isDarkBg = selectedBg === 'black';
             
+            // Draw a colored rectangle as placeholder
             ctx.fillStyle = '#FF69B4';
             ctx.fillRect(50, 100, 300, 200);
             ctx.strokeStyle = isDarkBg ? '#FFF' : '#000';
             ctx.lineWidth = 3;
             ctx.strokeRect(50, 100, 300, 200);
             
+            // Draw text
             ctx.fillStyle = isDarkBg ? '#FFF' : '#000';
-            ctx.font = 'bold 28px Comic Sans MS';
+            ctx.font = 'bold 24px Comic Sans MS';
             ctx.textAlign = 'center';
-            ctx.fillText(characters[selectedImage], 200, 200);
+            const text = characters[selectedImage] || selectedImage.toUpperCase();
+            ctx.fillText(text, 200, 200);
+            
+            console.log('Placeholder drawn successfully');
         }
 
         function drawTextElement(element, index) {
