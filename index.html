@@ -622,7 +622,10 @@
                                     <button class="btn btn-custom" onclick="addMemeText()">Add Text</button>
                                 </div>
                                 <small class="text-muted d-block mt-2">
-                                    💡 <strong>Pro Tip:</strong> Your text will appear in the center of the image
+                                    💡 <strong>Pro Tips:</strong><br>
+                                    • Text appears in center - drag to move it anywhere<br>
+                                    • Click text to select it for editing<br>
+                                    • Works on both desktop and mobile
                                 </small>
                             </div>
                         </div>
@@ -649,7 +652,10 @@
                                     <button class="btn btn-outline-secondary btn-sm flex-fill" onclick="clearTextElements()">🧹 Clear Text</button>
                                 </div>
                                 <small class="text-muted d-block mt-2">
-                                    💡 <strong>Tip:</strong> Click and drag text to move it around
+                                    💡 <strong>How to use:</strong><br>
+                                    • <strong>Desktop:</strong> Click and drag to move text<br>
+                                    • <strong>Mobile:</strong> Touch and drag to move text<br>
+                                    • Click empty area to deselect
                                 </small>
                             </div>
                         </div>
@@ -1153,6 +1159,151 @@
                 // Replace the onclick with our improved function
                 addTextBtn.setAttribute('onclick', 'addMemeText()');
             }
+            
+            // Setup canvas interaction for text selection and dragging
+            setupCanvasInteraction();
+        }
+        
+        // Setup canvas mouse and touch events for text interaction
+        function setupCanvasInteraction() {
+            if (!canvas) return;
+            
+            let isDragging = false;
+            let dragOffset = { x: 0, y: 0 };
+            
+            // Mouse events
+            canvas.addEventListener('mousedown', handleCanvasMouseDown);
+            canvas.addEventListener('mousemove', handleCanvasMouseMove);
+            canvas.addEventListener('mouseup', handleCanvasMouseUp);
+            canvas.addEventListener('mouseleave', handleCanvasMouseUp);
+            
+            // Touch events for mobile
+            canvas.addEventListener('touchstart', handleCanvasTouchStart, { passive: false });
+            canvas.addEventListener('touchmove', handleCanvasTouchMove, { passive: false });
+            canvas.addEventListener('touchend', handleCanvasTouchEnd);
+            
+            function handleCanvasMouseDown(e) {
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Check if click is on any text element
+                const clickedTextIndex = getTextElementAtPosition(x, y);
+                
+                if (clickedTextIndex >= 0) {
+                    // Select this text for dragging
+                    selectedTextIndex = clickedTextIndex;
+                    isDragging = true;
+                    
+                    const text = textElements[selectedTextIndex];
+                    dragOffset.x = x - text.x;
+                    dragOffset.y = y - text.y;
+                    
+                    updateTextControls();
+                    drawMemeBackground();
+                    
+                    canvas.style.cursor = 'grabbing';
+                } else {
+                    // Clicked on empty area - deselect text
+                    selectedTextIndex = -1;
+                    updateTextControls();
+                    drawMemeBackground();
+                }
+            }
+            
+            function handleCanvasMouseMove(e) {
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                if (isDragging && selectedTextIndex >= 0) {
+                    // Update text position
+                    textElements[selectedTextIndex].x = x - dragOffset.x;
+                    textElements[selectedTextIndex].y = y - dragOffset.y;
+                    
+                    // Redraw canvas
+                    drawMemeBackground();
+                } else {
+                    // Update cursor based on hover
+                    const hoverTextIndex = getTextElementAtPosition(x, y);
+                    canvas.style.cursor = hoverTextIndex >= 0 ? 'grab' : 'crosshair';
+                }
+            }
+            
+            function handleCanvasMouseUp() {
+                isDragging = false;
+                canvas.style.cursor = 'crosshair';
+            }
+            
+            function handleCanvasTouchStart(e) {
+                e.preventDefault();
+                const rect = canvas.getBoundingClientRect();
+                const touch = e.touches[0];
+                const x = touch.clientX - rect.left;
+                const y = touch.clientY - rect.top;
+                
+                const clickedTextIndex = getTextElementAtPosition(x, y);
+                
+                if (clickedTextIndex >= 0) {
+                    selectedTextIndex = clickedTextIndex;
+                    isDragging = true;
+                    
+                    const text = textElements[selectedTextIndex];
+                    dragOffset.x = x - text.x;
+                    dragOffset.y = y - text.y;
+                    
+                    updateTextControls();
+                    drawMemeBackground();
+                }
+            }
+            
+            function handleCanvasTouchMove(e) {
+                e.preventDefault();
+                if (!isDragging || selectedTextIndex < 0) return;
+                
+                const rect = canvas.getBoundingClientRect();
+                const touch = e.touches[0];
+                const x = touch.clientX - rect.left;
+                const y = touch.clientY - rect.top;
+                
+                textElements[selectedTextIndex].x = x - dragOffset.x;
+                textElements[selectedTextIndex].y = y - dragOffset.y;
+                
+                drawMemeBackground();
+            }
+            
+            function handleCanvasTouchEnd() {
+                isDragging = false;
+            }
+        }
+        
+        // Get text element at specific position (for click detection)
+        function getTextElementAtPosition(x, y) {
+            if (!ctx) return -1;
+            
+            // Check from top to bottom (reverse order for proper layering)
+            for (let i = textElements.length - 1; i >= 0; i--) {
+                const text = textElements[i];
+                
+                // Set font to measure text
+                ctx.font = `bold ${text.size}px Comic Sans MS`;
+                
+                // Measure text dimensions
+                const metrics = ctx.measureText(text.text);
+                const textWidth = metrics.width;
+                const textHeight = text.size;
+                
+                // Check if click is within text bounds (with some padding)
+                const padding = 10;
+                if (x >= text.x - textWidth/2 - padding && 
+                    x <= text.x + textWidth/2 + padding &&
+                    y >= text.y - textHeight - padding && 
+                    y <= text.y + padding) {
+                    return i;
+                }
+            }
+            
+            return -1; // No text element found at this position
         }
         
         // Add new text to meme
@@ -1246,19 +1397,39 @@
             // Draw selection indicator if this text is selected
             if (index === selectedTextIndex) {
                 ctx.strokeStyle = '#FF69B4';
-                ctx.lineWidth = 3;
-                ctx.setLineDash([5, 5]);
+                ctx.lineWidth = 4;
+                ctx.setLineDash([8, 4]);
                 
                 const metrics = ctx.measureText(element.text);
-                const padding = 10;
-                ctx.strokeRect(
-                    element.x - metrics.width/2 - padding,
-                    element.y - element.size - padding,
-                    metrics.width + padding * 2,
-                    element.size + padding * 2
-                );
+                const padding = 15;
+                const x = element.x - metrics.width/2 - padding;
+                const y = element.y - element.size - padding;
+                const width = metrics.width + padding * 2;
+                const height = element.size + padding * 2;
+                
+                // Draw selection box with rounded corners effect
+                ctx.strokeRect(x, y, width, height);
+                
+                // Draw corner indicators
+                const cornerSize = 8;
+                ctx.fillStyle = '#FF69B4';
+                
+                // Top-left corner
+                ctx.fillRect(x, y, cornerSize, cornerSize);
+                // Top-right corner
+                ctx.fillRect(x + width - cornerSize, y, cornerSize, cornerSize);
+                // Bottom-left corner
+                ctx.fillRect(x, y + height - cornerSize, cornerSize, cornerSize);
+                // Bottom-right corner
+                ctx.fillRect(x + width - cornerSize, y + height - cornerSize, cornerSize, cornerSize);
                 
                 ctx.setLineDash([]);
+                
+                // Draw handle indicator
+                ctx.fillStyle = '#FF69B4';
+                ctx.beginPath();
+                ctx.arc(element.x + metrics.width/2 + padding + 10, element.y, 6, 0, 2 * Math.PI);
+                ctx.fill();
             }
         }
         
