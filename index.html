@@ -496,11 +496,55 @@
         <div class="container">
             <div class="feature-card">
                 <h3>🏆 Achievement Share Generator 🏆</h3>
-                <p>Complete challenges to unlock shareable achievement images!</p>
-                <div class="text-center">
-                    <button class="btn btn-custom" onclick="generateAchievement()">
-                        🌟 Generate Achievement Image 🌟
-                    </button>
+                <p>Enter your Blood Money game stats to generate a personalized achievement!</p>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="gameTime" class="form-label">⏱️ Completion Time (minutes):</label>
+                            <input type="number" class="form-control" id="gameTime" placeholder="e.g., 15" min="1" max="120" value="15">
+                        </div>
+                        <div class="mb-3">
+                            <label for="gameMoney" class="form-label">💰 Money Earned ($):</label>
+                            <input type="number" class="form-control" id="gameMoney" placeholder="e.g., 45000" min="0" max="100000" value="45000">
+                        </div>
+                        <div class="mb-3">
+                            <label for="gameChoice" class="form-label">🎯 Your Final Choice:</label>
+                            <select class="form-select" id="gameChoice">
+                                <option value="good">😊 Good Ending</option>
+                                <option value="normal">😐 Normal Ending</option>
+                                <option value="bad">😢 Bad Ending</option>
+                            </select>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-custom" onclick="generateAchievement()">
+                                🌟 Generate My Achievement! 🌟
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <h5>🏆 Achievement Tiers 🏆</h5>
+                            <div class="row text-start">
+                                <div class="col-12 mb-2">
+                                    <span class="badge bg-success">🚀 Speed Runner Millionaire</span><br>
+                                    <small>Complete in ≤12 minutes with ≥$45,000</small>
+                                </div>
+                                <div class="col-12 mb-2">
+                                    <span class="badge bg-primary">🦄 Moral Hero</span><br>
+                                    <small>Good ending with ≥$30,000</small>
+                                </div>
+                                <div class="col-12 mb-2">
+                                    <span class="badge bg-warning">💰 Money Master</span><br>
+                                    <small>Earn ≥$40,000</small>
+                                </div>
+                                <div class="col-12 mb-2">
+                                    <span class="badge bg-info">🎮 Blood Money Player</span><br>
+                                    <small>All other brave players!</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -511,7 +555,53 @@
         <div class="container">
             <div class="feature-card">
                 <h3>🏆 Blood Money Game Leaderboard 🏆</h3>
-                <p>Compete for the fastest completion times in the blood money game!</p>
+                <p>Submit your score to compete with other players!</p>
+                
+                <!-- Score Submission Form -->
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <div class="card" style="background: rgba(255,255,255,0.8); border: 2px solid var(--cute-pink);">
+                            <div class="card-body">
+                                <h5 class="card-title">🎮 Submit Your Score</h5>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" id="playerName" placeholder="Your Name" maxlength="15">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="number" class="form-control" id="playerTime" placeholder="Time (min)" min="1" max="120">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="number" class="form-control" id="playerMoney" placeholder="Money ($)" min="0" max="100000">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select class="form-select" id="playerEnding">
+                                            <option value="">Ending</option>
+                                            <option value="good">😊 Good</option>
+                                            <option value="normal">😐 Normal</option>
+                                            <option value="bad">😢 Bad</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-custom w-100" onclick="submitScore()">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" style="background: rgba(255,255,255,0.8); border: 2px solid var(--cute-blue);">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">📊 Ranking Rules</h5>
+                                <small>
+                                    1. Fastest time first<br>
+                                    2. Higher money breaks ties<br>
+                                    3. Good ending bonus
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="leaderboard-table">
                     <table class="table">
                         <thead>
@@ -521,30 +611,11 @@
                                 <th>Time</th>
                                 <th>Money</th>
                                 <th>Ending</th>
+                                <th>Score</th>
                             </tr>
                         </thead>
                         <tbody id="leaderboard-body">
-                            <tr>
-                                <td>🥇</td>
-                                <td>ProGamer123</td>
-                                <td>12:34</td>
-                                <td>$50,000</td>
-                                <td><span class="badge" style="background: linear-gradient(45deg, var(--cute-green), var(--cute-blue));">😊 Good</span></td>
-                            </tr>
-                            <tr>
-                                <td>🥈</td>
-                                <td>SpeedRunner</td>
-                                <td>15:22</td>
-                                <td>$45,000</td>
-                                <td><span class="badge" style="background: linear-gradient(45deg, var(--cute-yellow), var(--cute-purple));">😐 Normal</span></td>
-                            </tr>
-                            <tr>
-                                <td>🥉</td>
-                                <td>MoralChoice</td>
-                                <td>18:45</td>
-                                <td>$38,000</td>
-                                <td><span class="badge" style="background: linear-gradient(45deg, var(--cute-pink), var(--cute-purple));">😢 Bad</span></td>
-                            </tr>
+                            <!-- Default scores will be loaded here -->
                         </tbody>
                     </table>
                 </div>
@@ -661,26 +732,67 @@
             }
         }
 
-        // Achievement Generator
+        // Achievement Generator - Form Input
         function generateAchievement() {
-            const achievements = [
-                { name: "💕 Blood Money Master 💕", emoji: "🏆", color: "linear-gradient(45deg, var(--cute-pink), var(--cute-purple))" },
-                { name: "🌟 Harvey's Best Friend 🌟", emoji: "🤝", color: "linear-gradient(45deg, var(--cute-blue), var(--cute-green))" },
-                { name: "✨ Eun-mi's Amazing Ally ✨", emoji: "🌸", color: "linear-gradient(45deg, var(--cute-yellow), var(--cute-pink))" },
-                { name: "🦄 Moral Compass Hero 🦄", emoji: "⚖️", color: "linear-gradient(45deg, var(--cute-purple), var(--cute-blue))" },
-                { name: "🚀 Super Speed Runner 🚀", emoji: "⭐", color: "linear-gradient(45deg, var(--cute-green), var(--cute-yellow))" }
-            ];
+            // Get user input from form fields
+            const gameTime = document.getElementById('gameTime').value;
+            const gameMoney = document.getElementById('gameMoney').value;
+            const gameChoice = document.getElementById('gameChoice').value;
             
-            const achievement = achievements[Math.floor(Math.random() * achievements.length)];
-            const gameTime = Math.floor(Math.random() * 30) + 10;
-            const gameMoney = Math.floor(Math.random() * 50000) + 10000;
-            const choices = ["😊 Moral", "😐 Neutral", "😢 Ruthless"];
-            const choice = choices[Math.floor(Math.random() * choices.length)];
+            // Validate inputs
+            if (!gameTime || !gameMoney || !gameChoice) {
+                alert("💕 Please fill in all fields to generate your achievement!");
+                return;
+            }
             
-            document.getElementById('achievementText').textContent = achievement.name;
-            document.getElementById('achievementStats').textContent = `⏱️ Time: ${gameTime}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')} | 💰 Money: $${gameMoney.toLocaleString()} | 🎯 Choice: ${choice}`;
-            document.getElementById('achievementEmoji').textContent = achievement.emoji;
-            document.getElementById('achievementImage').style.background = achievement.color;
+            if (parseInt(gameTime) <= 0 || parseInt(gameMoney) < 0) {
+                alert("💕 Please enter valid positive numbers!");
+                return;
+            }
+            
+            // Determine achievement based on performance
+            let achievement, emoji, color;
+            const timeNum = parseInt(gameTime);
+            const moneyNum = parseInt(gameMoney.replace(/[^0-9]/g, ''));
+            
+            if (timeNum <= 12 && moneyNum >= 45000) {
+                achievement = "🚀 Speed Runner Millionaire 🚀";
+                emoji = "⭐";
+                color = "linear-gradient(45deg, var(--cute-green), var(--cute-yellow))";
+            } else if (gameChoice === "good" && moneyNum >= 30000) {
+                achievement = "🦄 Moral Hero 🦄";
+                emoji = "⚖️";
+                color = "linear-gradient(45deg, var(--cute-purple), var(--cute-blue))";
+            } else if (moneyNum >= 40000) {
+                achievement = "💰 Money Master 💰";
+                emoji = "💎";
+                color = "linear-gradient(45deg, var(--cute-yellow), var(--cute-pink))";
+            } else {
+                achievement = "🎮 Blood Money Player 🎮";
+                emoji = "🎮";
+                color = "linear-gradient(45deg, var(--cute-pink), var(--cute-purple))";
+            }
+            
+            // Format choice text
+            const choiceText = {
+                'good': '😊 Moral',
+                'normal': '😐 Neutral', 
+                'bad': '😢 Ruthless'
+            }[gameChoice] || gameChoice;
+            
+            // Format time
+            const minutes = parseInt(gameTime) || 0;
+            const seconds = Math.floor(Math.random() * 60); // Add random seconds for realism
+            const timeText = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Format money
+            const moneyText = `$${parseInt(moneyNum || 0).toLocaleString()}`;
+            
+            // Update achievement modal
+            document.getElementById('achievementText').textContent = achievement;
+            document.getElementById('achievementStats').textContent = `⏱️ Time: ${timeText} | 💰 Money: ${moneyText} | 🎯 Choice: ${choiceText}`;
+            document.getElementById('achievementEmoji').textContent = emoji;
+            document.getElementById('achievementImage').style.background = color;
             
             document.getElementById('achievementModal').style.display = 'block';
         }
@@ -1052,11 +1164,160 @@
             }
         }
 
-        // Ending Voting
+        // Ending Voting - Real-time calculation
+        let voteData = {
+            good: 10,
+            normal: 10,
+            bad: 10
+        };
+
         function voteEnding(ending) {
+            // Add vote to data
+            voteData[ending]++;
+            
+            // Update UI with new percentages
+            updateVoteDisplay();
+            
+            // Show confirmation
             alert(`🌟 Thank you for voting for the ${ending} ending! Your vote has been recorded. You're awesome! 🌟`);
-            // In a real implementation, this would update the server-side voting data
         }
+
+        function updateVoteDisplay() {
+            const total = voteData.good + voteData.normal + voteData.bad;
+            const goodPercent = Math.round((voteData.good / total) * 100);
+            const normalPercent = Math.round((voteData.normal / total) * 100);
+            const badPercent = Math.round((voteData.bad / total) * 100);
+
+            // Update progress bars
+            document.querySelector('.progress-bar:nth-child(1)').style.width = goodPercent + '%';
+            document.querySelector('.progress-bar:nth-child(1)').textContent = goodPercent + '%';
+            
+            document.querySelector('.progress-bar:nth-child(2)').style.width = normalPercent + '%';
+            document.querySelector('.progress-bar:nth-child(2)').textContent = normalPercent + '%';
+            
+            document.querySelector('.progress-bar:nth-child(3)').style.width = badPercent + '%';
+            document.querySelector('.progress-bar:nth-child(3)').textContent = badPercent + '%';
+        }
+
+        // Leaderboard System
+        let leaderboardData = [
+            { name: "SpeedDemon", time: 8, money: 48000, ending: "good" },
+            { name: "ProGamer123", time: 12, money: 50000, ending: "good" },
+            { name: "MoneyMaker", time: 15, money: 52000, ending: "normal" },
+            { name: "QuickPlayer", time: 18, money: 35000, ending: "bad" },
+            { name: "CasualGamer", time: 25, money: 30000, ending: "normal" }
+        ];
+
+        function calculateScore(player) {
+            // Lower time = higher score, higher money = higher score
+            const timeScore = (100 - player.time) * 1000;
+            const moneyScore = player.money;
+            const endingBonus = player.ending === 'good' ? 5000 : player.ending === 'normal' ? 2000 : 0;
+            return timeScore + moneyScore + endingBonus;
+        }
+
+        function formatTime(minutes) {
+            const secs = Math.floor(Math.random() * 60); // Add random seconds
+            return `${minutes}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function getEndingBadge(ending) {
+            const badges = {
+                'good': '<span class="badge" style="background: linear-gradient(45deg, var(--cute-green), var(--cute-blue));">😊 Good</span>',
+                'normal': '<span class="badge" style="background: linear-gradient(45deg, var(--cute-yellow), var(--cute-purple));">😐 Normal</span>',
+                'bad': '<span class="badge" style="background: linear-gradient(45deg, var(--cute-pink), var(--cute-purple));">😢 Bad</span>'
+            };
+            return badges[ending] || ending;
+        }
+
+        function getRankEmoji(index) {
+            const emojis = ['🥇', '🥈', '🥉'];
+            return emojis[index] || `${index + 1}`;
+        }
+
+        function updateLeaderboard() {
+            // Sort by score (highest first)
+            const sortedData = [...leaderboardData].sort((a, b) => calculateScore(b) - calculateScore(a));
+            
+            const tbody = document.getElementById('leaderboard-body');
+            tbody.innerHTML = '';
+            
+            sortedData.forEach((player, index) => {
+                const row = document.createElement('tr');
+                const score = calculateScore(player);
+                
+                row.innerHTML = `
+                    <td>${getRankEmoji(index)}</td>
+                    <td>${player.name}</td>
+                    <td>${formatTime(player.time)}</td>
+                    <td>$${player.money.toLocaleString()}</td>
+                    <td>${getEndingBadge(player.ending)}</td>
+                    <td><small class="text-muted">${score.toLocaleString()}</small></td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+
+        function submitScore() {
+            const name = document.getElementById('playerName').value.trim();
+            const time = parseInt(document.getElementById('playerTime').value);
+            const money = parseInt(document.getElementById('playerMoney').value);
+            const ending = document.getElementById('playerEnding').value;
+            
+            // Validation
+            if (!name || !time || !money || !ending) {
+                alert('💕 Please fill in all fields!');
+                return;
+            }
+            
+            if (time <= 0 || money < 0) {
+                alert('💕 Please enter valid positive numbers!');
+                return;
+            }
+            
+            // Check if player already exists and update, or add new
+            const existingIndex = leaderboardData.findIndex(p => p.name.toLowerCase() === name.toLowerCase());
+            
+            const newScore = {
+                name: name,
+                time: time,
+                money: money,
+                ending: ending
+            };
+            
+            if (existingIndex >= 0) {
+                // Update existing player (only if new score is better)
+                const oldScore = calculateScore(leaderboardData[existingIndex]);
+                const newPlayerScore = calculateScore(newScore);
+                
+                if (newPlayerScore > oldScore) {
+                    leaderboardData[existingIndex] = newScore;
+                    alert(`🎉 New personal best for ${name}!`);
+                } else {
+                    alert(`💪 Your existing score is still better!`);
+                }
+            } else {
+                // Add new player
+                leaderboardData.push(newScore);
+                alert(`🎉 Welcome to the leaderboard, ${name}!`);
+            }
+            
+            // Clear form
+            document.getElementById('playerName').value = '';
+            document.getElementById('playerTime').value = '';
+            document.getElementById('playerMoney').value = '';
+            document.getElementById('playerEnding').value = '';
+            
+            // Update display
+            updateLeaderboard();
+        }
+
+        // Initialize vote display and leaderboard on page load
+        window.addEventListener('load', function() {
+            updateVoteDisplay();
+            updateLeaderboard();
+        });
 
         // Comment System
         function postComment() {
