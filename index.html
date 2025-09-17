@@ -968,8 +968,10 @@
             }, 1000);
             
             // Initialize vote display and leaderboard
+            console.log('Initializing vote display and leaderboard...');
             updateVoteDisplay();
             updateLeaderboard();
+            console.log('Initialization complete');
             
             // Add event listeners for drag and drop (desktop)
             canvas.addEventListener('mousedown', startDrag);
@@ -1668,8 +1670,10 @@
         };
 
         function voteEnding(ending) {
+            console.log('voteEnding called with:', ending);
             // Add vote to data
             voteData[ending]++;
+            console.log('Updated voteData:', voteData);
             
             // Update UI with new percentages
             updateVoteDisplay();
@@ -1679,13 +1683,17 @@
         }
 
         function updateVoteDisplay() {
+            console.log('updateVoteDisplay called');
             const total = voteData.good + voteData.normal + voteData.bad;
             const goodPercent = Math.round((voteData.good / total) * 100);
             const normalPercent = Math.round((voteData.normal / total) * 100);
             const badPercent = Math.round((voteData.bad / total) * 100);
+            
+            console.log('Vote percentages:', {goodPercent, normalPercent, badPercent});
 
             // Find all progress containers and update the correct ones
             const progressContainers = document.querySelectorAll('.progress');
+            console.log('Found progress containers:', progressContainers.length);
             
             // Good ending (first progress bar)
             if (progressContainers[0]) {
