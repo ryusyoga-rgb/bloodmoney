@@ -1,0 +1,25 @@
+# Cloudflare Pages Configuration
+build:
+  command: echo "No build needed"
+publish: .
+
+# Custom headers for better performance
+headers:
+  - for: /*
+    values:
+      Cache-Control: public, max-age=3600
+      X-Content-Type-Options: nosniff
+      X-Frame-Options: DENY
+      X-XSS-Protection: 1; mode=block
+
+# Redirect rules
+redirects:
+  - from: /game
+    to: /#game
+    status: 301
+  - from: /memes
+    to: /#harvey-memes
+    status: 301
+  - from: /vote
+    to: /#ending-voting
+    status: 301

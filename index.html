@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play Blood Money Game Online Free - No download needed! Experience the thrilling human expenditure program featuring Harvey and Eun-mi. Complete challenges, make moral choices, and compete in the ultimate blood money game adventure. Play the full online version now!">
+    <meta name="keywords" content="blood money game, harvey, eun-mi, human expenditure program, lovemoney game, bloodmoney, online game, no download needed, online version, free online game">
+    <meta name="author" content="Blood Money Game">
+    <meta property="og:title" content="Blood Money Game Online - No Download Needed | Harvey & Eun-mi Adventure">
+    <meta property="og:description" content="Play Blood Money Game online free - No download needed! Experience the ultimate human expenditure program with Harvey and Eun-mi. Navigate moral choices and make life-changing decisions in this thrilling online version adventure.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourwebsite.com">
+    <title>Blood Money Game Online - No Download Needed | Harvey & Eun-mi Human Expenditure Program</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --cute-pink: #FFB6C1;
+            --cute-purple: #DDA0DD;
+            --cute-blue: #87CEEB;
+            --cute-yellow: #F0E68C;
+            --cute-green: #98FB98;
+            --cute-bg: #FFF0F5;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --border-color: rgba(255, 182, 193, 0.5);
+            --text-dark: #4A4A4A;
+            --text-light: #6B6B6B;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(180deg, var(--cute-bg) 0%, #FFE4E1 100%);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,182,193,0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><defs><pattern id="hearts" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><rect fill="%23FFB6C1" width="40" height="40"/><text fill="%23FF69B4" font-size="20" font-family="Arial" x="20" y="25" text-anchor="middle">♥</text></pattern></defs><rect fill="url(%23hearts)" width="1200" height="400"/><text fill="%23FF1493" font-size="72" font-family="Comic Sans MS" font-weight="bold" x="600" y="200" text-anchor="middle">💕 Blood Money Game 💕</text><text fill="%23937DB" font-size="48" font-family="Comic Sans MS" x="600" y="250" text-anchor="middle">Play with Harvey & Eun-mi!</text></svg>');
+            background-size: cover;
+            background-position: center;
+            padding: 60px 0;
+            text-align: center;
+            border-bottom: 3px solid var(--cute-pink);
+        }
+
+        .game-container {
+            background: var(--card-bg);
+            border: 2px solid var(--cute-pink);
+            border-radius: 20px;
+            padding: 0;
+            margin: 0;
+            box-shadow: 0 0 30px rgba(255, 182, 193, 0.5);
+        }
+
+        .game-iframe {
+            width: 100%;
+            height: 100vh;
+            border: none;
+            display: block;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 3px solid var(--cute-pink);
+            border-radius: 25px;
+            padding: 30px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--cute-purple);
+            box-shadow: 0 12px 35px rgba(221, 160, 221, 0.5);
+        }
+
+        .btn-custom {
+            background: linear-gradient(45deg, var(--cute-pink), var(--cute-purple));
+            color: white;
+            border: 3px solid var(--cute-blue);
+            padding: 15px 35px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-family: 'Comic Sans MS', cursive;
+            text-transform: none;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+
+        .btn-custom:hover {
+            background: linear-gradient(45deg, var(--cute-purple), var(--cute-blue));
+            border-color: var(--cute-yellow);
+            color: white;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(221, 160, 221, 0.4);
+        }
+
+        .leaderboard-table {
+            background: rgba(255,255,255,0.8);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 3px solid var(--cute-pink);
+        }
+
+        .meme-generator {
+            background: rgba(255,255,255,0.9);
+            border-radius: 25px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 3px solid var(--cute-purple);
+        }
+
+        .meme-canvas {
+            border: 3px solid var(--cute-blue);
+            border-radius: 15px;
+            max-width: 100%;
+            background: white;
+        }
+
+        .voting-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .ending-btn {
+            padding: 20px 40px;
+            border: 3px solid white;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 1.1em;
+        }
+
+        .ending-good { background: linear-gradient(45deg, var(--cute-green), var(--cute-blue)); color: white; border-color: var(--cute-green); }
+        .ending-normal { background: linear-gradient(45deg, var(--cute-yellow), var(--cute-purple)); color: white; border-color: var(--cute-yellow); }
+        .ending-bad { background: linear-gradient(45deg, var(--cute-pink), var(--cute-purple)); color: white; border-color: var(--cute-pink); }
+
+        .social-share {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--money-bronze);
+            border-radius: 0;
+            color: var(--money-gold);
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .twitter { background: #1da1f2; }
+        .reddit { background: #ff4500; }
+        .tiktok { background: #000000; }
+        .discord { background: #5865f2; }
+
+        .comment-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 25px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 3px solid var(--cute-blue);
+            box-shadow: 0 8px 25px rgba(135, 206, 235, 0.3);
+        }
+
+        .achievement-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,182,193,0.9);
+            z-index: 1000;
+        }
+
+        .achievement-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            color: var(--text-dark);
+            padding: 40px;
+            border-radius: 25px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            border: 3px solid var(--cute-pink);
+            box-shadow: 0 8px 30px rgba(255,182,193,0.5);
+        }
+
+        .achievement-image {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            background: linear-gradient(45deg, var(--cute-pink), var(--cute-purple));
+            border-radius: 20px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: 'Comic Sans MS', cursive;
+            box-shadow: 0 4px 15px rgba(221, 160, 221, 0.3);
+        }
+
+        h1, h2, h3 {
+            color: var(--cute-purple);
+            font-weight: bold;
+            font-family: 'Comic Sans MS', cursive;
+            text-transform: none;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .keyword-density {
+            color: var(--cute-pink);
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .image-option .placeholder-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .meme-canvas {
+            cursor: default;
+        }
+
+        .meme-canvas:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .meme-thumbnail {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .meme-thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg" style="background: linear-gradient(45deg, var(--cute-pink), var(--cute-purple)); border-bottom: 3px solid var(--cute-blue);">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between w-100">
+                <!-- Game Title -->
+                <div style="color: white; font-family: 'Comic Sans MS', cursive; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                    <div style="font-size: 1.2em;">🎮 Play Blood Money Game Online</div>
+                    <div style="font-size: 0.9em; color: var(--cute-yellow);">💕 Free Online Version - No Download Needed!</div>
+                </div>
+                
+                <!-- Navigation Links -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav d-flex flex-row gap-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#harvey-memes" style="color: white; font-family: 'Comic Sans MS', cursive; font-weight: bold;">🎭 Harvey Memes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#player-leaderboard" style="color: white; font-family: 'Comic Sans MS', cursive; font-weight: bold;">🏆 Leaderboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#comment-section" style="color: white; font-family: 'Comic Sans MS', cursive; font-weight: bold;">💬 Discussion</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Section -->
+    <section id="game" class="py-0" style="height: 100vh; overflow: hidden;">
+        <div class="container-fluid">
+            <div class="game-container">
+                <div style="position: relative;">
+                    <iframe src="https://bloodmoneygame.io/game/bloodmoney/" class="game-iframe" title="Blood Money Game" id="gameFrame"></iframe>
+                    <!-- Fullscreen button -->
+                    <button onclick="toggleFullscreen()" class="btn btn-custom btn-sm" style="position: absolute; bottom: 20px; right: 120px; z-index: 10; background: rgba(255,255,255,0.9); color: var(--cute-purple); border: 2px solid var(--cute-pink); border-radius: 25px; padding: 8px 15px; font-size: 0.9em;" title="Toggle Fullscreen">
+                        🔳 Fullscreen
+                    </button>
+                    <!-- Share button in bottom right corner -->
+                    <div style="position: absolute; bottom: 20px; right: 20px; z-index: 10;">
+                        <div class="dropdown">
+                            <button class="btn btn-custom btn-sm" type="button" data-bs-toggle="dropdown" style="background: rgba(255,255,255,0.9); color: var(--cute-purple); border: 2px solid var(--cute-pink); border-radius: 25px; padding: 8px 15px; font-size: 0.9em;">
+                                🌟 Share
+                            </button>
+                            <ul class="dropdown-menu" style="background: white; border: 3px solid var(--cute-pink);">
+                                <li><a class="dropdown-item" href="#" onclick="shareToTwitter()" style="color: var(--cute-purple);">🐦 Twitter/X</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="shareToReddit()" style="color: var(--cute-purple);">👨‍💼 Reddit</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="shareToTikTok()" style="color: var(--cute-purple);">🎵 TikTok</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="shareToDiscord()" style="color: var(--cute-purple);">💎 Discord</a></li>
+                                <li><hr class="dropdown-divider" style="border-color: var(--cute-pink);"></li>
+                                <li><a class="dropdown-item" href="#" onclick="copyLink()" style="color: var(--cute-purple);">📋 Copy Link</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ending Voting Section -->
+    <section class="py-3" style="background: var(--cute-bg); border-top: 3px solid var(--cute-pink);">
+        <div class="container">
+            <div class="feature-card text-center">
+                <h3>🌟 Which Ending Did You Get? Vote Now! 🌟</h3>
+                <p class="mb-4" style="color: var(--cute-purple); font-size: 1.2rem;">🎯 Complete the blood money game above, then vote for your ending!</p>
+                <div class="voting-buttons">
+                    <button class="ending-btn ending-good" onclick="voteEnding('good')">
+                        😊 Good Ending
+                    </button>
+                    <button class="ending-btn ending-normal" onclick="voteEnding('normal')">
+                        😐 Normal Ending
+                    </button>
+                    <button class="ending-btn ending-bad" onclick="voteEnding('bad')">
+                        😢 Bad Ending
+                    </button>
+                </div>
+                <div class="mt-4">
+                    <h4>Current Results:</h4>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="progress" style="height: 30px; border-radius: 15px;">
+                                <div class="progress-bar" style="background: linear-gradient(45deg, var(--cute-green), var(--cute-blue)); width: 45%; border-radius: 15px;">45%</div>
+                            </div>
+                            <small style="color: var(--cute-green); font-weight: bold;">😊 Good Ending</small>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="progress" style="height: 30px; border-radius: 15px;">
+                                <div class="progress-bar" style="background: linear-gradient(45deg, var(--cute-yellow), var(--cute-purple)); width: 35%; border-radius: 15px;">35%</div>
+                            </div>
+                            <small style="color: var(--cute-yellow); font-weight: bold;">😐 Normal Ending</small>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="progress" style="height: 30px; border-radius: 15px;">
+                                <div class="progress-bar" style="background: linear-gradient(45deg, var(--cute-pink), var(--cute-purple)); width: 20%; border-radius: 15px;">20%</div>
+                            </div>
+                            <small style="color: var(--cute-pink); font-weight: bold;">😢 Bad Ending</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Harvey Meme Generator -->
+    <section id="harvey-memes" class="py-3" style="background: var(--cute-bg); border-top: 3px solid var(--cute-pink); margin-top: 20px;">
+        <div class="container">
+            <div class="meme-generator">
+                <h3>🎭 Harvey Meme Generator 🎭</h3>
+                <p>Create your own Harvey memes from the blood money game!</p>
+                
+                <!-- Image Selection -->
+                <div class="mb-4">
+                    <h5>📸 Choose Your Image:</h5>
+                    <div class="row">
+                        <div class="col-md-4 col-6 mb-3">
+                            <div class="image-option" onclick="selectMemeImage('harvey1')" id="img-harvey1">
+                                <img src="images/harvey1.png" alt="Harvey 1" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="placeholder-img" style="background: linear-gradient(45deg, var(--cute-pink), var(--cute-purple)); height: 120px; border-radius: 15px; display: none; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; border: 3px solid transparent;">
+                                    🤗 Harvey 1
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-6 mb-3">
+                            <div class="image-option" onclick="selectMemeImage('harvey2')" id="img-harvey2">
+                                <img src="images/harvey2.png" alt="Harvey 2" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="placeholder-img" style="background: linear-gradient(45deg, var(--cute-blue), var(--cute-green)); height: 120px; border-radius: 15px; display: none; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; border: 3px solid transparent;">
+                                    😎 Harvey 2
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-6 mb-3">
+                            <div class="image-option" onclick="selectMemeImage('harvey3')" id="img-harvey3">
+                                <img src="images/harvey3.png" alt="Harvey 3" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="placeholder-img" style="background: linear-gradient(45deg, var(--cute-yellow), var(--cute-purple)); height: 120px; border-radius: 15px; display: none; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; border: 3px solid transparent;">
+                                    🥳 Harvey 3
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-6 mb-3">
+                            <div class="image-option" onclick="selectMemeImage('harvey4')" id="img-harvey4">
+                                <img src="images/harvey4.png" alt="Harvey 4" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="placeholder-img" style="background: linear-gradient(45deg, var(--cute-green), var(--cute-blue)); height: 120px; border-radius: 15px; display: none; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; border: 3px solid transparent;">
+                                    🎭 Harvey 4
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-6 mb-3">
+                            <div class="image-option" onclick="selectMemeImage('harvey5')" id="img-harvey5">
+                                <img src="images/harvey5.png" alt="Harvey 5" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="placeholder-img" style="background: linear-gradient(45deg, var(--cute-purple), var(--cute-pink)); height: 120px; border-radius: 15px; display: none; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; border: 3px solid transparent;">
+                                    🌟 Harvey 5
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-6 mb-3">
+                            <div class="image-option" onclick="selectMemeImage('harvey6')" id="img-harvey6">
+                                <img src="images/harvey6.png" alt="Harvey 6" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="placeholder-img" style="background: linear-gradient(45deg, var(--cute-blue), var(--cute-yellow)); height: 120px; border-radius: 15px; display: none; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; border: 3px solid transparent;">
+                                    🎨 Harvey 6
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div style="position: relative;">
+                            <canvas id="memeCanvas" class="meme-canvas" width="400" height="400"></canvas>
+                            <!-- Draggable text elements will be added here -->
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="memeText" class="form-label">📝 Your Text:</label>
+                            <input type="text" class="form-control" id="memeText" placeholder="Enter your meme text" oninput="updateMemeText()">
+                        </div>
+                        <div class="mb-3">
+                            <label for="textSize" class="form-label">📏 Text Size: <span id="sizeValue">24</span>px</label>
+                            <input type="range" class="form-range" id="textSize" min="12" max="48" value="24" oninput="updateMemeText()">
+                        </div>
+                        <div class="mb-3">
+                            <label for="textColor" class="form-label">🎨 Text Color:</label>
+                            <input type="color" class="form-control form-control-color" id="textColor" value="#ffffff" oninput="updateMemeText()">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">🖼️ Background Color:</label>
+                            <div class="btn-group" role="group">
+                                <input type="radio" class="btn-check" name="bgColor" id="bgNone" value="none" checked onchange="updateMemeText()">
+                                <label class="btn btn-outline-secondary" for="bgNone">🌈 None</label>
+                                
+                                <input type="radio" class="btn-check" name="bgColor" id="bgWhite" value="white" onchange="updateMemeText()">
+                                <label class="btn btn-outline-light" for="bgWhite">⚪ White</label>
+                                
+                                <input type="radio" class="btn-check" name="bgColor" id="bgBlack" value="black" onchange="updateMemeText()">
+                                <label class="btn btn-outline-dark" for="bgBlack">⚫ Black</label>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-secondary me-2" onclick="clearCanvas()">🗑️ Clear Text</button>
+                        <button class="btn btn-custom" onclick="downloadMeme()">💾 Download PNG</button>
+                        
+                        <div class="mt-3">
+                            <small class="text-muted">💡 Tip: Click and drag text to move it around!</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievement Image Generator -->
+    <section class="py-3">
+        <div class="container">
+            <div class="feature-card">
+                <h3>🏆 Achievement Share Generator 🏆</h3>
+                <p>Complete challenges to unlock shareable achievement images!</p>
+                <div class="text-center">
+                    <button class="btn btn-custom" onclick="generateAchievement()">
+                        🌟 Generate Achievement Image 🌟
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Player Leaderboard -->
+    <section id="player-leaderboard" class="py-3">
+        <div class="container">
+            <div class="feature-card">
+                <h3>🏆 Blood Money Game Leaderboard 🏆</h3>
+                <p>Compete for the fastest completion times in the blood money game!</p>
+                <div class="leaderboard-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Player</th>
+                                <th>Time</th>
+                                <th>Money</th>
+                                <th>Ending</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboard-body">
+                            <tr>
+                                <td>🥇</td>
+                                <td>ProGamer123</td>
+                                <td>12:34</td>
+                                <td>$50,000</td>
+                                <td><span class="badge" style="background: linear-gradient(45deg, var(--cute-green), var(--cute-blue));">😊 Good</span></td>
+                            </tr>
+                            <tr>
+                                <td>🥈</td>
+                                <td>SpeedRunner</td>
+                                <td>15:22</td>
+                                <td>$45,000</td>
+                                <td><span class="badge" style="background: linear-gradient(45deg, var(--cute-yellow), var(--cute-purple));">😐 Normal</span></td>
+                            </tr>
+                            <tr>
+                                <td>🥉</td>
+                                <td>MoralChoice</td>
+                                <td>18:45</td>
+                                <td>$38,000</td>
+                                <td><span class="badge" style="background: linear-gradient(45deg, var(--cute-pink), var(--cute-purple));">😢 Bad</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+    <!-- Comment Section -->
+    <section id="comment-section" class="py-3">
+        <div class="container">
+            <div class="comment-section">
+                <h3>💬 Blood Money Game Discussion 💬</h3>
+                <p>Share your thoughts, strategies, and experiences with the community!</p>
+                
+                <div class="mb-4">
+                    <h4>Leave a Comment</h4>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Your Name" id="commentName">
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" rows="3" placeholder="Share your blood money game experience..." id="commentText"></textarea>
+                    </div>
+                    <button class="btn btn-custom" onclick="postComment()">📝 Post Comment</button>
+                </div>
+
+                <div id="comments-section">
+                    <h4>Recent Comments</h4>
+                    <div class="border-bottom pb-3 mb-3">
+                        <div class="d-flex justify-content-between">
+                            <strong>GameMaster2024</strong>
+                            <small class="text-muted">2 hours ago</small>
+                        </div>
+                        <p>This blood money game is amazing! The moral choices really make you think.</p>
+                    </div>
+                    <div class="border-bottom pb-3 mb-3">
+                        <div class="d-flex justify-content-between">
+                            <strong>StrategyQueen</strong>
+                            <small class="text-muted">5 hours ago</small>
+                        </div>
+                        <p>Harvey's storyline in the human expenditure program is so compelling. Great game design!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEO Article Section -->
+    <section class="py-3">
+        <div class="container">
+            <div class="feature-card">
+                <h2>🤔 What is Blood Money Game? Complete Guide to the Human Expenditure Program 🤔</h2>
+                
+                <h3>💕 Blood Money Game: Play with Harvey & Eun-mi in the Cutest Game Ever! 💕</h3>
+                <p>Welcome to the ultimate <span class="keyword-density">blood money game</span> experience! This amazing <span class="keyword-density">blood money game</span> allows you to <span class="keyword-density">play online free</span> with <span class="keyword-density">no download needed</span>. Get ready to embark on an incredible journey with Harvey & Eun-mi in the cutest game adventure ever created!</p>
+                
+                <h3>Understanding the Blood Money Game Concept</h3>
+                <p>The <span class="keyword-density">blood money game</span> represents a unique gaming experience that challenges players to navigate complex moral and financial decisions. At its core, this <span class="keyword-density">blood money game</span> introduces players to the mysterious <span class="keyword-density">human expenditure program</span>, where every choice carries significant weight and consequences.</p>
+
+                <h3>Meet Harvey and Eun-mi: Key Characters</h3>
+                <p>Central to the <span class="keyword-density">blood money game</span> experience are two compelling characters: <span class="keyword-density">Harvey</span> and <span class="keyword-density">Eun-mi</span>. These characters guide players through the intricate narrative of the <span class="keyword-density">human expenditure program</span>, offering different perspectives and challenges that shape the overall <span class="keyword-density">blood money game</span> journey.</p>
+
+                <h3>How to Play Blood Money Game Effectively</h3>
+                <p>Learning <strong>how to play the blood money game</strong> requires understanding several key mechanics. Players must balance risk versus reward while participating in various challenges within the <span class="keyword-density">human expenditure program</span>. The <span class="keyword-density">blood money game</span> rewards strategic thinking and moral consideration, making each playthrough unique.</p>
+
+                <h3>Strategies for Success in Blood Money Game</h3>
+                <p>Successful <span class="keyword-density">blood money game</span> players develop specific strategies to maximize their earnings while maintaining their moral compass. The <span class="keyword-density">lovemoney game</span> mechanics within the larger <span class="keyword-density">blood money game</span> framework require careful planning and decision-making skills.</p>
+
+                <h3>The Multiple Endings System</h3>
+                <p>One of the most compelling aspects of the <span class="keyword-density">blood money game</span> is its multiple ending system. Based on player choices throughout the <span class="keyword-density">human expenditure program</span>, participants can achieve different outcomes: good ending, normal ending, or bad ending. This replayability factor makes the <span class="keyword-density">blood money game</span> incredibly engaging.</p>
+
+                <h3>Community and Competitive Features</h3>
+                <p>The <span class="keyword-density">blood money game</span> community thrives on competition and collaboration. Players can share their achievements, compare completion times, and discuss strategies for navigating the complex <span class="keyword-density">human expenditure program</span>. This social aspect enhances the overall <span class="keyword-density">blood money game</span> experience.</p>
+
+                <h3>Why Blood Money Game Stands Out</h3>
+                <p>What sets the <span class="keyword-density">blood money game</span> apart from other games is its unique blend of moral storytelling and strategic gameplay. The <span class="keyword-density">blood money game</span> doesn't just entertain—it challenges players to think critically about their decisions and their impact within the <span class="keyword-density">human expenditure program</span> context.</p>
+
+                <p>Whether you're a casual player or a dedicated gamer, the <span class="keyword-density">blood money game</span> offers something for everyone. With its compelling narrative featuring <span class="keyword-density">Harvey</span> and <span class="keyword-density">Eun-mi</span>, strategic depth, and multiple paths to victory, the <span class="keyword-density">blood money game</span> represents the pinnacle of interactive storytelling in modern gaming.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievement Modal -->
+    <div id="achievementModal" class="achievement-modal">
+        <div class="achievement-content">
+            <h3>🎉 Achievement Unlocked! 🎉</h3>
+            <div class="achievement-image" id="achievementImage">
+                <div>
+                    <div id="achievementEmoji" style="font-size: 60px;">🏆</div>
+                    <div id="achievementText">Blood Money Master</div>
+                    <div id="achievementStats">Time: 15:30 | Money: $45,000 | Choice: Moral</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-custom" onclick="shareAchievement()">🌟 Share Achievement</button>
+                <button class="btn btn-outline-secondary" onclick="closeAchievement()" style="background: var(--cute-blue); color: white; border: 2px solid var(--cute-purple); border-radius: 20px; padding: 12px 25px; font-family: 'Comic Sans MS', cursive;">✨ Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Fullscreen functionality
+        function toggleFullscreen() {
+            const gameFrame = document.getElementById('gameFrame');
+            if (!document.fullscreenElement) {
+                gameFrame.requestFullscreen().catch(err => {
+                    console.log('Error attempting to enable fullscreen:', err);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Achievement Generator
+        function generateAchievement() {
+            const achievements = [
+                { name: "💕 Blood Money Master 💕", emoji: "🏆", color: "linear-gradient(45deg, var(--cute-pink), var(--cute-purple))" },
+                { name: "🌟 Harvey's Best Friend 🌟", emoji: "🤝", color: "linear-gradient(45deg, var(--cute-blue), var(--cute-green))" },
+                { name: "✨ Eun-mi's Amazing Ally ✨", emoji: "🌸", color: "linear-gradient(45deg, var(--cute-yellow), var(--cute-pink))" },
+                { name: "🦄 Moral Compass Hero 🦄", emoji: "⚖️", color: "linear-gradient(45deg, var(--cute-purple), var(--cute-blue))" },
+                { name: "🚀 Super Speed Runner 🚀", emoji: "⭐", color: "linear-gradient(45deg, var(--cute-green), var(--cute-yellow))" }
+            ];
+            
+            const achievement = achievements[Math.floor(Math.random() * achievements.length)];
+            const gameTime = Math.floor(Math.random() * 30) + 10;
+            const gameMoney = Math.floor(Math.random() * 50000) + 10000;
+            const choices = ["😊 Moral", "😐 Neutral", "😢 Ruthless"];
+            const choice = choices[Math.floor(Math.random() * choices.length)];
+            
+            document.getElementById('achievementText').textContent = achievement.name;
+            document.getElementById('achievementStats').textContent = `⏱️ Time: ${gameTime}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')} | 💰 Money: $${gameMoney.toLocaleString()} | 🎯 Choice: ${choice}`;
+            document.getElementById('achievementEmoji').textContent = achievement.emoji;
+            document.getElementById('achievementImage').style.background = achievement.color;
+            
+            document.getElementById('achievementModal').style.display = 'block';
+        }
+
+        function closeAchievement() {
+            document.getElementById('achievementModal').style.display = 'none';
+        }
+
+        function shareAchievement() {
+            const text = document.getElementById('achievementText').textContent;
+            const stats = document.getElementById('achievementStats').textContent;
+            shareToSocial(`Just unlocked "${text}" in Blood Money Game! ${stats}`);
+        }
+
+        // Advanced Meme Generator with Image Selection and Draggable Text
+        let selectedImage = 'harvey1';
+        let canvas, ctx;
+        let textElements = [];
+        let isDragging = false;
+        let dragElement = null;
+        let dragOffset = { x: 0, y: 0 };
+        let loadedImages = {};
+        let currentText = null;
+
+        // Initialize canvas
+        window.addEventListener('load', function() {
+            canvas = document.getElementById('memeCanvas');
+            ctx = canvas.getContext('2d');
+            preloadImages();
+            setTimeout(() => {
+                selectMemeImage('harvey1');
+            }, 1000);
+            
+            // Add event listeners for drag and drop
+            canvas.addEventListener('mousedown', startDrag);
+            canvas.addEventListener('mousemove', drag);
+            canvas.addEventListener('mouseup', endDrag);
+            canvas.addEventListener('mouseleave', endDrag);
+        });
+
+        function preloadImages() {
+            const imageNames = ['harvey1', 'harvey2', 'harvey3', 'harvey4', 'harvey5', 'harvey6'];
+            imageNames.forEach(name => {
+                const img = new Image();
+                img.onload = function() {
+                    loadedImages[name] = img;
+                };
+                img.onerror = function() {
+                    console.log(`Image ${name} not found, using placeholder`);
+                };
+                img.src = `images/${name}.png`;
+            });
+        }
+
+        function selectMemeImage(imageId) {
+            selectedImage = imageId;
+            
+            // Update UI to show selected image
+            document.querySelectorAll('.image-option img, .image-option .placeholder-img').forEach(element => {
+                element.style.border = '3px solid transparent';
+                element.style.boxShadow = 'none';
+            });
+            
+            const selectedElement = document.querySelector(`#img-${imageId} img, #img-${imageId} .placeholder-img`);
+            if (selectedElement) {
+                selectedElement.style.border = '3px solid var(--cute-purple)';
+                selectedElement.style.boxShadow = '0 4px 15px rgba(221, 160, 221, 0.5)';
+            }
+            
+            drawMemeBackground();
+        }
+
+        function drawMemeBackground() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Try to get selected background, fall back to 'none' if not available
+            let selectedBg = 'none';
+            try {
+                const bgRadio = document.querySelector('input[name="bgColor"]:checked');
+                if (bgRadio) {
+                    selectedBg = bgRadio.value;
+                }
+            } catch (e) {
+                selectedBg = 'none';
+            }
+            
+            // Draw background if selected
+            if (selectedBg === 'black') {
+                ctx.fillStyle = '#000000';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            } else if (selectedBg === 'white') {
+                ctx.fillStyle = '#FFFFFF';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+            
+            // Draw the selected image if loaded
+            if (loadedImages && loadedImages[selectedImage]) {
+                try {
+                    const img = loadedImages[selectedImage];
+                    const scale = Math.min(canvas.width / img.width, canvas.height / img.height);
+                    const x = (canvas.width - img.width * scale) / 2;
+                    const y = (canvas.height - img.height * scale) / 2;
+                    
+                    // Draw image on top of background
+                    ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+                } catch (e) {
+                    // If image drawing fails, show placeholder
+                    drawPlaceholder(selectedBg);
+                }
+            } else {
+                // Show placeholder if no image loaded
+                drawPlaceholder(selectedBg);
+            }
+            
+            // Draw all text elements
+            if (textElements && textElements.length > 0) {
+                textElements.forEach(element => drawTextElement(element));
+            }
+        }
+        
+        function drawPlaceholder(selectedBg) {
+            // Draw gradient placeholder
+            const gradients = {
+                'harvey1': ['#FFB6C1', '#DDA0DD'],
+                'harvey2': ['#87CEEB', '#98FB98'],
+                'harvey3': ['#F0E68C', '#DDA0DD'],
+                'harvey4': ['#98FB98', '#87CEEB'],
+                'harvey5': ['#DDA0DD', '#FFB6C1'],
+                'harvey6': ['#87CEEB', '#F0E68C']
+            };
+            
+            if (selectedBg === 'none') {
+                const colors = gradients[selectedImage];
+                if (colors) {
+                    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                    gradient.addColorStop(0, colors[0]);
+                    gradient.addColorStop(1, colors[1]);
+                    ctx.fillStyle = gradient;
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+            
+            // Draw placeholder text
+            const characters = {
+                'harvey1': '🤗 HARVEY 1 🤗',
+                'harvey2': '😎 HARVEY 2 😎',
+                'harvey3': '🥳 HARVEY 3 🥳',
+                'harvey4': '🎭 HARVEY 4 🎭',
+                'harvey5': '🌟 HARVEY 5 🌟',
+                'harvey6': '🎨 HARVEY 6 🎨'
+            };
+            
+            const isDarkBg = selectedBg === 'black';
+            
+            ctx.fillStyle = '#FF69B4';
+            ctx.fillRect(50, 100, 300, 200);
+            ctx.strokeStyle = isDarkBg ? '#FFF' : '#000';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(50, 100, 300, 200);
+            
+            ctx.fillStyle = isDarkBg ? '#FFF' : '#000';
+            ctx.font = 'bold 28px Comic Sans MS';
+            ctx.textAlign = 'center';
+            ctx.fillText(characters[selectedImage], 200, 200);
+        }
+
+        function drawTextElement(element) {
+            ctx.font = `bold ${element.size}px Comic Sans MS`;
+            ctx.fillStyle = element.color;
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2;
+            ctx.textAlign = 'center';
+            ctx.strokeText(element.text, element.x, element.y);
+            ctx.fillText(element.text, element.x, element.y);
+        }
+
+        function updateMemeText() {
+            const text = document.getElementById('memeText').value;
+            const size = parseInt(document.getElementById('textSize').value);
+            const color = document.getElementById('textColor').value;
+            
+            // Update size display
+            document.getElementById('sizeValue').textContent = size;
+            
+            // Create or update current text (automatically appears on canvas)
+            if (text.trim()) {
+                let currentX = 200;
+                let currentY = 50;
+                
+                // If we have existing text, preserve its position
+                if (textElements.length > 0) {
+                    currentX = textElements[0].x;
+                    currentY = textElements[0].y;
+                }
+                
+                currentText = {
+                    text: text,
+                    x: currentX,
+                    y: currentY,
+                    size: size,
+                    color: color
+                };
+                
+                // Remove any existing text elements and replace with current
+                textElements = [];
+                textElements.push(currentText);
+            } else {
+                // Clear text if input is empty
+                currentText = null;
+                textElements = [];
+            }
+            
+            drawMemeBackground();
+        }
+
+        function startDrag(e) {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Check if clicking on a text element (reverse order to get top element)
+            for (let i = textElements.length - 1; i >= 0; i--) {
+                const element = textElements[i];
+                ctx.font = `bold ${element.size}px Comic Sans MS`;
+                const textWidth = ctx.measureText(element.text).width;
+                const textHeight = element.size;
+                
+                if (x >= element.x - textWidth/2 && x <= element.x + textWidth/2 &&
+                    y >= element.y - textHeight && y <= element.y) {
+                    isDragging = true;
+                    dragElement = element;
+                    dragOffset.x = x - element.x;
+                    dragOffset.y = y - element.y;
+                    canvas.style.cursor = 'grabbing';
+                    break;
+                }
+            }
+        }
+
+        function drag(e) {
+            if (!isDragging || !dragElement) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            dragElement.x = x - dragOffset.x;
+            dragElement.y = y - dragOffset.y;
+            
+            // Keep text within canvas bounds
+            dragElement.x = Math.max(20, Math.min(canvas.width - 20, dragElement.x));
+            dragElement.y = Math.max(20, Math.min(canvas.height - 10, dragElement.y));
+            
+            drawMemeBackground();
+        }
+
+        function endDrag() {
+            isDragging = false;
+            dragElement = null;
+            canvas.style.cursor = 'default';
+        }
+
+        function clearCanvas() {
+            textElements = [];
+            drawMemeBackground();
+        }
+
+        function downloadMeme() {
+            const canvas = document.getElementById('memeCanvas');
+            const link = document.createElement('a');
+            link.download = 'harvey-meme.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        // Social Sharing
+        function shareToTwitter() {
+            const text = "Just played Blood Money Game Online - No download needed! Experience the human expenditure program with Harvey and Eun-mi. #BloodMoneyGame #NoDownload #OnlineGame";
+            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        }
+
+        function copyLink() {
+            const dummy = document.createElement('input');
+            document.body.appendChild(dummy);
+            dummy.value = window.location.href;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            alert('🌟 Link copied to clipboard! Yay! 🌟');
+        }
+
+        function shareToReddit() {
+            const title = "Blood Money Game - Amazing Experience!";
+            const url = `https://reddit.com/submit?url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(title)}`;
+            window.open(url, '_blank');
+        }
+
+        function shareToTikTok() {
+            alert('🎵 To share on TikTok, create a cute video of your gameplay and use hashtags: #BloodMoneyGame #Harvey #Eunmi #Gaming 🎵');
+        }
+
+        function shareToDiscord() {
+            const text = "Check out this amazing Blood Money Game! 🎮✨";
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Blood Money Game',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                alert('Copy this link to share on Discord: ' + window.location.href);
+            }
+        }
+
+        function shareToSocial(text) {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Blood Money Game Achievement',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this achievement: ' + text);
+            }
+        }
+
+        // Ending Voting
+        function voteEnding(ending) {
+            alert(`🌟 Thank you for voting for the ${ending} ending! Your vote has been recorded. You're awesome! 🌟`);
+            // In a real implementation, this would update the server-side voting data
+        }
+
+        // Comment System
+        function postComment() {
+            const name = document.getElementById('commentName').value;
+            const text = document.getElementById('commentText').value;
+            
+            if (!name || !text) {
+                alert('💕 Please enter both name and comment. We want to hear from you! 💕');
+                return;
+            }
+            
+            const commentsSection = document.getElementById('comments-section');
+            const newComment = document.createElement('div');
+            newComment.className = 'border-bottom pb-3 mb-3';
+            newComment.innerHTML = `
+                <div class="d-flex justify-content-between">
+                    <strong>${name}</strong>
+                    <small class="text-muted">Just now</small>
+                </div>
+                <p>${text}</p>
+            `;
+            
+            commentsSection.appendChild(newComment);
+            
+            // Clear form
+            document.getElementById('commentName').value = '';
+            document.getElementById('commentText').value = '';
+            
+            alert('🌟 Comment posted successfully! Thank you for sharing! 🌟');
+        }
+
+  
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('achievementModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>
