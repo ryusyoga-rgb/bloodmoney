@@ -385,6 +385,49 @@
             transform: scale(1.05);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
+        
+        /* Meme Generator Styles */
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .meme-canvas {
+            border: 3px solid var(--cute-purple);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: crosshair;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .meme-canvas:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .image-option {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            padding: 10px;
+        }
+        
+        .image-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .image-option.selected {
+            border: 3px solid var(--cute-purple);
+            box-shadow: 0 4px 15px rgba(221, 160, 221, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -568,37 +611,33 @@
                         </div>
                     </div>
                     
-                    <!-- Mobile-friendly Controls -->
+                    <!-- Step-by-Step Controls -->
                     <div class="mobile-controls">
-                        <!-- Add New Text Section -->
+                        <!-- Step 1: Add Text -->
                         <div class="card mb-3" style="background: rgba(255,255,255,0.8); border: 2px solid var(--cute-purple);">
                             <div class="card-body">
-                                <h6 class="card-title">➕ Add Text</h6>
+                                <h6 class="card-title">✏️ Step 1: Add Your Text</h6>
                                 <div class="input-group">
-                                    <textarea class="form-control" id="newMemeText" placeholder="Enter your text (supports multiline)" rows="2" style="font-size: 16px; resize: vertical;"></textarea>
-                                    <button class="btn btn-custom" onclick="addNewText()">Add</button>
+                                    <textarea class="form-control" id="newMemeText" placeholder="Enter your meme text here..." rows="2" style="font-size: 16px; resize: vertical;"></textarea>
+                                    <button class="btn btn-custom" onclick="addMemeText()">Add Text</button>
                                 </div>
                                 <small class="text-muted d-block mt-2">
-                                    💡 <strong>Tips:</strong><br>
-                                    • Desktop: Use mouse wheel to resize selected text<br>
-                                    • Mobile: Use pinch gesture to resize text<br>
-                                    • Click empty area to deselect text<br>
-                                    • Ctrl+Enter to quickly add text
+                                    💡 <strong>Pro Tip:</strong> Your text will appear in the center of the image
                                 </small>
                             </div>
                         </div>
                         
-                        <!-- Text Controls -->
+                        <!-- Step 2: Adjust Text -->
                         <div class="card mb-3" style="background: rgba(255,255,255,0.8); border: 2px solid var(--cute-blue);">
                             <div class="card-body">
-                                <h6 class="card-title">🎨 Text Settings</h6>
+                                <h6 class="card-title">🎨 Step 2: Customize Your Text</h6>
                                 <div class="mb-3">
-                                    <small>Selected: <span id="selectedTextInfo">Tap text to select</span></small>
+                                    <small>Selected: <span id="selectedTextInfo">Click text to select</span></small>
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <label for="textSize" class="form-label">Size: <span id="sizeValue">24</span>px</label>
-                                        <input type="range" class="form-range" id="textSize" min="12" max="48" value="24" oninput="updateSelectedText()">
+                                        <label for="textSize" class="form-label">Size: <span id="sizeValue">32</span>px</label>
+                                        <input type="range" class="form-range" id="textSize" min="12" max="72" value="32" oninput="updateSelectedText()">
                                     </div>
                                     <div class="col-6">
                                         <label for="textColor" class="form-label">Color:</label>
@@ -607,18 +646,21 @@
                                 </div>
                                 <div class="d-flex gap-2 mt-3">
                                     <button class="btn btn-outline-danger btn-sm flex-fill" onclick="deleteSelectedText()">🗑️ Delete</button>
-                                    <button class="btn btn-outline-secondary btn-sm flex-fill" onclick="clearCanvasForMeme()">🧹 Clear All</button>
+                                    <button class="btn btn-outline-secondary btn-sm flex-fill" onclick="clearTextElements()">🧹 Clear Text</button>
                                 </div>
+                                <small class="text-muted d-block mt-2">
+                                    💡 <strong>Tip:</strong> Click and drag text to move it around
+                                </small>
                             </div>
                         </div>
                         
-                        <!-- Background Controls -->
+                        <!-- Step 3: Background (Optional) -->
                         <div class="card mb-3" style="background: rgba(255,255,255,0.8); border: 2px solid var(--cute-green);">
                             <div class="card-body">
-                                <h6 class="card-title">🖼️ Background</h6>
+                                <h6 class="card-title">🖼️ Step 3: Background (Optional)</h6>
                                 <div class="btn-group w-100" role="group">
                                     <input type="radio" class="btn-check" name="bgColor" id="bgNone" value="none" checked onchange="drawMemeBackground()">
-                                    <label class="btn btn-outline-secondary" for="bgNone">🌈 None</label>
+                                    <label class="btn btn-outline-secondary" for="bgNone">🌈 Transparent</label>
                                     
                                     <input type="radio" class="btn-check" name="bgColor" id="bgWhite" value="white" onchange="drawMemeBackground()">
                                     <label class="btn btn-outline-light" for="bgWhite">⚪ White</label>
@@ -629,7 +671,18 @@
                             </div>
                         </div>
                         
-                        <button class="btn btn-custom w-100 btn-lg" onclick="downloadMeme()">💾 Download Meme</button>
+                        <!-- Step 4: Download -->
+                        <div class="card" style="background: linear-gradient(45deg, var(--cute-pink), var(--cute-purple)); border: 3px solid white;">
+                            <div class="card-body text-center">
+                                <h6 class="card-title text-white">🎉 Step 4: Download Your Meme!</h6>
+                                <button onclick="downloadMeme()" class="btn btn-light btn-lg w-100" style="padding: 15px; font-size: 1.2em; font-weight: bold;">
+                                    📥 Download Meme
+                                </button>
+                                <small class="text-white d-block mt-2">
+                                    Your meme will be saved as a PNG file
+                                </small>
+                            </div>
+                        </div>
                         
                         <div class="mt-3 text-center">
                             <small class="text-muted">💡 How to use: 
@@ -894,7 +947,7 @@
         let canvas, ctx;
         let loadedImages = {};
         
-        // Basic meme selection function
+        // Main meme selection function
         function selectMemeImage(imageId) {
             console.log('Selecting image:', imageId);
             selectedImage = imageId;
@@ -911,13 +964,44 @@
                 selectedElement.style.boxShadow = '0 4px 15px rgba(221, 160, 221, 0.5)';
             }
             
-            // Try to draw on canvas if available
+            // Draw the selected image on canvas
             if (canvas && ctx) {
                 drawMemeBackground();
             }
+            
+            // Show user feedback
+            showNotification(`Selected: ${imageId.toUpperCase()}. Now add your text!`);
         }
         
-        // Basic canvas drawing function
+        // Show user notification
+        function showNotification(message) {
+            // Create a simple notification
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(45deg, var(--cute-purple), var(--cute-pink));
+                color: white;
+                padding: 15px 20px;
+                border-radius: 25px;
+                font-family: 'Comic Sans MS', cursive;
+                font-weight: bold;
+                z-index: 10000;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                animation: slideIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+        
+        // Main canvas drawing function
         function drawMemeBackground() {
             if (!canvas || !ctx) {
                 console.log('Canvas not ready yet');
@@ -929,7 +1013,64 @@
             // Clear canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // Draw gradient background based on selected image
+            // Try to get selected background
+            let selectedBg = 'none';
+            try {
+                const bgRadio = document.querySelector('input[name="bgColor"]:checked');
+                if (bgRadio) {
+                    selectedBg = bgRadio.value;
+                }
+            } catch (e) {
+                selectedBg = 'none';
+            }
+            
+            // Draw background if selected
+            if (selectedBg === 'black') {
+                ctx.fillStyle = '#000000';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            } else if (selectedBg === 'white') {
+                ctx.fillStyle = '#FFFFFF';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+            
+            // Try to load and draw the actual image
+            const img = new Image();
+            img.onload = function() {
+                console.log('Image loaded successfully:', selectedImage);
+                
+                // Calculate scaling to fit canvas
+                const scale = Math.min(canvas.width / img.width, canvas.height / img.height) * 0.8;
+                const x = (canvas.width - img.width * scale) / 2;
+                const y = (canvas.height - img.height * scale) / 2;
+                
+                // Draw the image
+                ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+                
+                // Draw text elements on top
+                if (textElements && textElements.length > 0) {
+                    textElements.forEach((element, index) => drawTextElement(element, index));
+                }
+                
+                console.log('Image drawn successfully');
+            };
+            
+            img.onerror = function() {
+                console.log('Image not found, drawing placeholder for:', selectedImage);
+                drawMemePlaceholder(selectedBg);
+                
+                // Draw text elements on top of placeholder
+                if (textElements && textElements.length > 0) {
+                    textElements.forEach((element, index) => drawTextElement(element, index));
+                }
+            };
+            
+            // Try to load the image
+            img.src = `image/${selectedImage}.png`;
+        }
+        
+        // Draw placeholder when image is not available
+        function drawMemePlaceholder(selectedBg) {
+            // Draw gradient placeholder based on selected image
             const gradients = {
                 'harvey1': ['#FFB6C1', '#DDA0DD'],
                 'harvey2': ['#87CEEB', '#98FB98'],
@@ -939,13 +1080,15 @@
                 'harvey6': ['#87CEEB', '#F0E68C']
             };
             
-            const colors = gradients[selectedImage];
-            if (colors) {
-                const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-                gradient.addColorStop(0, colors[0]);
-                gradient.addColorStop(1, colors[1]);
-                ctx.fillStyle = gradient;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            if (selectedBg === 'none') {
+                const colors = gradients[selectedImage];
+                if (colors) {
+                    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                    gradient.addColorStop(0, colors[0]);
+                    gradient.addColorStop(1, colors[1]);
+                    ctx.fillStyle = gradient;
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                }
             }
             
             // Draw placeholder text
@@ -958,22 +1101,31 @@
                 'harvey6': '🎨 HARVEY 6 🎨'
             };
             
-            // Draw placeholder box
+            // Draw main placeholder area
+            const boxWidth = 300;
+            const boxHeight = 200;
+            const boxX = (canvas.width - boxWidth) / 2;
+            const boxY = (canvas.height - boxHeight) / 2;
+            
             ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-            ctx.fillRect(50, 100, 300, 200);
+            ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
             ctx.strokeStyle = '#000';
             ctx.lineWidth = 3;
-            ctx.strokeRect(50, 100, 300, 200);
+            ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
             
-            // Draw text
+            // Draw character name
             ctx.fillStyle = '#000';
             ctx.font = 'bold 24px Comic Sans MS';
             ctx.textAlign = 'center';
             const text = characters[selectedImage] || selectedImage.toUpperCase();
-            ctx.fillText(text, 200, 200);
+            ctx.fillText(text, canvas.width / 2, canvas.height / 2);
             
             console.log('Placeholder drawn successfully for', selectedImage);
         }
+        
+        // Text elements for meme
+        let textElements = [];
+        let selectedTextIndex = -1;
         
         // Initialize canvas when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
@@ -981,12 +1133,176 @@
             if (canvas) {
                 ctx = canvas.getContext('2d');
                 console.log('Canvas initialized in early script');
+                
                 // Draw initial placeholder
                 setTimeout(() => {
                     drawMemeBackground();
                 }, 500);
+                
+                // Setup text functionality
+                setupTextFunctionality();
             }
         });
+        
+        // Setup text editing functionality
+        function setupTextFunctionality() {
+            const textInput = document.getElementById('newMemeText');
+            const addTextBtn = document.querySelector('button[onclick="addNewText()"]');
+            
+            if (textInput && addTextBtn) {
+                // Replace the onclick with our improved function
+                addTextBtn.setAttribute('onclick', 'addMemeText()');
+            }
+        }
+        
+        // Add new text to meme
+        function addMemeText() {
+            const textInput = document.getElementById('newMemeText');
+            const text = textInput.value.trim();
+            
+            if (!text) {
+                showNotification('Please enter some text first!');
+                return;
+            }
+            
+            // Create new text element
+            const newText = {
+                text: text,
+                x: canvas.width / 2, // Center horizontally
+                y: canvas.height / 2, // Center vertically
+                size: 32,
+                color: '#ffffff'
+            };
+            
+            textElements.push(newText);
+            selectedTextIndex = textElements.length - 1;
+            
+            // Clear input and update display
+            textInput.value = '';
+            updateTextControls();
+            drawMemeBackground();
+            
+            showNotification('Text added! You can drag to move it.');
+        }
+        
+        // Update text control panel
+        function updateTextControls() {
+            const selectedInfo = document.getElementById('selectedTextInfo');
+            const sizeSlider = document.getElementById('textSize');
+            const colorPicker = document.getElementById('textColor');
+            
+            if (selectedTextIndex >= 0 && selectedTextIndex < textElements.length) {
+                const text = textElements[selectedTextIndex];
+                if (selectedInfo) selectedInfo.textContent = `"${text.text}"`;
+                if (sizeSlider) sizeSlider.value = text.size;
+                if (colorPicker) colorPicker.value = text.color;
+                
+                // Update size display
+                const sizeValue = document.getElementById('sizeValue');
+                if (sizeValue) sizeValue.textContent = text.size;
+            } else {
+                if (selectedInfo) selectedInfo.textContent = 'Click text to select';
+            }
+        }
+        
+        // Update selected text properties
+        function updateSelectedText() {
+            if (selectedTextIndex < 0 || selectedTextIndex >= textElements.length) return;
+            
+            const size = parseInt(document.getElementById('textSize').value);
+            const color = document.getElementById('textColor').value;
+            
+            textElements[selectedTextIndex].size = size;
+            textElements[selectedTextIndex].color = color;
+            
+            // Update size display
+            const sizeValue = document.getElementById('sizeValue');
+            if (sizeValue) sizeValue.textContent = size;
+            
+            drawMemeBackground();
+        }
+        
+        // Draw text element on canvas
+        function drawTextElement(element, index) {
+            ctx.font = `bold ${element.size}px Comic Sans MS`;
+            ctx.fillStyle = element.color;
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 3;
+            ctx.textAlign = 'center';
+            
+            // Add shadow for better visibility
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+            ctx.shadowOffsetX = 2;
+            ctx.shadowOffsetY = 2;
+            ctx.shadowBlur = 4;
+            
+            // Draw text with stroke for better visibility
+            ctx.strokeText(element.text, element.x, element.y);
+            ctx.fillText(element.text, element.x, element.y);
+            
+            // Reset shadow
+            ctx.shadowColor = 'transparent';
+            
+            // Draw selection indicator if this text is selected
+            if (index === selectedTextIndex) {
+                ctx.strokeStyle = '#FF69B4';
+                ctx.lineWidth = 3;
+                ctx.setLineDash([5, 5]);
+                
+                const metrics = ctx.measureText(element.text);
+                const padding = 10;
+                ctx.strokeRect(
+                    element.x - metrics.width/2 - padding,
+                    element.y - element.size - padding,
+                    metrics.width + padding * 2,
+                    element.size + padding * 2
+                );
+                
+                ctx.setLineDash([]);
+            }
+        }
+        
+        // Download meme as image
+        function downloadMeme() {
+            if (!canvas) {
+                showNotification('Canvas not ready!');
+                return;
+            }
+            
+            try {
+                const link = document.createElement('a');
+                link.download = `harvey-meme-${selectedImage}.png`;
+                link.href = canvas.toDataURL();
+                link.click();
+                
+                showNotification('Meme downloaded successfully!');
+            } catch (error) {
+                console.error('Download failed:', error);
+                showNotification('Download failed. Please try again.');
+            }
+        }
+        
+        // Clear all text elements
+        function clearTextElements() {
+            textElements = [];
+            selectedTextIndex = -1;
+            updateTextControls();
+            drawMemeBackground();
+            showNotification('All text cleared!');
+        }
+        
+        // Delete selected text
+        function deleteSelectedText() {
+            if (selectedTextIndex >= 0 && selectedTextIndex < textElements.length) {
+                textElements.splice(selectedTextIndex, 1);
+                selectedTextIndex = -1;
+                updateTextControls();
+                drawMemeBackground();
+                showNotification('Text deleted!');
+            } else {
+                showNotification('No text selected!');
+            }
+        }
     </script>
     
     <script>
