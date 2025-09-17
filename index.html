@@ -973,7 +973,7 @@
                     const textWidth = ctx.measureText(element.text).width;
                     const textHeight = element.size;
                     
-                    const padding = 5;
+                    const padding = 15;
                     if (x >= element.x - textWidth/2 - padding && 
                         x <= element.x + textWidth/2 + padding &&
                         y >= element.y - textHeight - padding && 
@@ -1311,7 +1311,7 @@
                 const textHeight = element.size;
                 
                 // Add some padding for easier clicking, similar to touch handling
-                const padding = 5;
+                const padding = 15;
                 const leftBound = element.x - textWidth/2 - padding;
                 const rightBound = element.x + textWidth/2 + padding;
                 const topBound = element.y - textHeight - padding;
@@ -1381,7 +1381,7 @@
                 const textHeight = element.size;
                 
                 // Increased padding for much easier touch detection
-                const padding = Math.max(25, element.size / 2);
+                const padding = Math.max(60, element.size / 1.2);
                 
                 // Expanded touch area - make it much easier to grab text
                 const touchAreaLeft = element.x - textWidth/2 - padding;
