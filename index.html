@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Play Blood Money Game Online Free - No download needed! Experience the thrilling human expenditure program featuring Harvey and Eun-mi. Complete challenges, make moral choices, and compete in the ultimate blood money game adventure. Play the full online version now!">
-    <meta name="keywords" content="blood money game, harvey, eun-mi, human expenditure program, lovemoney game, bloodmoney, online game, no download needed, online version, free online game">
+    <meta name="keywords" content="blood money, human expenditure program">
     <meta name="author" content="Blood Money Game">
     <meta property="og:title" content="Blood Money Game Online - No Download Needed | Harvey & Eun-mi Adventure">
     <meta property="og:description" content="Play Blood Money Game online free - No download needed! Experience the ultimate human expenditure program with Harvey and Eun-mi. Navigate moral choices and make life-changing decisions in this thrilling online version adventure.">
@@ -63,95 +63,6 @@
             height: 100vh;
             border: none;
             display: block;
-            position: relative;
-            z-index: 1;
-        }
-
-        .game-container {
-            position: relative;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .game-container .btn,
-        .game-container .dropdown {
-            pointer-events: auto;
-            z-index: 2;
-        }
-        
-        /* Mobile Responsive Styles */
-        @media (max-width: 768px) {
-            .game-iframe {
-                height: 70vh;
-            }
-            
-            .hero-section {
-                padding: 30px 0;
-            }
-            
-            .feature-card, .meme-generator, .comment-section {
-                margin: 10px 0;
-                padding: 20px;
-            }
-            
-            .btn-custom {
-                padding: 12px 25px;
-                font-size: 1em;
-            }
-            
-            .meme-canvas {
-                width: 100%;
-                max-width: 350px;
-                height: 300px;
-                border: 3px solid var(--cute-blue);
-                border-radius: 15px;
-                touch-action: none; /* Prevents browser default touch actions */
-            }
-            
-            .voting-buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .ending-btn {
-                width: 100%;
-                padding: 15px 20px;
-            }
-            
-            .navbar-nav {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            /* Mobile text input fixes */
-            .form-control, .form-select {
-                font-size: 16px; /* Prevents zoom on iOS */
-            }
-            
-            /* Mobile-friendly buttons */
-            .btn-custom {
-                touch-action: manipulation;
-                -webkit-tap-highlight-color: transparent;
-            }
-            
-            /* Mobile Canvas Container */
-            .meme-generator-mobile {
-                padding: 10px;
-            }
-            
-            .mobile-controls {
-                margin-top: 20px;
-            }
-            
-            /* Better touch targets */
-            .btn-custom {
-                min-height: 44px; /* Apple's recommended minimum touch target size */
-            }
-            
-            .form-control {
-                min-height: 44px;
-                padding: 12px;
-            }
         }
 
         .feature-card {
@@ -213,8 +124,6 @@
             border-radius: 15px;
             max-width: 100%;
             background: white;
-            touch-action: none;
-            cursor: default;
         }
 
         .voting-buttons {
@@ -229,27 +138,10 @@
             border: 3px solid white;
             border-radius: 25px;
             font-weight: bold;
-            cursor: pointer !important;
+            cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Comic Sans MS', cursive;
             font-size: 1.1em;
-            pointer-events: auto !important;
-            position: relative !important;
-            z-index: 1000 !important;
-            touch-action: manipulation !important;
-            user-select: none !important;
-        }
-
-        .ending-btn:hover {
-            transform: translateY(-3px) scale(1.05) !important;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
-            pointer-events: auto !important;
-        }
-
-        .voting-buttons {
-            pointer-events: auto !important;
-            position: relative !important;
-            z-index: 100 !important;
         }
 
         .ending-good { background: linear-gradient(45deg, var(--cute-green), var(--cute-blue)); color: white; border-color: var(--cute-green); }
@@ -362,8 +254,6 @@
 
         .meme-canvas {
             cursor: default;
-            transition: transform 0.15s ease;
-            touch-action: none;
         }
 
         .meme-canvas:hover {
@@ -384,49 +274,6 @@
         .meme-thumbnail:hover {
             transform: scale(1.05);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        
-        /* Meme Generator Styles */
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .meme-canvas {
-            border: 3px solid var(--cute-purple);
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            cursor: crosshair;
-            transition: all 0.3s ease;
-            background: white;
-        }
-        
-        .meme-canvas:hover {
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-            transform: translateY(-2px);
-        }
-        
-        .image-option {
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 15px;
-            padding: 10px;
-        }
-        
-        .image-option:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-        }
-        
-        .image-option.selected {
-            border: 3px solid var(--cute-purple);
-            box-shadow: 0 4px 15px rgba(221, 160, 221, 0.5);
         }
     </style>
 </head>
@@ -463,20 +310,19 @@
     </nav>
 
     <!-- Game Section -->
-    <section id="game" class="py-0" style="height: 100vh; overflow: hidden; position: relative; z-index: 1;">
+    <section id="game" class="py-0" style="height: 100vh; overflow: hidden;">
         <div class="container-fluid">
             <div class="game-container">
                 <div style="position: relative;">
                     <iframe src="https://bloodmoneygame.io/game/bloodmoney/" class="game-iframe" title="Blood Money Game" id="gameFrame"></iframe>
-                    <!-- Mobile-friendly game controls -->
-                    <div style="position: absolute; bottom: 20px; right: 20px; z-index: 10; display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end;">
-                        <!-- Fullscreen button -->
-                        <button onclick="toggleFullscreen()" class="btn btn-custom btn-sm" style="background: rgba(255,255,255,0.9); color: var(--cute-purple); border: 2px solid var(--cute-pink); border-radius: 25px; padding: 8px 15px; font-size: 0.9em; min-width: 80px;" title="Toggle Fullscreen">
-                            🔳 Full
-                        </button>
-                        <!-- Share button -->
+                    <!-- Fullscreen button -->
+                    <button onclick="toggleFullscreen()" class="btn btn-custom btn-sm" style="position: absolute; bottom: 20px; right: 120px; z-index: 10; background: rgba(255,255,255,0.9); color: var(--cute-purple); border: 2px solid var(--cute-pink); border-radius: 25px; padding: 8px 15px; font-size: 0.9em;" title="Toggle Fullscreen">
+                        🔳 Fullscreen
+                    </button>
+                    <!-- Share button in bottom right corner -->
+                    <div style="position: absolute; bottom: 20px; right: 20px; z-index: 10;">
                         <div class="dropdown">
-                            <button class="btn btn-custom btn-sm" type="button" data-bs-toggle="dropdown" style="background: rgba(255,255,255,0.9); color: var(--cute-purple); border: 2px solid var(--cute-pink); border-radius: 25px; padding: 8px 15px; font-size: 0.9em; min-width: 80px;">
+                            <button class="btn btn-custom btn-sm" type="button" data-bs-toggle="dropdown" style="background: rgba(255,255,255,0.9); color: var(--cute-purple); border: 2px solid var(--cute-pink); border-radius: 25px; padding: 8px 15px; font-size: 0.9em;">
                                 🌟 Share
                             </button>
                             <ul class="dropdown-menu" style="background: white; border: 3px solid var(--cute-pink);">
@@ -495,23 +341,22 @@
     </section>
 
     <!-- Ending Voting Section -->
-    <section class="py-3" style="background: var(--cute-bg); border-top: 3px solid var(--cute-pink); position: relative; z-index: 10; margin-top: 0;">
+    <section class="py-3" style="background: var(--cute-bg); border-top: 3px solid var(--cute-pink);">
         <div class="container">
-            <div class="feature-card text-center" style="position: relative; z-index: 11;">
+            <div class="feature-card text-center">
                 <h3>🌟 Which Ending Did You Get? Vote Now! 🌟</h3>
                 <p class="mb-4" style="color: var(--cute-purple); font-size: 1.2rem;">🎯 Complete the blood money game above, then vote for your ending!</p>
-                <div class="voting-buttons" style="position: relative; z-index: 12; pointer-events: auto;">
-                    <button class="ending-btn ending-good" onclick="voteEnding('good')" style="position: relative; z-index: 13; pointer-events: auto;">
+                <div class="voting-buttons">
+                    <button class="ending-btn ending-good" onclick="voteEnding('good')">
                         😊 Good Ending
                     </button>
-                    <button class="ending-btn ending-normal" onclick="voteEnding('normal')" style="position: relative; z-index: 13; pointer-events: auto;">
+                    <button class="ending-btn ending-normal" onclick="voteEnding('normal')">
                         😐 Normal Ending
                     </button>
-                    <button class="ending-btn ending-bad" onclick="voteEnding('bad')" style="position: relative; z-index: 13; pointer-events: auto;">
+                    <button class="ending-btn ending-bad" onclick="voteEnding('bad')">
                         😢 Bad Ending
                     </button>
                 </div>
-                
                 <div class="mt-4">
                     <h4>Current Results:</h4>
                     <div class="row">
@@ -552,7 +397,7 @@
                     <div class="row">
                         <div class="col-md-4 col-6 mb-3">
                             <div class="image-option" onclick="selectMemeImage('harvey1')" id="img-harvey1">
-                                <img src="image/harvey1.png" alt="Harvey 1" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <img src="images/harvey1.png" alt="Harvey 1" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                 <div class="placeholder-img" style="background: linear-gradient(45deg, var(--cute-pink), var(--cute-purple)); height: 120px; border-radius: 15px; display: none; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; border: 3px solid transparent;">
                                     🤗 Harvey 1
                                 </div>
@@ -560,7 +405,7 @@
                         </div>
                         <div class="col-md-4 col-6 mb-3">
                             <div class="image-option" onclick="selectMemeImage('harvey2')" id="img-harvey2">
-                                <img src="image/harvey2.png" alt="Harvey 2" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <img src="images/harvey2.png" alt="Harvey 2" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                 <div class="placeholder-img" style="background: linear-gradient(45deg, var(--cute-blue), var(--cute-green)); height: 120px; border-radius: 15px; display: none; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; border: 3px solid transparent;">
                                     😎 Harvey 2
                                 </div>
@@ -568,7 +413,7 @@
                         </div>
                         <div class="col-md-4 col-6 mb-3">
                             <div class="image-option" onclick="selectMemeImage('harvey3')" id="img-harvey3">
-                                <img src="image/harvey3.png" alt="Harvey 3" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <img src="images/harvey3.png" alt="Harvey 3" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                 <div class="placeholder-img" style="background: linear-gradient(45deg, var(--cute-yellow), var(--cute-purple)); height: 120px; border-radius: 15px; display: none; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; border: 3px solid transparent;">
                                     🥳 Harvey 3
                                 </div>
@@ -576,7 +421,7 @@
                         </div>
                         <div class="col-md-4 col-6 mb-3">
                             <div class="image-option" onclick="selectMemeImage('harvey4')" id="img-harvey4">
-                                <img src="image/harvey4.png" alt="Harvey 4" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <img src="images/harvey4.png" alt="Harvey 4" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                 <div class="placeholder-img" style="background: linear-gradient(45deg, var(--cute-green), var(--cute-blue)); height: 120px; border-radius: 15px; display: none; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; border: 3px solid transparent;">
                                     🎭 Harvey 4
                                 </div>
@@ -584,7 +429,7 @@
                         </div>
                         <div class="col-md-4 col-6 mb-3">
                             <div class="image-option" onclick="selectMemeImage('harvey5')" id="img-harvey5">
-                                <img src="image/harvey5.png" alt="Harvey 5" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <img src="images/harvey5.png" alt="Harvey 5" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                 <div class="placeholder-img" style="background: linear-gradient(45deg, var(--cute-purple), var(--cute-pink)); height: 120px; border-radius: 15px; display: none; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; border: 3px solid transparent;">
                                     🌟 Harvey 5
                                 </div>
@@ -592,7 +437,7 @@
                         </div>
                         <div class="col-md-4 col-6 mb-3">
                             <div class="image-option" onclick="selectMemeImage('harvey6')" id="img-harvey6">
-                                <img src="image/harvey6.png" alt="Harvey 6" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <img src="images/harvey6.png" alt="Harvey 6" class="meme-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                 <div class="placeholder-img" style="background: linear-gradient(45deg, var(--cute-blue), var(--cute-yellow)); height: 120px; border-radius: 15px; display: none; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; border: 3px solid transparent;">
                                     🎨 Harvey 6
                                 </div>
@@ -601,116 +446,44 @@
                     </div>
                 </div>
                 
-                <!-- Mobile-first Meme Generator Layout -->
-                <div class="meme-generator-mobile">
-                    <!-- Canvas Section -->
-                    <div class="text-center mb-4">
-                        <div style="position: relative; display: inline-block;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div style="position: relative;">
                             <canvas id="memeCanvas" class="meme-canvas" width="400" height="400"></canvas>
                             <!-- Draggable text elements will be added here -->
                         </div>
                     </div>
-                    
-                    <!-- Step-by-Step Controls -->
-                    <div class="mobile-controls">
-                        <!-- Step 1: Add Text -->
-                        <div class="card mb-3" style="background: rgba(255,255,255,0.8); border: 2px solid var(--cute-purple);">
-                            <div class="card-body">
-                                <h6 class="card-title">✏️ Step 1: Add Your Text</h6>
-                                <div class="input-group">
-                                    <textarea class="form-control" id="newMemeText" placeholder="Enter your meme text here..." rows="2" style="font-size: 16px; resize: vertical;"></textarea>
-                                    <button class="btn btn-custom" onclick="addMemeText()">Add Text</button>
-                                </div>
-                                <small class="text-muted d-block mt-2">
-                                    💡 <strong>Pro Tips:</strong><br>
-                                    • Text appears in center - drag to move it anywhere<br>
-                                    • Click text to select it for editing<br>
-                                    • Works on both desktop and mobile
-                                </small>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="memeText" class="form-label">📝 Your Text:</label>
+                            <input type="text" class="form-control" id="memeText" placeholder="Enter your meme text" oninput="updateMemeText()">
+                        </div>
+                        <div class="mb-3">
+                            <label for="textSize" class="form-label">📏 Text Size: <span id="sizeValue">24</span>px</label>
+                            <input type="range" class="form-range" id="textSize" min="12" max="48" value="24" oninput="updateMemeText()">
+                        </div>
+                        <div class="mb-3">
+                            <label for="textColor" class="form-label">🎨 Text Color:</label>
+                            <input type="color" class="form-control form-control-color" id="textColor" value="#ffffff" oninput="updateMemeText()">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">🖼️ Background Color:</label>
+                            <div class="btn-group" role="group">
+                                <input type="radio" class="btn-check" name="bgColor" id="bgNone" value="none" checked onchange="updateMemeText()">
+                                <label class="btn btn-outline-secondary" for="bgNone">🌈 None</label>
+                                
+                                <input type="radio" class="btn-check" name="bgColor" id="bgWhite" value="white" onchange="updateMemeText()">
+                                <label class="btn btn-outline-light" for="bgWhite">⚪ White</label>
+                                
+                                <input type="radio" class="btn-check" name="bgColor" id="bgBlack" value="black" onchange="updateMemeText()">
+                                <label class="btn btn-outline-dark" for="bgBlack">⚫ Black</label>
                             </div>
                         </div>
+                        <button class="btn btn-outline-secondary me-2" onclick="clearCanvas()">🗑️ Clear Text</button>
+                        <button class="btn btn-custom" onclick="downloadMeme()">💾 Download PNG</button>
                         
-                        <!-- Step 2: Adjust Text -->
-                        <div class="card mb-3" style="background: rgba(255,255,255,0.8); border: 2px solid var(--cute-blue);">
-                            <div class="card-body">
-                                <h6 class="card-title">🎨 Step 2: Customize Your Text</h6>
-                                <div class="mb-3">
-                                    <small>Selected: <span id="selectedTextInfo">Click text to select</span></small>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label for="textSize" class="form-label">Size: <span id="sizeValue">32</span>px</label>
-                                        <input type="range" class="form-range" id="textSize" min="12" max="72" value="32" oninput="updateSelectedText()">
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="textColor" class="form-label">Color:</label>
-                                        <input type="color" class="form-control form-control-color" id="textColor" value="#ffffff" oninput="updateSelectedText()" style="height: 40px;">
-                                    </div>
-                                </div>
-                                <div class="d-flex gap-2 mt-3">
-                                    <button class="btn btn-outline-danger btn-sm flex-fill" onclick="deleteSelectedText()">🗑️ Delete</button>
-                                    <button class="btn btn-outline-secondary btn-sm flex-fill" onclick="clearTextElements()">🧹 Clear Text</button>
-                                </div>
-                                <small class="text-muted d-block mt-2">
-                                    💡 <strong>How to use:</strong><br>
-                                    • <strong>Desktop:</strong> Click and drag to move text<br>
-                                    • <strong>Mobile:</strong> Touch and drag to move text<br>
-                                    • Click empty area to deselect
-                                </small>
-                            </div>
-                        </div>
-                        
-                        <!-- Step 3: Background (Optional) -->
-                        <div class="card mb-3" style="background: rgba(255,255,255,0.8); border: 2px solid var(--cute-green);">
-                            <div class="card-body">
-                                <h6 class="card-title">🖼️ Step 3: Background (Optional)</h6>
-                                <div class="btn-group w-100" role="group">
-                                    <input type="radio" class="btn-check" name="bgColor" id="bgNone" value="none" checked onchange="drawMemeBackground()">
-                                    <label class="btn btn-outline-secondary" for="bgNone">🌈 Transparent</label>
-                                    
-                                    <input type="radio" class="btn-check" name="bgColor" id="bgWhite" value="white" onchange="drawMemeBackground()">
-                                    <label class="btn btn-outline-light" for="bgWhite">⚪ White</label>
-                                    
-                                    <input type="radio" class="btn-check" name="bgColor" id="bgBlack" value="black" onchange="drawMemeBackground()">
-                                    <label class="btn btn-outline-dark" for="bgBlack">⚫ Black</label>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Step 4: Download -->
-                        <div class="card" style="background: linear-gradient(45deg, var(--cute-pink), var(--cute-purple)); border: 3px solid white;">
-                            <div class="card-body text-center">
-                                <h6 class="card-title text-white">🎉 Step 4: Download Your Meme!</h6>
-                                <button onclick="downloadMeme()" class="btn btn-light btn-lg w-100" style="padding: 15px; font-size: 1.2em; font-weight: bold;">
-                                    📥 Download Meme
-                                </button>
-                                <small class="text-white d-block mt-2">
-                                    Your meme will be saved as a PNG file
-                                </small>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-3 text-center">
-                            <small class="text-muted">💡 How to use: 
-                            • Add text with the input box above
-                            • <strong>Tap text</strong> to select (pink outline)
-                            • <strong>Touch & drag</strong> to move anywhere
-                            • Use size/color controls to customize
-                            </small>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Desktop Layout (hidden on mobile) -->
-                <div class="d-none d-md-block">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div style="position: relative;">
-                                <canvas id="memeCanvasDesktop" class="meme-canvas" width="400" height="400" style="display: none;"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <!-- Desktop controls would go here -->
+                        <div class="mt-3">
+                            <small class="text-muted">💡 Tip: Click and drag text to move it around!</small>
                         </div>
                     </div>
                 </div>
@@ -723,55 +496,11 @@
         <div class="container">
             <div class="feature-card">
                 <h3>🏆 Achievement Share Generator 🏆</h3>
-                <p>Enter your Blood Money game stats to generate a personalized achievement!</p>
-                
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="gameTime" class="form-label">⏱️ Completion Time (minutes):</label>
-                            <input type="number" class="form-control" id="gameTime" placeholder="e.g., 15" min="1" max="120" value="15">
-                        </div>
-                        <div class="mb-3">
-                            <label for="gameMoney" class="form-label">💰 Money Earned ($):</label>
-                            <input type="number" class="form-control" id="gameMoney" placeholder="e.g., 45000" min="0" max="100000" value="45000">
-                        </div>
-                        <div class="mb-3">
-                            <label for="gameChoice" class="form-label">🎯 Your Final Choice:</label>
-                            <select class="form-select" id="gameChoice">
-                                <option value="good">😊 Good Ending</option>
-                                <option value="normal">😐 Normal Ending</option>
-                                <option value="bad">😢 Bad Ending</option>
-                            </select>
-                        </div>
-                        <div class="text-center">
-                            <button class="btn btn-custom" onclick="generateAchievement()">
-                                🌟 Generate My Achievement! 🌟
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="text-center">
-                            <h5>🏆 Achievement Tiers 🏆</h5>
-                            <div class="row text-start">
-                                <div class="col-12 mb-2">
-                                    <span class="badge bg-success">🚀 Speed Runner Millionaire</span><br>
-                                    <small>Complete in ≤12 minutes with ≥$45,000</small>
-                                </div>
-                                <div class="col-12 mb-2">
-                                    <span class="badge bg-primary">🦄 Moral Hero</span><br>
-                                    <small>Good ending with ≥$30,000</small>
-                                </div>
-                                <div class="col-12 mb-2">
-                                    <span class="badge bg-warning">💰 Money Master</span><br>
-                                    <small>Earn ≥$40,000</small>
-                                </div>
-                                <div class="col-12 mb-2">
-                                    <span class="badge bg-info">🎮 Blood Money Player</span><br>
-                                    <small>All other brave players!</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <p>Complete challenges to unlock shareable achievement images!</p>
+                <div class="text-center">
+                    <button class="btn btn-custom" onclick="generateAchievement()">
+                        🌟 Generate Achievement Image 🌟
+                    </button>
                 </div>
             </div>
         </div>
@@ -782,53 +511,7 @@
         <div class="container">
             <div class="feature-card">
                 <h3>🏆 Blood Money Game Leaderboard 🏆</h3>
-                <p>Submit your score to compete with other players!</p>
-                
-                <!-- Score Submission Form -->
-                <div class="row mb-4">
-                    <div class="col-md-8">
-                        <div class="card" style="background: rgba(255,255,255,0.8); border: 2px solid var(--cute-pink);">
-                            <div class="card-body">
-                                <h5 class="card-title">🎮 Submit Your Score</h5>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <input type="text" class="form-control" id="playerName" placeholder="Your Name" maxlength="15">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <input type="number" class="form-control" id="playerTime" placeholder="Time (min)" min="1" max="120">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="number" class="form-control" id="playerMoney" placeholder="Money ($)" min="0" max="100000">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <select class="form-select" id="playerEnding">
-                                            <option value="">Ending</option>
-                                            <option value="good">😊 Good</option>
-                                            <option value="normal">😐 Normal</option>
-                                            <option value="bad">😢 Bad</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button class="btn btn-custom w-100" onclick="submitScore()">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card" style="background: rgba(255,255,255,0.8); border: 2px solid var(--cute-blue);">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">📊 Ranking Rules</h5>
-                                <small>
-                                    1. Fastest time first<br>
-                                    2. Higher money breaks ties<br>
-                                    3. Good ending bonus
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+                <p>Compete for the fastest completion times in the blood money game!</p>
                 <div class="leaderboard-table">
                     <table class="table">
                         <thead>
@@ -838,11 +521,30 @@
                                 <th>Time</th>
                                 <th>Money</th>
                                 <th>Ending</th>
-                                <th>Score</th>
                             </tr>
                         </thead>
                         <tbody id="leaderboard-body">
-                            <!-- Default scores will be loaded here -->
+                            <tr>
+                                <td>🥇</td>
+                                <td>ProGamer123</td>
+                                <td>12:34</td>
+                                <td>$50,000</td>
+                                <td><span class="badge" style="background: linear-gradient(45deg, var(--cute-green), var(--cute-blue));">😊 Good</span></td>
+                            </tr>
+                            <tr>
+                                <td>🥈</td>
+                                <td>SpeedRunner</td>
+                                <td>15:22</td>
+                                <td>$45,000</td>
+                                <td><span class="badge" style="background: linear-gradient(45deg, var(--cute-yellow), var(--cute-purple));">😐 Normal</span></td>
+                            </tr>
+                            <tr>
+                                <td>🥉</td>
+                                <td>MoralChoice</td>
+                                <td>18:45</td>
+                                <td>$38,000</td>
+                                <td><span class="badge" style="background: linear-gradient(45deg, var(--cute-pink), var(--cute-purple));">😢 Bad</span></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -896,31 +598,38 @@
             <div class="feature-card">
                 <h2>🤔 What is Blood Money Game? Complete Guide to the Human Expenditure Program 🤔</h2>
                 
-                <h3>💕 Blood Money Game: Play with Harvey & Eun-mi in the Cutest Game Ever! 💕</h3>
-                <p>Welcome to the ultimate <span class="keyword-density">blood money game</span> experience! This amazing <span class="keyword-density">blood money game</span> allows you to <span class="keyword-density">play online free</span> with <span class="keyword-density">no download needed</span>. Get ready to embark on an incredible journey with Harvey & Eun-mi in the cutest game adventure ever created!</p>
+                <h3>💕 Understanding the Blood Money Game Experience 💕</h3>
+                <p>Welcome to a unique gaming experience that combines moral choices with strategic decision-making. This game introduces players to an intriguing world where every decision matters, featuring compelling characters and an engaging narrative that keeps players invested throughout their journey.</p>
                 
-                <h3>Understanding the Blood Money Game Concept</h3>
-                <p>The <span class="keyword-density">blood money game</span> represents a unique gaming experience that challenges players to navigate complex moral and financial decisions. At its core, this <span class="keyword-density">blood money game</span> introduces players to the mysterious <span class="keyword-density">human expenditure program</span>, where every choice carries significant weight and consequences.</p>
+                <h3>What is the Blood Money Game?</h3>
+                <p>At its core, this is a narrative-driven adventure that places players in challenging moral situations. The concept revolves around making difficult choices that affect both your character's development and the story's outcome. Players navigate through various scenarios where financial and ethical decisions intersect, creating a thought-provoking gaming experience.</p>
 
                 <h3>Meet Harvey and Eun-mi: Key Characters</h3>
-                <p>Central to the <span class="keyword-density">blood money game</span> experience are two compelling characters: <span class="keyword-density">Harvey</span> and <span class="keyword-density">Eun-mi</span>. These characters guide players through the intricate narrative of the <span class="keyword-density">human expenditure program</span>, offering different perspectives and challenges that shape the overall <span class="keyword-density">blood money game</span> journey.</p>
+                <p>Two central characters guide players through this adventure: Harvey and Eun-mi. These characters offer different perspectives and help shape the narrative based on your interactions with them. Their stories intertwine with the main plot, adding depth to the overall experience and influencing how the story unfolds.</p>
 
                 <h3>How to Play Blood Money Game Effectively</h3>
-                <p>Learning <strong>how to play the blood money game</strong> requires understanding several key mechanics. Players must balance risk versus reward while participating in various challenges within the <span class="keyword-density">human expenditure program</span>. The <span class="keyword-density">blood money game</span> rewards strategic thinking and moral consideration, making each playthrough unique.</p>
+                <p>Learning how to play effectively requires understanding several key mechanics:</p>
+                <ul>
+                    <li><strong>Decision Making:</strong> Every choice you make impacts the story direction</li>
+                    <li><strong>Resource Management:</strong> Balance your resources carefully to progress</li>
+                    <li><strong>Character Relationships:</strong> Build and maintain relationships with key characters</li>
+                    <li><strong>Moral Considerations:</strong> Your ethical choices affect different story outcomes</li>
+                </ul>
+                <p>The game rewards strategic thinking and careful planning, making each playthrough feel unique and personal.</p>
 
-                <h3>Strategies for Success in Blood Money Game</h3>
-                <p>Successful <span class="keyword-density">blood money game</span> players develop specific strategies to maximize their earnings while maintaining their moral compass. The <span class="keyword-density">lovemoney game</span> mechanics within the larger <span class="keyword-density">blood money game</span> framework require careful planning and decision-making skills.</p>
+                <h3>Essential Tips for New Players</h3>
+                <p>If you're just starting out, here are some helpful strategies:</p>
+                <ul>
+                    <li>Take time to understand each character's motivations</li>
+                    <li>Save frequently to explore different choice outcomes</li>
+                    <li>Pay attention to dialogue clues and character reactions</li>
+                    <li>Consider the long-term consequences of your decisions</li>
+                </ul>
 
                 <h3>The Multiple Endings System</h3>
-                <p>One of the most compelling aspects of the <span class="keyword-density">blood money game</span> is its multiple ending system. Based on player choices throughout the <span class="keyword-density">human expenditure program</span>, participants can achieve different outcomes: good ending, normal ending, or bad ending. This replayability factor makes the <span class="keyword-density">blood money game</span> incredibly engaging.</p>
+                <p>One of the most engaging features is the multiple ending system. Based on your choices throughout the game, you can achieve different outcomes. This encourages replayability, as players often want to go back and explore alternative paths to see how different decisions lead to varied results.</p>
 
-                <h3>Community and Competitive Features</h3>
-                <p>The <span class="keyword-density">blood money game</span> community thrives on competition and collaboration. Players can share their achievements, compare completion times, and discuss strategies for navigating the complex <span class="keyword-density">human expenditure program</span>. This social aspect enhances the overall <span class="keyword-density">blood money game</span> experience.</p>
-
-                <h3>Why Blood Money Game Stands Out</h3>
-                <p>What sets the <span class="keyword-density">blood money game</span> apart from other games is its unique blend of moral storytelling and strategic gameplay. The <span class="keyword-density">blood money game</span> doesn't just entertain—it challenges players to think critically about their decisions and their impact within the <span class="keyword-density">human expenditure program</span> context.</p>
-
-                <p>Whether you're a casual player or a dedicated gamer, the <span class="keyword-density">blood money game</span> offers something for everyone. With its compelling narrative featuring <span class="keyword-density">Harvey</span> and <span class="keyword-density">Eun-mi</span>, strategic depth, and multiple paths to victory, the <span class="keyword-density">blood money game</span> represents the pinnacle of interactive storytelling in modern gaming.</p>
+                <p>Whether you're new to narrative games or an experienced player, this experience offers something for everyone. With its compelling story, strategic depth, and meaningful choices, it represents an engaging adventure that challenges players to think critically about their decisions.</p>
             </div>
         </div>
     </section>
@@ -946,536 +655,6 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Meme Generator Core Functions -->
-    <script>
-        // Global variables for meme generator
-        let selectedImage = 'harvey1';
-        let canvas, ctx;
-        let loadedImages = {};
-        
-        // Main meme selection function
-        function selectMemeImage(imageId) {
-            console.log('Selecting image:', imageId);
-            selectedImage = imageId;
-            
-            // Update UI to show selected image
-            document.querySelectorAll('.image-option img, .image-option .placeholder-img').forEach(element => {
-                element.style.border = '3px solid transparent';
-                element.style.boxShadow = 'none';
-            });
-            
-            const selectedElement = document.querySelector(`#img-${imageId} img, #img-${imageId} .placeholder-img`);
-            if (selectedElement) {
-                selectedElement.style.border = '3px solid var(--cute-purple)';
-                selectedElement.style.boxShadow = '0 4px 15px rgba(221, 160, 221, 0.5)';
-            }
-            
-            // Draw the selected image on canvas
-            if (canvas && ctx) {
-                drawMemeBackground();
-            }
-            
-            // Show user feedback
-            showNotification(`Selected: ${imageId.toUpperCase()}. Now add your text!`);
-        }
-        
-        // Show user notification
-        function showNotification(message) {
-            // Create a simple notification
-            const notification = document.createElement('div');
-            notification.textContent = message;
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: linear-gradient(45deg, var(--cute-purple), var(--cute-pink));
-                color: white;
-                padding: 15px 20px;
-                border-radius: 25px;
-                font-family: 'Comic Sans MS', cursive;
-                font-weight: bold;
-                z-index: 10000;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-                animation: slideIn 0.3s ease;
-            `;
-            
-            document.body.appendChild(notification);
-            
-            // Remove after 3 seconds
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }
-        
-        // Main canvas drawing function
-        function drawMemeBackground() {
-            if (!canvas || !ctx) {
-                console.log('Canvas not ready yet');
-                return;
-            }
-            
-            console.log('Drawing meme background for:', selectedImage);
-            
-            // Clear canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Try to get selected background
-            let selectedBg = 'none';
-            try {
-                const bgRadio = document.querySelector('input[name="bgColor"]:checked');
-                if (bgRadio) {
-                    selectedBg = bgRadio.value;
-                }
-            } catch (e) {
-                selectedBg = 'none';
-            }
-            
-            // Draw background if selected
-            if (selectedBg === 'black') {
-                ctx.fillStyle = '#000000';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-            } else if (selectedBg === 'white') {
-                ctx.fillStyle = '#FFFFFF';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-            }
-            
-            // Try to load and draw the actual image
-            const img = new Image();
-            img.onload = function() {
-                console.log('Image loaded successfully:', selectedImage);
-                
-                // Calculate scaling to fit canvas
-                const scale = Math.min(canvas.width / img.width, canvas.height / img.height) * 0.8;
-                const x = (canvas.width - img.width * scale) / 2;
-                const y = (canvas.height - img.height * scale) / 2;
-                
-                // Draw the image
-                ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-                
-                // Draw text elements on top
-                if (textElements && textElements.length > 0) {
-                    textElements.forEach((element, index) => drawTextElement(element, index));
-                }
-                
-                console.log('Image drawn successfully');
-            };
-            
-            img.onerror = function() {
-                console.log('Image not found, drawing placeholder for:', selectedImage);
-                drawMemePlaceholder(selectedBg);
-                
-                // Draw text elements on top of placeholder
-                if (textElements && textElements.length > 0) {
-                    textElements.forEach((element, index) => drawTextElement(element, index));
-                }
-            };
-            
-            // Try to load the image
-            img.src = `image/${selectedImage}.png`;
-        }
-        
-        // Draw placeholder when image is not available
-        function drawMemePlaceholder(selectedBg) {
-            // Draw gradient placeholder based on selected image
-            const gradients = {
-                'harvey1': ['#FFB6C1', '#DDA0DD'],
-                'harvey2': ['#87CEEB', '#98FB98'],
-                'harvey3': ['#F0E68C', '#DDA0DD'],
-                'harvey4': ['#98FB98', '#87CEEB'],
-                'harvey5': ['#DDA0DD', '#FFB6C1'],
-                'harvey6': ['#87CEEB', '#F0E68C']
-            };
-            
-            if (selectedBg === 'none') {
-                const colors = gradients[selectedImage];
-                if (colors) {
-                    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-                    gradient.addColorStop(0, colors[0]);
-                    gradient.addColorStop(1, colors[1]);
-                    ctx.fillStyle = gradient;
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                }
-            }
-            
-            // Draw placeholder text
-            const characters = {
-                'harvey1': '🤗 HARVEY 1 🤗',
-                'harvey2': '😎 HARVEY 2 😎',
-                'harvey3': '🥳 HARVEY 3 🥳',
-                'harvey4': '🎭 HARVEY 4 🎭',
-                'harvey5': '🌟 HARVEY 5 🌟',
-                'harvey6': '🎨 HARVEY 6 🎨'
-            };
-            
-            // Draw main placeholder area
-            const boxWidth = 300;
-            const boxHeight = 200;
-            const boxX = (canvas.width - boxWidth) / 2;
-            const boxY = (canvas.height - boxHeight) / 2;
-            
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-            ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
-            ctx.strokeStyle = '#000';
-            ctx.lineWidth = 3;
-            ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
-            
-            // Draw character name
-            ctx.fillStyle = '#000';
-            ctx.font = 'bold 24px Comic Sans MS';
-            ctx.textAlign = 'center';
-            const text = characters[selectedImage] || selectedImage.toUpperCase();
-            ctx.fillText(text, canvas.width / 2, canvas.height / 2);
-            
-            console.log('Placeholder drawn successfully for', selectedImage);
-        }
-        
-        // Text elements for meme
-        let textElements = [];
-        let selectedTextIndex = -1;
-        
-        // Initialize canvas when DOM is ready
-        document.addEventListener('DOMContentLoaded', function() {
-            canvas = document.getElementById('memeCanvas');
-            if (canvas) {
-                ctx = canvas.getContext('2d');
-                console.log('Canvas initialized in early script');
-                
-                // Draw initial placeholder
-                setTimeout(() => {
-                    drawMemeBackground();
-                }, 500);
-                
-                // Setup text functionality
-                setupTextFunctionality();
-            }
-        });
-        
-        // Setup text editing functionality
-        function setupTextFunctionality() {
-            const textInput = document.getElementById('newMemeText');
-            const addTextBtn = document.querySelector('button[onclick="addNewText()"]');
-            
-            if (textInput && addTextBtn) {
-                // Replace the onclick with our improved function
-                addTextBtn.setAttribute('onclick', 'addMemeText()');
-            }
-            
-            // Setup canvas interaction for text selection and dragging
-            setupCanvasInteraction();
-        }
-        
-        // Setup canvas mouse and touch events for text interaction
-        function setupCanvasInteraction() {
-            if (!canvas) return;
-            
-            let isDragging = false;
-            let dragOffset = { x: 0, y: 0 };
-            
-            // Mouse events
-            canvas.addEventListener('mousedown', handleCanvasMouseDown);
-            canvas.addEventListener('mousemove', handleCanvasMouseMove);
-            canvas.addEventListener('mouseup', handleCanvasMouseUp);
-            canvas.addEventListener('mouseleave', handleCanvasMouseUp);
-            
-            // Touch events for mobile
-            canvas.addEventListener('touchstart', handleCanvasTouchStart, { passive: false });
-            canvas.addEventListener('touchmove', handleCanvasTouchMove, { passive: false });
-            canvas.addEventListener('touchend', handleCanvasTouchEnd);
-            
-            function handleCanvasMouseDown(e) {
-                const rect = canvas.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                // Check if click is on any text element
-                const clickedTextIndex = getTextElementAtPosition(x, y);
-                
-                if (clickedTextIndex >= 0) {
-                    // Select this text for dragging
-                    selectedTextIndex = clickedTextIndex;
-                    isDragging = true;
-                    
-                    const text = textElements[selectedTextIndex];
-                    dragOffset.x = x - text.x;
-                    dragOffset.y = y - text.y;
-                    
-                    updateTextControls();
-                    drawMemeBackground();
-                    
-                    canvas.style.cursor = 'grabbing';
-                } else {
-                    // Clicked on empty area - deselect text
-                    selectedTextIndex = -1;
-                    updateTextControls();
-                    drawMemeBackground();
-                }
-            }
-            
-            function handleCanvasMouseMove(e) {
-                const rect = canvas.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                if (isDragging && selectedTextIndex >= 0) {
-                    // Update text position
-                    textElements[selectedTextIndex].x = x - dragOffset.x;
-                    textElements[selectedTextIndex].y = y - dragOffset.y;
-                    
-                    // Redraw canvas
-                    drawMemeBackground();
-                } else {
-                    // Update cursor based on hover
-                    const hoverTextIndex = getTextElementAtPosition(x, y);
-                    canvas.style.cursor = hoverTextIndex >= 0 ? 'grab' : 'crosshair';
-                }
-            }
-            
-            function handleCanvasMouseUp() {
-                isDragging = false;
-                canvas.style.cursor = 'crosshair';
-            }
-            
-            function handleCanvasTouchStart(e) {
-                e.preventDefault();
-                const rect = canvas.getBoundingClientRect();
-                const touch = e.touches[0];
-                const x = touch.clientX - rect.left;
-                const y = touch.clientY - rect.top;
-                
-                const clickedTextIndex = getTextElementAtPosition(x, y);
-                
-                if (clickedTextIndex >= 0) {
-                    selectedTextIndex = clickedTextIndex;
-                    isDragging = true;
-                    
-                    const text = textElements[selectedTextIndex];
-                    dragOffset.x = x - text.x;
-                    dragOffset.y = y - text.y;
-                    
-                    updateTextControls();
-                    drawMemeBackground();
-                }
-            }
-            
-            function handleCanvasTouchMove(e) {
-                e.preventDefault();
-                if (!isDragging || selectedTextIndex < 0) return;
-                
-                const rect = canvas.getBoundingClientRect();
-                const touch = e.touches[0];
-                const x = touch.clientX - rect.left;
-                const y = touch.clientY - rect.top;
-                
-                textElements[selectedTextIndex].x = x - dragOffset.x;
-                textElements[selectedTextIndex].y = y - dragOffset.y;
-                
-                drawMemeBackground();
-            }
-            
-            function handleCanvasTouchEnd() {
-                isDragging = false;
-            }
-        }
-        
-        // Get text element at specific position (for click detection)
-        function getTextElementAtPosition(x, y) {
-            if (!ctx) return -1;
-            
-            // Check from top to bottom (reverse order for proper layering)
-            for (let i = textElements.length - 1; i >= 0; i--) {
-                const text = textElements[i];
-                
-                // Set font to measure text
-                ctx.font = `bold ${text.size}px Comic Sans MS`;
-                
-                // Measure text dimensions
-                const metrics = ctx.measureText(text.text);
-                const textWidth = metrics.width;
-                const textHeight = text.size;
-                
-                // Check if click is within text bounds (with some padding)
-                const padding = 10;
-                if (x >= text.x - textWidth/2 - padding && 
-                    x <= text.x + textWidth/2 + padding &&
-                    y >= text.y - textHeight - padding && 
-                    y <= text.y + padding) {
-                    return i;
-                }
-            }
-            
-            return -1; // No text element found at this position
-        }
-        
-        // Add new text to meme
-        function addMemeText() {
-            const textInput = document.getElementById('newMemeText');
-            const text = textInput.value.trim();
-            
-            if (!text) {
-                showNotification('Please enter some text first!');
-                return;
-            }
-            
-            // Create new text element
-            const newText = {
-                text: text,
-                x: canvas.width / 2, // Center horizontally
-                y: canvas.height / 2, // Center vertically
-                size: 32,
-                color: '#ffffff'
-            };
-            
-            textElements.push(newText);
-            selectedTextIndex = textElements.length - 1;
-            
-            // Clear input and update display
-            textInput.value = '';
-            updateTextControls();
-            drawMemeBackground();
-            
-            showNotification('Text added! You can drag to move it.');
-        }
-        
-        // Update text control panel
-        function updateTextControls() {
-            const selectedInfo = document.getElementById('selectedTextInfo');
-            const sizeSlider = document.getElementById('textSize');
-            const colorPicker = document.getElementById('textColor');
-            
-            if (selectedTextIndex >= 0 && selectedTextIndex < textElements.length) {
-                const text = textElements[selectedTextIndex];
-                if (selectedInfo) selectedInfo.textContent = `"${text.text}"`;
-                if (sizeSlider) sizeSlider.value = text.size;
-                if (colorPicker) colorPicker.value = text.color;
-                
-                // Update size display
-                const sizeValue = document.getElementById('sizeValue');
-                if (sizeValue) sizeValue.textContent = text.size;
-            } else {
-                if (selectedInfo) selectedInfo.textContent = 'Click text to select';
-            }
-        }
-        
-        // Update selected text properties
-        function updateSelectedText() {
-            if (selectedTextIndex < 0 || selectedTextIndex >= textElements.length) return;
-            
-            const size = parseInt(document.getElementById('textSize').value);
-            const color = document.getElementById('textColor').value;
-            
-            textElements[selectedTextIndex].size = size;
-            textElements[selectedTextIndex].color = color;
-            
-            // Update size display
-            const sizeValue = document.getElementById('sizeValue');
-            if (sizeValue) sizeValue.textContent = size;
-            
-            drawMemeBackground();
-        }
-        
-        // Draw text element on canvas
-        function drawTextElement(element, index) {
-            ctx.font = `bold ${element.size}px Comic Sans MS`;
-            ctx.fillStyle = element.color;
-            ctx.strokeStyle = '#000';
-            ctx.lineWidth = 3;
-            ctx.textAlign = 'center';
-            
-            // Add shadow for better visibility
-            ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
-            ctx.shadowOffsetX = 2;
-            ctx.shadowOffsetY = 2;
-            ctx.shadowBlur = 4;
-            
-            // Draw text with stroke for better visibility
-            ctx.strokeText(element.text, element.x, element.y);
-            ctx.fillText(element.text, element.x, element.y);
-            
-            // Reset shadow
-            ctx.shadowColor = 'transparent';
-            
-            // Draw selection indicator if this text is selected
-            if (index === selectedTextIndex) {
-                ctx.strokeStyle = '#FF69B4';
-                ctx.lineWidth = 4;
-                ctx.setLineDash([8, 4]);
-                
-                const metrics = ctx.measureText(element.text);
-                const padding = 15;
-                const x = element.x - metrics.width/2 - padding;
-                const y = element.y - element.size - padding;
-                const width = metrics.width + padding * 2;
-                const height = element.size + padding * 2;
-                
-                // Draw selection box with rounded corners effect
-                ctx.strokeRect(x, y, width, height);
-                
-                // Draw corner indicators
-                const cornerSize = 8;
-                ctx.fillStyle = '#FF69B4';
-                
-                // Top-left corner
-                ctx.fillRect(x, y, cornerSize, cornerSize);
-                // Top-right corner
-                ctx.fillRect(x + width - cornerSize, y, cornerSize, cornerSize);
-                // Bottom-left corner
-                ctx.fillRect(x, y + height - cornerSize, cornerSize, cornerSize);
-                // Bottom-right corner
-                ctx.fillRect(x + width - cornerSize, y + height - cornerSize, cornerSize, cornerSize);
-                
-                ctx.setLineDash([]);
-                
-                // Draw handle indicator
-                ctx.fillStyle = '#FF69B4';
-                ctx.beginPath();
-                ctx.arc(element.x + metrics.width/2 + padding + 10, element.y, 6, 0, 2 * Math.PI);
-                ctx.fill();
-            }
-        }
-        
-        // Download meme as image
-        function downloadMeme() {
-            if (!canvas) {
-                showNotification('Canvas not ready!');
-                return;
-            }
-            
-            try {
-                const link = document.createElement('a');
-                link.download = `harvey-meme-${selectedImage}.png`;
-                link.href = canvas.toDataURL();
-                link.click();
-                
-                showNotification('Meme downloaded successfully!');
-            } catch (error) {
-                console.error('Download failed:', error);
-                showNotification('Download failed. Please try again.');
-            }
-        }
-        
-        // Clear all text elements
-        function clearTextElements() {
-            textElements = [];
-            selectedTextIndex = -1;
-            updateTextControls();
-            drawMemeBackground();
-            showNotification('All text cleared!');
-        }
-        
-        // Delete selected text
-        function deleteSelectedText() {
-            if (selectedTextIndex >= 0 && selectedTextIndex < textElements.length) {
-                textElements.splice(selectedTextIndex, 1);
-                selectedTextIndex = -1;
-                updateTextControls();
-                drawMemeBackground();
-                showNotification('Text deleted!');
-            } else {
-                showNotification('No text selected!');
-            }
-        }
-    </script>
-    
     <script>
         // Fullscreen functionality
         function toggleFullscreen() {
@@ -1489,67 +668,26 @@
             }
         }
 
-        // Achievement Generator - Form Input
+        // Achievement Generator
         function generateAchievement() {
-            // Get user input from form fields
-            const gameTime = document.getElementById('gameTime').value;
-            const gameMoney = document.getElementById('gameMoney').value;
-            const gameChoice = document.getElementById('gameChoice').value;
+            const achievements = [
+                { name: "💕 Blood Money Master 💕", emoji: "🏆", color: "linear-gradient(45deg, var(--cute-pink), var(--cute-purple))" },
+                { name: "🌟 Harvey's Best Friend 🌟", emoji: "🤝", color: "linear-gradient(45deg, var(--cute-blue), var(--cute-green))" },
+                { name: "✨ Eun-mi's Amazing Ally ✨", emoji: "🌸", color: "linear-gradient(45deg, var(--cute-yellow), var(--cute-pink))" },
+                { name: "🦄 Moral Compass Hero 🦄", emoji: "⚖️", color: "linear-gradient(45deg, var(--cute-purple), var(--cute-blue))" },
+                { name: "🚀 Super Speed Runner 🚀", emoji: "⭐", color: "linear-gradient(45deg, var(--cute-green), var(--cute-yellow))" }
+            ];
             
-            // Validate inputs
-            if (!gameTime || !gameMoney || !gameChoice) {
-                alert("💕 Please fill in all fields to generate your achievement!");
-                return;
-            }
+            const achievement = achievements[Math.floor(Math.random() * achievements.length)];
+            const gameTime = Math.floor(Math.random() * 30) + 10;
+            const gameMoney = Math.floor(Math.random() * 50000) + 10000;
+            const choices = ["😊 Moral", "😐 Neutral", "😢 Ruthless"];
+            const choice = choices[Math.floor(Math.random() * choices.length)];
             
-            if (parseInt(gameTime) <= 0 || parseInt(gameMoney) < 0) {
-                alert("💕 Please enter valid positive numbers!");
-                return;
-            }
-            
-            // Determine achievement based on performance
-            let achievement, emoji, color;
-            const timeNum = parseInt(gameTime);
-            const moneyNum = parseInt(gameMoney.replace(/[^0-9]/g, ''));
-            
-            if (timeNum <= 12 && moneyNum >= 45000) {
-                achievement = "🚀 Speed Runner Millionaire 🚀";
-                emoji = "⭐";
-                color = "linear-gradient(45deg, var(--cute-green), var(--cute-yellow))";
-            } else if (gameChoice === "good" && moneyNum >= 30000) {
-                achievement = "🦄 Moral Hero 🦄";
-                emoji = "⚖️";
-                color = "linear-gradient(45deg, var(--cute-purple), var(--cute-blue))";
-            } else if (moneyNum >= 40000) {
-                achievement = "💰 Money Master 💰";
-                emoji = "💎";
-                color = "linear-gradient(45deg, var(--cute-yellow), var(--cute-pink))";
-            } else {
-                achievement = "🎮 Blood Money Player 🎮";
-                emoji = "🎮";
-                color = "linear-gradient(45deg, var(--cute-pink), var(--cute-purple))";
-            }
-            
-            // Format choice text
-            const choiceText = {
-                'good': '😊 Moral',
-                'normal': '😐 Neutral', 
-                'bad': '😢 Ruthless'
-            }[gameChoice] || gameChoice;
-            
-            // Format time
-            const minutes = parseInt(gameTime) || 0;
-            const seconds = Math.floor(Math.random() * 60); // Add random seconds for realism
-            const timeText = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-            
-            // Format money
-            const moneyText = `$${parseInt(moneyNum || 0).toLocaleString()}`;
-            
-            // Update achievement modal
-            document.getElementById('achievementText').textContent = achievement;
-            document.getElementById('achievementStats').textContent = `⏱️ Time: ${timeText} | 💰 Money: ${moneyText} | 🎯 Choice: ${choiceText}`;
-            document.getElementById('achievementEmoji').textContent = emoji;
-            document.getElementById('achievementImage').style.background = color;
+            document.getElementById('achievementText').textContent = achievement.name;
+            document.getElementById('achievementStats').textContent = `⏱️ Time: ${gameTime}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')} | 💰 Money: $${gameMoney.toLocaleString()} | 🎯 Choice: ${choice}`;
+            document.getElementById('achievementEmoji').textContent = achievement.emoji;
+            document.getElementById('achievementImage').style.background = achievement.color;
             
             document.getElementById('achievementModal').style.display = 'block';
         }
@@ -1564,7 +702,7 @@
             shareToSocial(`Just unlocked "${text}" in Blood Money Game! ${stats}`);
         }
 
-        // Advanced Meme Generator with Multi-Text Support
+        // Advanced Meme Generator with Image Selection and Draggable Text
         let selectedImage = 'harvey1';
         let canvas, ctx;
         let textElements = [];
@@ -1572,136 +710,22 @@
         let dragElement = null;
         let dragOffset = { x: 0, y: 0 };
         let loadedImages = {};
-        let selectedTextIndex = -1;
-        
-        // Pinch gesture variables for mobile text size control
-        let isPinching = false;
-        let initialPinchDistance = 0;
-        let initialTextSize = 0;
+        let currentText = null;
 
         // Initialize canvas
         window.addEventListener('load', function() {
-            // Hide achievement modal if it's showing
-            const modal = document.getElementById('achievementModal');
-            if (modal) {
-                modal.style.display = 'none';
-            }
-            
             canvas = document.getElementById('memeCanvas');
-            if (!canvas) {
-                console.error('Canvas element not found');
-                return;
-            }
-            
             ctx = canvas.getContext('2d');
-            if (!ctx) {
-                console.error('Canvas context not available');
-                return;
-            }
-            
-            console.log('Canvas initialized successfully');
             preloadImages();
-            
-            // Initialize with first image after a short delay
             setTimeout(() => {
-                console.log('Initializing with harvey1');
                 selectMemeImage('harvey1');
-            }, 1500);
+            }, 1000);
             
-            // Vote display and leaderboard are now initialized in DOMContentLoaded event
-            
-            // Add event listeners for drag and drop (desktop)
+            // Add event listeners for drag and drop
             canvas.addEventListener('mousedown', startDrag);
             canvas.addEventListener('mousemove', drag);
             canvas.addEventListener('mouseup', endDrag);
             canvas.addEventListener('mouseleave', endDrag);
-            canvas.addEventListener('click', function(e) {
-                // Reset selection if clicking outside any text element
-                const rect = canvas.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                let clickedOnText = false;
-                for (let i = textElements.length - 1; i >= 0; i--) {
-                    const element = textElements[i];
-                    ctx.font = `bold ${element.size}px Comic Sans MS`;
-                    
-                    // Calculate text dimensions for multiline support
-                    const lines = element.text.split('\n');
-                    const lineHeight = element.size * 1.2;
-                    const totalHeight = lines.length * lineHeight;
-                    
-                    let textWidth = 0;
-                    lines.forEach(line => {
-                        const lineWidth = ctx.measureText(line).width;
-                        if (lineWidth > textWidth) {
-                            textWidth = lineWidth;
-                        }
-                    });
-                    
-                    const padding = 15;
-                    if (x >= element.x - textWidth/2 - padding && 
-                        x <= element.x + textWidth/2 + padding &&
-                        y >= element.y - element.size - padding && 
-                        y <= element.y + totalHeight - element.size + padding) {
-                        clickedOnText = true;
-                        break;
-                    }
-                }
-                
-                // If clicked outside any text, deselect the current text
-                if (!clickedOnText) {
-                    selectedTextIndex = -1;
-                    updateTextControls();
-                    drawMemeBackground();
-                }
-            });
-            
-            // Add mouse wheel support for text size control (desktop)
-            canvas.addEventListener('wheel', function(e) {
-                if (selectedTextIndex >= 0 && selectedTextIndex < textElements.length) {
-                    e.preventDefault();
-                    
-                    const element = textElements[selectedTextIndex];
-                    const delta = e.deltaY > 0 ? -2 : 2; // Scroll down = smaller, up = larger
-                    
-                    // Update text size with limits
-                    element.size = Math.max(10, Math.min(100, element.size + delta));
-                    
-                    // Update UI controls
-                    document.getElementById('textSize').value = element.size;
-                    document.getElementById('sizeValue').textContent = element.size;
-                    
-                    // Redraw canvas
-                    drawMemeBackground();
-                }
-            });
-            
-            // Add touch event listeners for mobile
-            canvas.addEventListener('touchstart', handleTouchStart, {passive: false});
-            canvas.addEventListener('touchmove', handleTouchMove, {passive: false});
-            canvas.addEventListener('touchend', handleTouchEnd, {passive: false});
-            
-            // Add enter key support for text input
-            document.getElementById('newMemeText').addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' && e.ctrlKey) {
-                    e.preventDefault();
-                    addNewText();
-                }
-            });
-            
-            // Mobile touch optimization - prevent default scrolling
-            document.body.addEventListener('touchstart', function(e) {
-                if (e.target === canvas) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-            
-            document.body.addEventListener('touchmove', function(e) {
-                if (e.target === canvas) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
         });
 
         function preloadImages() {
@@ -1710,26 +734,37 @@
                 const img = new Image();
                 img.onload = function() {
                     loadedImages[name] = img;
-                    console.log(`Image ${name} loaded successfully`);
                 };
                 img.onerror = function() {
                     console.log(`Image ${name} not found, using placeholder`);
-                    // Create placeholder for missing images
-                    loadedImages[name] = null;
                 };
-                img.src = `image/${name}.png`;
+                img.src = `images/${name}.png`;
             });
         }
 
-        // selectMemeImage function moved to early script block to avoid undefined errors
-        
-        function updateMemePreview() {
-            if (!canvas || !ctx) return;
+        function selectMemeImage(imageId) {
+            selectedImage = imageId;
             
+            // Update UI to show selected image
+            document.querySelectorAll('.image-option img, .image-option .placeholder-img').forEach(element => {
+                element.style.border = '3px solid transparent';
+                element.style.boxShadow = 'none';
+            });
+            
+            const selectedElement = document.querySelector(`#img-${imageId} img, #img-${imageId} .placeholder-img`);
+            if (selectedElement) {
+                selectedElement.style.border = '3px solid var(--cute-purple)';
+                selectedElement.style.boxShadow = '0 4px 15px rgba(221, 160, 221, 0.5)';
+            }
+            
+            drawMemeBackground();
+        }
+
+        function drawMemeBackground() {
             // Clear canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // Get selected background
+            // Try to get selected background, fall back to 'none' if not available
             let selectedBg = 'none';
             try {
                 const bgRadio = document.querySelector('input[name="bgColor"]:checked');
@@ -1749,27 +784,32 @@
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
             
-            // Load and draw the selected image
-            const img = new Image();
-            img.onload = function() {
-                const scale = Math.min(canvas.width / img.width, canvas.height / img.height);
-                const x = (canvas.width - img.width * scale) / 2;
-                const y = (canvas.height - img.height * scale) / 2;
-                ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-                
-                // Redraw text elements if any
-                if (textElements && textElements.length > 0) {
-                    textElements.forEach((element, index) => drawTextElement(element, index));
+            // Draw the selected image if loaded
+            if (loadedImages && loadedImages[selectedImage]) {
+                try {
+                    const img = loadedImages[selectedImage];
+                    const scale = Math.min(canvas.width / img.width, canvas.height / img.height);
+                    const x = (canvas.width - img.width * scale) / 2;
+                    const y = (canvas.height - img.height * scale) / 2;
+                    
+                    // Draw image on top of background
+                    ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+                } catch (e) {
+                    // If image drawing fails, show placeholder
+                    drawPlaceholder(selectedBg);
                 }
-            };
-            img.src = `image/${selectedImage}.png`;
+            } else {
+                // Show placeholder if no image loaded
+                drawPlaceholder(selectedBg);
+            }
+            
+            // Draw all text elements
+            if (textElements && textElements.length > 0) {
+                textElements.forEach(element => drawTextElement(element));
+            }
         }
-
-        // drawMemeBackground function moved to early script block to ensure availability
         
         function drawPlaceholder(selectedBg) {
-            console.log('Drawing placeholder for:', selectedImage);
-            
             // Draw gradient placeholder
             const gradients = {
                 'harvey1': ['#FFB6C1', '#DDA0DD'],
@@ -1803,153 +843,65 @@
             
             const isDarkBg = selectedBg === 'black';
             
-            // Draw a colored rectangle as placeholder
             ctx.fillStyle = '#FF69B4';
             ctx.fillRect(50, 100, 300, 200);
             ctx.strokeStyle = isDarkBg ? '#FFF' : '#000';
             ctx.lineWidth = 3;
             ctx.strokeRect(50, 100, 300, 200);
             
-            // Draw text
             ctx.fillStyle = isDarkBg ? '#FFF' : '#000';
-            ctx.font = 'bold 24px Comic Sans MS';
+            ctx.font = 'bold 28px Comic Sans MS';
             ctx.textAlign = 'center';
-            const text = characters[selectedImage] || selectedImage.toUpperCase();
-            ctx.fillText(text, 200, 200);
-            
-            console.log('Placeholder drawn successfully');
+            ctx.fillText(characters[selectedImage], 200, 200);
         }
 
-        function drawTextElement(element, index) {
+        function drawTextElement(element) {
             ctx.font = `bold ${element.size}px Comic Sans MS`;
             ctx.fillStyle = element.color;
             ctx.strokeStyle = '#000';
             ctx.lineWidth = 2;
             ctx.textAlign = 'center';
-            
-            // Split text into lines for multiline support
-            const lines = element.text.split('\n');
-            const lineHeight = element.size * 1.2;
-            
-            // Calculate total text dimensions for selection box
-            let totalWidth = 0;
-            let totalHeight = lines.length * lineHeight;
-            
-            // Find the widest line
-            lines.forEach(line => {
-                const lineWidth = ctx.measureText(line).width;
-                if (lineWidth > totalWidth) {
-                    totalWidth = lineWidth;
-                }
-            });
-            
-            // Draw selection indicator if this text is selected
-            if (index === selectedTextIndex) {
-                // Draw selection box
-                ctx.strokeStyle = '#FF69B4';
-                ctx.lineWidth = 3;
-                ctx.setLineDash([5, 5]);
-                ctx.strokeRect(
-                    element.x - totalWidth/2 - 5,
-                    element.y - element.size - 5,
-                    totalWidth + 10,
-                    totalHeight + 10
-                );
-                ctx.setLineDash([]);
-            }
-            
-            // Draw each line of text
-            lines.forEach((line, lineIndex) => {
-                const yOffset = element.y + (lineIndex * lineHeight);
-                ctx.strokeText(line, element.x, yOffset);
-                ctx.fillText(line, element.x, yOffset);
-            });
+            ctx.strokeText(element.text, element.x, element.y);
+            ctx.fillText(element.text, element.x, element.y);
         }
 
-        // Multi-Text Functions
-        function addNewText() {
-            const text = document.getElementById('newMemeText').value.trim();
-            if (!text) {
-                alert('💕 Please enter some text first!');
-                return;
-            }
-            
-            // Create new text element with random position
-            const newText = {
-                text: text,
-                x: Math.random() * 200 + 100, // Random position
-                y: Math.random() * 200 + 100,
-                size: 24,
-                color: '#ffffff'
-            };
-            
-            textElements.push(newText);
-            selectedTextIndex = textElements.length - 1;
-            
-            // Clear input and update UI
-            document.getElementById('newMemeText').value = '';
-            updateTextControls();
-            drawMemeBackground();
-        }
-
-        function updateTextControls() {
-            if (selectedTextIndex >= 0 && selectedTextIndex < textElements.length) {
-                const text = textElements[selectedTextIndex];
-                document.getElementById('selectedTextInfo').textContent = `"${text.text}"`;
-                document.getElementById('textSize').value = text.size;
-                document.getElementById('textColor').value = text.color;
-                document.getElementById('sizeValue').textContent = text.size;
-            } else {
-                document.getElementById('selectedTextInfo').textContent = 'Click on text to select';
-            }
-        }
-
-        function updateSelectedText() {
-            if (selectedTextIndex < 0 || selectedTextIndex >= textElements.length) return;
-            
+        function updateMemeText() {
+            const text = document.getElementById('memeText').value;
             const size = parseInt(document.getElementById('textSize').value);
             const color = document.getElementById('textColor').value;
             
-            textElements[selectedTextIndex].size = size;
-            textElements[selectedTextIndex].color = color;
-            
+            // Update size display
             document.getElementById('sizeValue').textContent = size;
             
-            // Ensure the selected text remains draggable after modification
-            const currentElement = textElements[selectedTextIndex];
-            if (dragElement === currentElement) {
-                // If this element was being dragged, maintain the drag state
-                dragElement = currentElement;
-            }
-            
-            drawMemeBackground();
-        }
-
-        function deleteSelectedText() {
-            if (selectedTextIndex < 0 || selectedTextIndex >= textElements.length) {
-                alert('💕 Please select a text first!');
-                return;
-            }
-            
-            textElements.splice(selectedTextIndex, 1);
-            selectedTextIndex = -1;
-            updateTextControls();
-            drawMemeBackground();
-        }
-
-        function clearAllText() {
-            if (textElements.length === 0) return;
-            
-            if (confirm('💕 Are you sure you want to clear all text?')) {
+            // Create or update current text (automatically appears on canvas)
+            if (text.trim()) {
+                let currentX = 200;
+                let currentY = 50;
+                
+                // If we have existing text, preserve its position
+                if (textElements.length > 0) {
+                    currentX = textElements[0].x;
+                    currentY = textElements[0].y;
+                }
+                
+                currentText = {
+                    text: text,
+                    x: currentX,
+                    y: currentY,
+                    size: size,
+                    color: color
+                };
+                
+                // Remove any existing text elements and replace with current
                 textElements = [];
-                selectedTextIndex = -1;
-                updateTextControls();
-                drawMemeBackground();
+                textElements.push(currentText);
+            } else {
+                // Clear text if input is empty
+                currentText = null;
+                textElements = [];
             }
-        }
-
-        function clearCanvas() {
-            clearAllText();
+            
+            drawMemeBackground();
         }
 
         function startDrag(e) {
@@ -1964,44 +916,13 @@
                 const textWidth = ctx.measureText(element.text).width;
                 const textHeight = element.size;
                 
-                // Add some padding for easier clicking, similar to touch handling
-                const padding = 15;
-                
-                // Calculate text dimensions for multiline support
-                const lines = element.text.split('\n');
-                const lineHeight = element.size * 1.2;
-                const totalHeight = lines.length * lineHeight;
-                
-                let textWidth = 0;
-                lines.forEach(line => {
-                    const lineWidth = ctx.measureText(line).width;
-                    if (lineWidth > textWidth) {
-                        textWidth = lineWidth;
-                    }
-                });
-                
-                const leftBound = element.x - textWidth/2 - padding;
-                const rightBound = element.x + textWidth/2 + padding;
-                const topBound = element.y - element.size - padding;
-                const bottomBound = element.y + totalHeight - element.size + padding;
-                
-                if (x >= leftBound && x <= rightBound &&
-                    y >= topBound && y <= bottomBound) {
-                    
-                    // Select this text element
-                    selectedTextIndex = i;
-                    updateTextControls();
-                    
+                if (x >= element.x - textWidth/2 && x <= element.x + textWidth/2 &&
+                    y >= element.y - textHeight && y <= element.y) {
                     isDragging = true;
                     dragElement = element;
                     dragOffset.x = x - element.x;
                     dragOffset.y = y - element.y;
                     canvas.style.cursor = 'grabbing';
-                    
-                    // Visual feedback
-                    canvas.style.transform = 'scale(1.01)';
-                    
-                    drawMemeBackground(); // Redraw to show selection
                     break;
                 }
             }
@@ -2028,159 +949,9 @@
             isDragging = false;
             dragElement = null;
             canvas.style.cursor = 'default';
-            
-            // Reset visual feedback
-            canvas.style.transform = 'scale(1)';
         }
 
-        // Touch event handlers for mobile - simplified and more reliable
-        function handleTouchStart(e) {
-            e.preventDefault();
-            
-            // Handle pinch gesture for text size control
-            if (e.touches.length === 2 && selectedTextIndex >= 0) {
-                isPinching = true;
-                const touch1 = e.touches[0];
-                const touch2 = e.touches[1];
-                initialPinchDistance = Math.hypot(
-                    touch2.clientX - touch1.clientX,
-                    touch2.clientY - touch1.clientY
-                );
-                initialTextSize = textElements[selectedTextIndex].size;
-                return;
-            }
-            
-            const touch = e.touches[0];
-            const rect = canvas.getBoundingClientRect();
-            const x = touch.clientX - rect.left;
-            const y = touch.clientY - rect.top;
-            
-            // Check if touching on any text element - increased sensitivity
-            for (let i = textElements.length - 1; i >= 0; i--) {
-                const element = textElements[i];
-                ctx.font = `bold ${element.size}px Comic Sans MS`;
-                
-                // Calculate text dimensions for multiline support
-                const lines = element.text.split('\n');
-                const lineHeight = element.size * 1.2;
-                const totalHeight = lines.length * lineHeight;
-                
-                let textWidth = 0;
-                lines.forEach(line => {
-                    const lineWidth = ctx.measureText(line).width;
-                    if (lineWidth > textWidth) {
-                        textWidth = lineWidth;
-                    }
-                });
-                
-                // Increased padding for much easier touch detection
-                const padding = Math.max(60, element.size / 1.2);
-                
-                // Expanded touch area - make it much easier to grab text
-                const touchAreaLeft = element.x - textWidth/2 - padding;
-                const touchAreaRight = element.x + textWidth/2 + padding;
-                const touchAreaTop = element.y - element.size - padding;
-                const touchAreaBottom = element.y + totalHeight - element.size + padding;
-                
-                if (x >= touchAreaLeft && 
-                    x <= touchAreaRight &&
-                    y >= touchAreaTop && 
-                    y <= touchAreaBottom) {
-                    
-                    // Select this text element
-                    selectedTextIndex = i;
-                    updateTextControls();
-                    
-                    isDragging = true;
-                    dragElement = element;
-                    
-                    // Calculate offset from touch point to text center for more intuitive dragging
-                    dragOffset.x = x - element.x;
-                    dragOffset.y = y - element.y;
-                    
-                    // Visual feedback - add slight scale effect
-                    canvas.style.transform = 'scale(1.02)';
-                    setTimeout(() => {
-                        canvas.style.transform = 'scale(1)';
-                    }, 150);
-                    
-                    // Redraw to show selection
-                    drawMemeBackground();
-                    break;
-                }
-            }
-        }
-
-        function handleTouchMove(e) {
-            e.preventDefault();
-            
-            // Handle pinch gesture for text size control
-            if (e.touches.length === 2 && isPinching && selectedTextIndex >= 0) {
-                const touch1 = e.touches[0];
-                const touch2 = e.touches[1];
-                const currentDistance = Math.hypot(
-                    touch2.clientX - touch1.clientX,
-                    touch2.clientY - touch1.clientY
-                );
-                
-                const scale = currentDistance / initialPinchDistance;
-                const newSize = Math.max(10, Math.min(100, initialTextSize * scale));
-                
-                textElements[selectedTextIndex].size = newSize;
-                
-                // Update UI controls
-                document.getElementById('textSize').value = newSize;
-                document.getElementById('sizeValue').textContent = newSize;
-                
-                drawMemeBackground();
-                return;
-            }
-            
-            if (!isDragging || !dragElement) return;
-            
-            const touch = e.touches[0];
-            const rect = canvas.getBoundingClientRect();
-            const x = touch.clientX - rect.left;
-            const y = touch.clientY - rect.top;
-            
-            // Update text position based on touch - more responsive movement
-            dragElement.x = x - dragOffset.x;
-            dragElement.y = y - dragOffset.y;
-            
-            // Keep text within canvas bounds with reduced margin for more movement freedom
-            const margin = 15;
-            dragElement.x = Math.max(margin, Math.min(canvas.width - margin, dragElement.x));
-            dragElement.y = Math.max(margin, Math.min(canvas.height - margin, dragElement.y));
-            
-            // Immediate redraw without delay for better responsiveness
-            requestAnimationFrame(() => {
-                drawMemeBackground();
-            });
-        }
-
-        function handleTouchEnd(e) {
-            if (isPinching) {
-                isPinching = false;
-                initialPinchDistance = 0;
-                initialTextSize = 0;
-            }
-            
-            if (isDragging) {
-                isDragging = false;
-                dragElement = null;
-                
-                // Visual feedback - return to normal scale
-                canvas.style.transform = 'scale(1)';
-                
-                // Final redraw to clean up any visual artifacts
-                setTimeout(() => {
-                    drawMemeBackground();
-                }, 50);
-            }
-            e.preventDefault();
-        }
-
-        function clearCanvasForMeme() {
+        function clearCanvas() {
             textElements = [];
             drawMemeBackground();
         }
@@ -2245,170 +1016,11 @@
             }
         }
 
-        // Ending Voting - Real-time calculation
-        let voteData = {
-            good: 10,
-            normal: 10,
-            bad: 10
-        };
-
-        // Initialize vote display when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            updateVoteDisplay();
-            updateLeaderboard();
-        });
-
+        // Ending Voting
         function voteEnding(ending) {
-            voteData[ending]++;
-            updateVoteDisplay();
-            alert('🌟 Thank you for voting for the ' + ending + ' ending! Your vote has been recorded. 🌟');
+            alert(`🌟 Thank you for voting for the ${ending} ending! Your vote has been recorded. You're awesome! 🌟`);
+            // In a real implementation, this would update the server-side voting data
         }
-
-        function updateVoteDisplay() {
-            const total = voteData.good + voteData.normal + voteData.bad;
-            const goodPercent = Math.round((voteData.good / total) * 100);
-            const normalPercent = Math.round((voteData.normal / total) * 100);
-            const badPercent = Math.round((voteData.bad / total) * 100);
-
-            // Find voting section by looking for the specific heading
-            const votingSection = Array.from(document.querySelectorAll('h3')).find(h3 => 
-                h3.textContent.includes('Which Ending Did You Get')
-            )?.closest('.feature-card');
-            
-            if (votingSection) {
-                const progressBars = votingSection.querySelectorAll('.progress-bar');
-                if (progressBars.length >= 3) {
-                    progressBars[0].style.width = goodPercent + '%';
-                    progressBars[0].textContent = goodPercent + '%';
-                    progressBars[1].style.width = normalPercent + '%';
-                    progressBars[1].textContent = normalPercent + '%';
-                    progressBars[2].style.width = badPercent + '%';
-                    progressBars[2].textContent = badPercent + '%';
-                }
-            }
-        }
-
-        // Update vote statistics
-        function updateVoteStats() {
-            // Function kept for compatibility but statistics display removed
-        }
-
-        // Leaderboard System
-        let leaderboardData = [
-            { name: "SpeedDemon", time: 8, money: 48000, ending: "good" },
-            { name: "ProGamer123", time: 12, money: 50000, ending: "good" },
-            { name: "MoneyMaker", time: 15, money: 52000, ending: "normal" },
-            { name: "QuickPlayer", time: 18, money: 35000, ending: "bad" },
-            { name: "CasualGamer", time: 25, money: 30000, ending: "normal" }
-        ];
-
-        function calculateScore(player) {
-            // Lower time = higher score, higher money = higher score
-            const timeScore = (100 - player.time) * 1000;
-            const moneyScore = player.money;
-            const endingBonus = player.ending === 'good' ? 5000 : player.ending === 'normal' ? 2000 : 0;
-            return timeScore + moneyScore + endingBonus;
-        }
-
-        function formatTime(minutes) {
-            const secs = Math.floor(Math.random() * 60); // Add random seconds
-            return `${minutes}:${secs.toString().padStart(2, '0')}`;
-        }
-
-        function getEndingBadge(ending) {
-            const badges = {
-                'good': '<span class="badge" style="background: linear-gradient(45deg, var(--cute-green), var(--cute-blue));">😊 Good</span>',
-                'normal': '<span class="badge" style="background: linear-gradient(45deg, var(--cute-yellow), var(--cute-purple));">😐 Normal</span>',
-                'bad': '<span class="badge" style="background: linear-gradient(45deg, var(--cute-pink), var(--cute-purple));">😢 Bad</span>'
-            };
-            return badges[ending] || ending;
-        }
-
-        function getRankEmoji(index) {
-            const emojis = ['🥇', '🥈', '🥉'];
-            return emojis[index] || `${index + 1}`;
-        }
-
-        function updateLeaderboard() {
-            // Sort by score (highest first)
-            const sortedData = [...leaderboardData].sort((a, b) => calculateScore(b) - calculateScore(a));
-            
-            const tbody = document.getElementById('leaderboard-body');
-            tbody.innerHTML = '';
-            
-            sortedData.forEach((player, index) => {
-                const row = document.createElement('tr');
-                const score = calculateScore(player);
-                
-                row.innerHTML = `
-                    <td>${getRankEmoji(index)}</td>
-                    <td>${player.name}</td>
-                    <td>${formatTime(player.time)}</td>
-                    <td>$${player.money.toLocaleString()}</td>
-                    <td>${getEndingBadge(player.ending)}</td>
-                    <td><small class="text-muted">${score.toLocaleString()}</small></td>
-                `;
-                
-                tbody.appendChild(row);
-            });
-        }
-
-        function submitScore() {
-            const name = document.getElementById('playerName').value.trim();
-            const time = parseInt(document.getElementById('playerTime').value);
-            const money = parseInt(document.getElementById('playerMoney').value);
-            const ending = document.getElementById('playerEnding').value;
-            
-            // Validation
-            if (!name || !time || !money || !ending) {
-                alert('💕 Please fill in all fields!');
-                return;
-            }
-            
-            if (time <= 0 || money < 0) {
-                alert('💕 Please enter valid positive numbers!');
-                return;
-            }
-            
-            // Check if player already exists and update, or add new
-            const existingIndex = leaderboardData.findIndex(p => p.name.toLowerCase() === name.toLowerCase());
-            
-            const newScore = {
-                name: name,
-                time: time,
-                money: money,
-                ending: ending
-            };
-            
-            if (existingIndex >= 0) {
-                // Update existing player (only if new score is better)
-                const oldScore = calculateScore(leaderboardData[existingIndex]);
-                const newPlayerScore = calculateScore(newScore);
-                
-                if (newPlayerScore > oldScore) {
-                    leaderboardData[existingIndex] = newScore;
-                    alert(`🎉 New personal best for ${name}!`);
-                } else {
-                    alert(`💪 Your existing score is still better!`);
-                }
-            } else {
-                // Add new player
-                leaderboardData.push(newScore);
-                alert(`🎉 Welcome to the leaderboard, ${name}!`);
-            }
-            
-            // Clear form
-            document.getElementById('playerName').value = '';
-            document.getElementById('playerTime').value = '';
-            document.getElementById('playerMoney').value = '';
-            document.getElementById('playerEnding').value = '';
-            
-            // Update display
-            updateLeaderboard();
-        }
-
-        // Initialize vote display and leaderboard on page load
-        // (This is now included in the main load event above)
 
         // Comment System
         function postComment() {
@@ -2448,18 +1060,6 @@
                 modal.style.display = 'none';
             }
         };
-
-        // Emergency test button at bottom of page
-        document.addEventListener('DOMContentLoaded', function() {
-            const testBtn = document.createElement('div');
-            testBtn.style.cssText = 'position: fixed; bottom: 10px; left: 10px; z-index: 9999; background: red; color: white; padding: 10px; border-radius: 5px; cursor: pointer;';
-            testBtn.textContent = 'EMERGENCY TEST';
-            testBtn.onclick = function() {
-                alert('JavaScript is working!');
-                console.log('Emergency test button clicked!');
-            };
-            document.body.appendChild(testBtn);
-        });
     </script>
 </body>
 </html>
