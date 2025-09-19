@@ -214,6 +214,32 @@
             box-shadow: 0 8px 30px rgba(255,182,193,0.5);
         }
 
+        .text-edit-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,182,193,0.9);
+            z-index: 1001;
+        }
+
+        .text-edit-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            color: var(--text-dark);
+            padding: 30px;
+            border-radius: 25px;
+            max-width: 500px;
+            width: 90%;
+            border: 3px solid var(--cute-purple);
+            box-shadow: 0 8px 30px rgba(221,160,221,0.5);
+        }
+
         .achievement-image {
             width: 100%;
             max-width: 400px;
@@ -456,7 +482,7 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="memeText" class="form-label">📝 Your Text:</label>
-                            <input type="text" class="form-control" id="memeText" placeholder="Enter your meme text" oninput="updateMemeText()">
+                            <textarea class="form-control" id="memeText" placeholder="Enter your meme text" rows="3" style="resize: vertical;" oninput="handleTextInput()"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="textSize" class="form-label">📏 Text Size: <span id="sizeValue">24</span>px</label>
@@ -479,11 +505,12 @@
                                 <label class="btn btn-outline-dark" for="bgBlack">⚫ Black</label>
                             </div>
                         </div>
+                        <button class="btn btn-custom me-2" onclick="addText()">➕ Add Text</button>
                         <button class="btn btn-outline-secondary me-2" onclick="clearCanvas()">🗑️ Clear Text</button>
                         <button class="btn btn-custom" onclick="downloadMeme()">💾 Download PNG</button>
                         
                         <div class="mt-3">
-                            <small class="text-muted">💡 Tip: Click and drag text to move it around!</small>
+                            <small class="text-muted">💡 Tip: Click text to select, drag to move. Real-time preview while typing!</small>
                         </div>
                     </div>
                 </div>
@@ -634,6 +661,30 @@
         </div>
     </section>
 
+    <!-- Text Edit Modal -->
+    <div id="textEditModal" class="text-edit-modal">
+        <div class="text-edit-content">
+            <h3>✏️ Edit Text</h3>
+            <div class="mb-3">
+                <label for="editText" class="form-label">📝 Text:</label>
+                <textarea class="form-control" id="editText" rows="3" style="resize: vertical;"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="editSize" class="form-label">📏 Size: <span id="editSizeValue">24</span>px</label>
+                <input type="range" class="form-range" id="editSize" min="12" max="48" value="24" oninput="updateEditText()">
+            </div>
+            <div class="mb-3">
+                <label for="editColor" class="form-label">🎨 Color:</label>
+                <input type="color" class="form-control form-control-color" id="editColor" value="#ffffff" oninput="updateEditText()">
+            </div>
+            <div>
+                <button class="btn btn-custom me-2" onclick="saveEditText()">💾 Save</button>
+                <button class="btn btn-outline-secondary" onclick="deleteEditText()">🗑️ Delete</button>
+                <button class="btn btn-outline-secondary" onclick="cancelEditText()">❌ Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Achievement Modal -->
     <div id="achievementModal" class="achievement-modal">
         <div class="achievement-content">
@@ -710,7 +761,8 @@
         let dragElement = null;
         let dragOffset = { x: 0, y: 0 };
         let loadedImages = {};
-        let currentText = null;
+        let selectedTextIndex = -1; // 当前选中的文字索引
+        let isPreviewMode = true; // 实时预览模式
 
         // Initialize canvas
         window.addEventListener('load', function() {
@@ -730,10 +782,12 @@
 
         function preloadImages() {
             const imageNames = ['harvey1', 'harvey2', 'harvey3', 'harvey4', 'harvey5', 'harvey6'];
+            console.log('Preloading images...');
             imageNames.forEach(name => {
                 const img = new Image();
                 img.onload = function() {
                     loadedImages[name] = img;
+                    console.log(`Successfully loaded: ${name}`);
                 };
                 img.onerror = function() {
                     console.log(`Image ${name} not found, using placeholder`);
@@ -744,6 +798,7 @@
 
         function selectMemeImage(imageId) {
             selectedImage = imageId;
+            console.log(`Selected image: ${imageId}`);
             
             // Update UI to show selected image
             document.querySelectorAll('.image-option img, .image-option .placeholder-img').forEach(element => {
@@ -757,12 +812,17 @@
                 selectedElement.style.boxShadow = '0 4px 15px rgba(221, 160, 221, 0.5)';
             }
             
-            drawMemeBackground();
+            // Force redraw after a short delay to ensure images are loaded
+            setTimeout(() => {
+                drawMemeBackground();
+            }, 100);
         }
 
         function drawMemeBackground() {
             // Clear canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            console.log(`Drawing background for: ${selectedImage}`);
+            console.log(`Available images:`, Object.keys(loadedImages));
             
             // Try to get selected background, fall back to 'none' if not available
             let selectedBg = 'none';
@@ -794,18 +854,23 @@
                     
                     // Draw image on top of background
                     ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+                    console.log(`Successfully drew image: ${selectedImage}`);
                 } catch (e) {
+                    console.log(`Error drawing image ${selectedImage}:`, e);
                     // If image drawing fails, show placeholder
                     drawPlaceholder(selectedBg);
                 }
             } else {
+                console.log(`Image ${selectedImage} not loaded, using placeholder`);
                 // Show placeholder if no image loaded
                 drawPlaceholder(selectedBg);
             }
             
             // Draw all text elements
             if (textElements && textElements.length > 0) {
-                textElements.forEach(element => drawTextElement(element));
+                textElements.forEach((element, index) => {
+                    drawTextElement(element, index === selectedTextIndex);
+                });
             }
         }
         
@@ -855,14 +920,76 @@
             ctx.fillText(characters[selectedImage], 200, 200);
         }
 
-        function drawTextElement(element) {
+        function drawTextElement(element, isSelected = false) {
             ctx.font = `bold ${element.size}px Comic Sans MS`;
             ctx.fillStyle = element.color;
             ctx.strokeStyle = '#000';
             ctx.lineWidth = 2;
             ctx.textAlign = 'center';
-            ctx.strokeText(element.text, element.x, element.y);
-            ctx.fillText(element.text, element.x, element.y);
+            
+            // Handle multi-line text
+            const lines = element.text.split('\n');
+            const lineHeight = element.size * 1.2;
+            
+            // Calculate text bounds for selection highlight
+            let maxWidth = 0;
+            lines.forEach(line => {
+                const width = ctx.measureText(line).width;
+                if (width > maxWidth) maxWidth = width;
+            });
+            const totalHeight = lines.length * lineHeight;
+            
+            // Draw selection highlight
+            if (isSelected && !element.isPreview) {
+                ctx.fillStyle = 'rgba(255, 182, 193, 0.3)';
+                ctx.fillRect(
+                    element.x - maxWidth/2 - 10,
+                    element.y - element.size - 5,
+                    maxWidth + 20,
+                    totalHeight + 10
+                );
+                
+                // Draw border
+                ctx.strokeStyle = '#FF69B4';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(
+                    element.x - maxWidth/2 - 10,
+                    element.y - element.size - 5,
+                    maxWidth + 20,
+                    totalHeight + 10
+                );
+            }
+            
+            // Reset styles for text
+            ctx.fillStyle = element.color;
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2;
+            
+            // Draw text
+            lines.forEach((line, index) => {
+                const y = element.y + (index * lineHeight);
+                ctx.strokeText(line, element.x, y);
+                ctx.fillText(line, element.x, y);
+            });
+        }
+
+        function handleTextInput() {
+            const text = document.getElementById('memeText').value;
+            
+            // If we're editing selected text, update it in real-time
+            if (selectedTextIndex >= 0 && !isPreviewMode) {
+                const size = parseInt(document.getElementById('textSize').value);
+                const color = document.getElementById('textColor').value;
+                
+                textElements[selectedTextIndex].text = text;
+                textElements[selectedTextIndex].size = size;
+                textElements[selectedTextIndex].color = color;
+                
+                drawMemeBackground();
+            } else {
+                // Otherwise, use preview mode
+                updateMemeText();
+            }
         }
 
         function updateMemeText() {
@@ -873,35 +1000,24 @@
             // Update size display
             document.getElementById('sizeValue').textContent = size;
             
-            // Create or update current text (automatically appears on canvas)
-            if (text.trim()) {
-                let currentX = 200;
-                let currentY = 50;
+            // Real-time preview
+            if (isPreviewMode) {
+                // Clear previous preview and redraw everything
+                drawMemeBackground();
                 
-                // If we have existing text, preserve its position
-                if (textElements.length > 0) {
-                    currentX = textElements[0].x;
-                    currentY = textElements[0].y;
+                // Add preview text if there's content
+                if (text.trim()) {
+                    const previewText = {
+                        text: text,
+                        x: 200,
+                        y: 50,
+                        size: size,
+                        color: color,
+                        isPreview: true
+                    };
+                    drawTextElement(previewText);
                 }
-                
-                currentText = {
-                    text: text,
-                    x: currentX,
-                    y: currentY,
-                    size: size,
-                    color: color
-                };
-                
-                // Remove any existing text elements and replace with current
-                textElements = [];
-                textElements.push(currentText);
-            } else {
-                // Clear text if input is empty
-                currentText = null;
-                textElements = [];
             }
-            
-            drawMemeBackground();
         }
 
         function startDrag(e) {
@@ -913,19 +1029,36 @@
             for (let i = textElements.length - 1; i >= 0; i--) {
                 const element = textElements[i];
                 ctx.font = `bold ${element.size}px Comic Sans MS`;
-                const textWidth = ctx.measureText(element.text).width;
-                const textHeight = element.size;
                 
-                if (x >= element.x - textWidth/2 && x <= element.x + textWidth/2 &&
-                    y >= element.y - textHeight && y <= element.y) {
+                // Handle multi-line text bounds
+                const lines = element.text.split('\n');
+                const lineHeight = element.size * 1.2;
+                const totalHeight = lines.length * lineHeight;
+                let maxWidth = 0;
+                
+                lines.forEach(line => {
+                    const width = ctx.measureText(line).width;
+                    if (width > maxWidth) maxWidth = width;
+                });
+                
+                if (x >= element.x - maxWidth/2 && x <= element.x + maxWidth/2 &&
+                    y >= element.y - element.size && y <= element.y + totalHeight - element.size) {
+                    
+                    // Select this text element
+                    selectText(i);
+                    
+                    // Start dragging
                     isDragging = true;
                     dragElement = element;
                     dragOffset.x = x - element.x;
                     dragOffset.y = y - element.y;
                     canvas.style.cursor = 'grabbing';
-                    break;
+                    return;
                 }
             }
+            
+            // If clicked on empty space, deselect
+            selectText(-1);
         }
 
         function drag(e) {
@@ -953,7 +1086,106 @@
 
         function clearCanvas() {
             textElements = [];
+            selectedTextIndex = -1;
+            document.getElementById('memeText').value = '';
+            isPreviewMode = true;
             drawMemeBackground();
+        }
+
+        function addText() {
+            const text = document.getElementById('memeText').value.trim();
+            const size = parseInt(document.getElementById('textSize').value);
+            const color = document.getElementById('textColor').value;
+            
+            if (!text) {
+                alert('💕 Please enter some text first!');
+                return;
+            }
+            
+            // If editing selected text, update it
+            if (selectedTextIndex >= 0) {
+                textElements[selectedTextIndex].text = text;
+                textElements[selectedTextIndex].size = size;
+                textElements[selectedTextIndex].color = color;
+            } else {
+                // Add new text element
+                const newText = {
+                    text: text,
+                    x: 200,
+                    y: 50 + textElements.length * 40, // Offset new text elements
+                    size: size,
+                    color: color
+                };
+                
+                textElements.push(newText);
+                // Select the newly added text
+                selectedTextIndex = textElements.length - 1;
+            }
+            
+            // Clear input and exit preview mode
+            document.getElementById('memeText').value = '';
+            isPreviewMode = false;
+            
+            // Redraw canvas
+            drawMemeBackground();
+        }
+
+        function selectText(index) {
+            selectedTextIndex = index;
+            
+            if (index >= 0) {
+                // Load text into editor for in-place editing
+                const element = textElements[index];
+                document.getElementById('memeText').value = element.text;
+                document.getElementById('textSize').value = element.size;
+                document.getElementById('textColor').value = element.color;
+                document.getElementById('sizeValue').textContent = element.size;
+                
+                // Exit preview mode when selecting existing text
+                isPreviewMode = false;
+            } else {
+                // Clear editor when deselecting
+                document.getElementById('memeText').value = '';
+                isPreviewMode = true;
+            }
+            
+            // Redraw to show selection
+            drawMemeBackground();
+        }
+
+        function editText(index) {
+            // This function is kept for compatibility but now just uses selectText
+            selectText(index);
+        }
+
+        function updateEditText() {
+            const size = parseInt(document.getElementById('editSize').value);
+            document.getElementById('editSizeValue').textContent = size;
+        }
+
+        function saveEditText() {
+            if (editingTextIndex >= 0) {
+                const element = textElements[editingTextIndex];
+                element.text = document.getElementById('editText').value;
+                element.size = parseInt(document.getElementById('editSize').value);
+                element.color = document.getElementById('editColor').value;
+                
+                drawMemeBackground();
+                cancelEditText();
+            }
+        }
+
+        function deleteEditText() {
+            if (editingTextIndex >= 0) {
+                textElements.splice(editingTextIndex, 1);
+                drawMemeBackground();
+                cancelEditText();
+            }
+        }
+
+        function cancelEditText() {
+            editingTextIndex = -1;
+            document.getElementById('textEditModal').style.display = 'none';
         }
 
         function downloadMeme() {
@@ -1055,9 +1287,15 @@
   
         // Close modal when clicking outside
         window.onclick = function(event) {
-            const modal = document.getElementById('achievementModal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
+            const achievementModal = document.getElementById('achievementModal');
+            const textEditModal = document.getElementById('textEditModal');
+            
+            if (event.target === achievementModal) {
+                achievementModal.style.display = 'none';
+            }
+            
+            if (event.target === textEditModal) {
+                cancelEditText();
             }
         };
     </script>
