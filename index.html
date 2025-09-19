@@ -75,11 +75,7 @@
             box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            border-color: var(--cute-purple);
-            box-shadow: 0 12px 35px rgba(221, 160, 221, 0.5);
-        }
+        /* Removed hover animation from voting section */
 
         .btn-custom {
             background: linear-gradient(45deg, var(--cute-pink), var(--cute-purple));
@@ -257,6 +253,65 @@
             box-shadow: 0 4px 15px rgba(221, 160, 221, 0.3);
         }
 
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .share-buttons .btn {
+            padding: 10px 20px;
+            border-radius: 15px;
+            font-family: 'Comic Sans MS', cursive;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 100px;
+        }
+
+        .btn-download {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .btn-download:hover {
+            background: linear-gradient(45deg, #218838, #1ba085);
+            transform: translateY(-2px);
+        }
+
+        .btn-reddit {
+            background: linear-gradient(45deg, #ff4500, #ff6347);
+            color: white;
+        }
+
+        .btn-reddit:hover {
+            background: linear-gradient(45deg, #e03e00, #e74c3c);
+            transform: translateY(-2px);
+        }
+
+        .btn-tiktok {
+            background: linear-gradient(45deg, #000000, #ff0050);
+            color: white;
+        }
+
+        .btn-tiktok:hover {
+            background: linear-gradient(45deg, #1a1a1a, #e60045);
+            transform: translateY(-2px);
+        }
+
+        .btn-twitter {
+            background: linear-gradient(45deg, #1da1f2, #14171a);
+            color: white;
+        }
+
+        .btn-twitter:hover {
+            background: linear-gradient(45deg, #1991db, #0f1419);
+            transform: translateY(-2px);
+        }
+
         h1, h2, h3 {
             color: var(--cute-purple);
             font-weight: bold;
@@ -388,19 +443,19 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="progress" style="height: 30px; border-radius: 15px;">
-                                <div class="progress-bar" style="background: linear-gradient(45deg, var(--cute-green), var(--cute-blue)); width: 45%; border-radius: 15px;">45%</div>
+                                <div id="goodProgress" class="progress-bar" style="background: linear-gradient(45deg, var(--cute-green), var(--cute-blue)); width: 0%; border-radius: 15px;"></div>
                             </div>
                             <small style="color: var(--cute-green); font-weight: bold;">😊 Good Ending</small>
                         </div>
                         <div class="col-md-4">
                             <div class="progress" style="height: 30px; border-radius: 15px;">
-                                <div class="progress-bar" style="background: linear-gradient(45deg, var(--cute-yellow), var(--cute-purple)); width: 35%; border-radius: 15px;">35%</div>
+                                <div id="normalProgress" class="progress-bar" style="background: linear-gradient(45deg, var(--cute-yellow), var(--cute-purple)); width: 0%; border-radius: 15px;"></div>
                             </div>
                             <small style="color: var(--cute-yellow); font-weight: bold;">😐 Normal Ending</small>
                         </div>
                         <div class="col-md-4">
                             <div class="progress" style="height: 30px; border-radius: 15px;">
-                                <div class="progress-bar" style="background: linear-gradient(45deg, var(--cute-pink), var(--cute-purple)); width: 20%; border-radius: 15px;">20%</div>
+                                <div id="badProgress" class="progress-bar" style="background: linear-gradient(45deg, var(--cute-pink), var(--cute-purple)); width: 0%; border-radius: 15px;"></div>
                             </div>
                             <small style="color: var(--cute-pink); font-weight: bold;">😢 Bad Ending</small>
                         </div>
@@ -523,10 +578,48 @@
         <div class="container">
             <div class="feature-card">
                 <h3>🏆 Achievement Share Generator 🏆</h3>
-                <p>Complete challenges to unlock shareable achievement images!</p>
+                <p>Enter your game stats to generate your personalized achievement!</p>
+                
+                <!-- User Input Form -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label for="playerName" class="form-label">👤 Player Name:</label>
+                            <input type="text" class="form-control" id="playerName" maxlength="20" placeholder="Enter your name" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="gameTime" class="form-label">⏱️ Completion Time (minutes):</label>
+                            <input type="number" class="form-control" id="gameTime" min="1" max="999" value="15" placeholder="Enter your completion time">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="gameMoney" class="form-label">💰 Money Earned ($):</label>
+                            <input type="number" class="form-control" id="gameMoney" min="0" max="999999" value="45000" placeholder="Enter money earned">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label for="moralChoice" class="form-label">🎯 Moral Choice:</label>
+                            <select class="form-select" id="moralChoice">
+                                <option value="Moral">😊 Moral</option>
+                                <option value="Neutral">😐 Neutral</option>
+                                <option value="Ruthless">😢 Ruthless</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="text-center">
                     <button class="btn btn-custom" onclick="generateAchievement()">
-                        🌟 Generate Achievement Image 🌟
+                        🌟 Generate My Achievement! 🌟
                     </button>
                 </div>
             </div>
@@ -626,37 +719,15 @@
                 <h2>🤔 What is Blood Money Game? Complete Guide to the Human Expenditure Program 🤔</h2>
                 
                 <h3>💕 Understanding the Blood Money Game Experience 💕</h3>
-                <p>Welcome to a unique gaming experience that combines moral choices with strategic decision-making. This game introduces players to an intriguing world where every decision matters, featuring compelling characters and an engaging narrative that keeps players invested throughout their journey.</p>
+                <p>Welcome to a unique narrative-driven adventure where moral choices and strategic decisions shape your story. In Blood Money Game, every decision matters as you navigate challenging scenarios where financial and ethical interests collide.</p>
                 
-                <h3>What is the Blood Money Game?</h3>
-                <p>At its core, this is a narrative-driven adventure that places players in challenging moral situations. The concept revolves around making difficult choices that affect both your character's development and the story's outcome. Players navigate through various scenarios where financial and ethical decisions intersect, creating a thought-provoking gaming experience.</p>
+                <h3>Core Gameplay Mechanics</h3>
+                <p>Meet Harvey and Eun-mi, key characters whose perspectives influence your journey. Your choices impact character development and story outcomes through an interactive narrative system. The game features strategic resource management, relationship building, and meaningful moral considerations that create a thought-provoking experience.</p>
 
-                <h3>Meet Harvey and Eun-mi: Key Characters</h3>
-                <p>Two central characters guide players through this adventure: Harvey and Eun-mi. These characters offer different perspectives and help shape the narrative based on your interactions with them. Their stories intertwine with the main plot, adding depth to the overall experience and influencing how the story unfolds.</p>
+                <h3>How to Play Effectively</h3>
+                <p>Success requires careful decision-making, understanding character motivations, and considering long-term consequences. Save frequently to explore different outcomes and pay attention to dialogue clues. The multiple endings system encourages replayability, allowing you to discover how various choices lead to different results.</p>
 
-                <h3>How to Play Blood Money Game Effectively</h3>
-                <p>Learning how to play effectively requires understanding several key mechanics:</p>
-                <ul>
-                    <li><strong>Decision Making:</strong> Every choice you make impacts the story direction</li>
-                    <li><strong>Resource Management:</strong> Balance your resources carefully to progress</li>
-                    <li><strong>Character Relationships:</strong> Build and maintain relationships with key characters</li>
-                    <li><strong>Moral Considerations:</strong> Your ethical choices affect different story outcomes</li>
-                </ul>
-                <p>The game rewards strategic thinking and careful planning, making each playthrough feel unique and personal.</p>
-
-                <h3>Essential Tips for New Players</h3>
-                <p>If you're just starting out, here are some helpful strategies:</p>
-                <ul>
-                    <li>Take time to understand each character's motivations</li>
-                    <li>Save frequently to explore different choice outcomes</li>
-                    <li>Pay attention to dialogue clues and character reactions</li>
-                    <li>Consider the long-term consequences of your decisions</li>
-                </ul>
-
-                <h3>The Multiple Endings System</h3>
-                <p>One of the most engaging features is the multiple ending system. Based on your choices throughout the game, you can achieve different outcomes. This encourages replayability, as players often want to go back and explore alternative paths to see how different decisions lead to varied results.</p>
-
-                <p>Whether you're new to narrative games or an experienced player, this experience offers something for everyone. With its compelling story, strategic depth, and meaningful choices, it represents an engaging adventure that challenges players to think critically about their decisions.</p>
+                <p>Perfect for both newcomers and experienced players, Blood Money Game offers a compelling adventure that challenges you to think critically about your decisions while navigating an engaging storyline with strategic depth.</p>
             </div>
         </div>
     </section>
@@ -697,9 +768,27 @@
                 </div>
             </div>
             <div class="mb-3">
-                <button class="btn btn-custom" onclick="shareAchievement()">🌟 Share Achievement</button>
-                <button class="btn btn-outline-secondary" onclick="closeAchievement()" style="background: var(--cute-blue); color: white; border: 2px solid var(--cute-purple); border-radius: 20px; padding: 12px 25px; font-family: 'Comic Sans MS', cursive;">✨ Close</button>
+                <div class="share-buttons">
+                    <button class="btn btn-download" onclick="downloadAchievement()" title="Download Achievement Image">
+                        📥 Download
+                    </button>
+                    <button class="btn btn-reddit" onclick="shareToReddit()" title="Share to Reddit">
+                        📱 Reddit
+                    </button>
+                    <button class="btn btn-tiktok" onclick="shareToTikTok()" title="Share to TikTok">
+                        🎵 TikTok
+                    </button>
+                    <button class="btn btn-twitter" onclick="shareToTwitter()" title="Share to X (Twitter)">
+                        🐦 X
+                    </button>
+                    <button class="btn btn-outline-secondary" onclick="closeAchievement()" style="background: var(--cute-blue); color: white; border: 2px solid var(--cute-purple); border-radius: 20px; padding: 12px 25px; font-family: 'Comic Sans MS', cursive;">✨ Close</button>
+                </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Hidden canvas for image generation -->
+    <canvas id="achievementCanvas" style="display: none;"></canvas>
         </div>
     </div>
 
@@ -719,38 +808,276 @@
             }
         }
 
+        // Leaderboard Management
+        let leaderboardData = JSON.parse(localStorage.getItem('bloodMoneyLeaderboard')) || [
+            { name: 'ProGamer123', time: 12, money: 50000, choice: 'Good', seconds: 34 },
+            { name: 'SpeedRunner', time: 15, money: 45000, choice: 'Normal', seconds: 22 },
+            { name: 'MoralChoice', time: 18, money: 38000, choice: 'Bad', seconds: 45 }
+        ];
+
+        function updateLeaderboard() {
+            // Sort by money (descending)
+            leaderboardData.sort((a, b) => b.money - a.money);
+            
+            // Update display
+            const tbody = document.getElementById('leaderboard-body');
+            tbody.innerHTML = '';
+            
+            leaderboardData.slice(0, 10).forEach((entry, index) => {
+                const row = document.createElement('tr');
+                const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : (index + 1) + '.';
+                
+                const badgeColors = {
+                    'Good': 'linear-gradient(45deg, var(--cute-green), var(--cute-blue))',
+                    'Normal': 'linear-gradient(45deg, var(--cute-yellow), var(--cute-purple))',
+                    'Bad': 'linear-gradient(45deg, var(--cute-pink), var(--cute-purple))'
+                };
+                
+                row.innerHTML = `
+                    <td>${medal}</td>
+                    <td>${entry.name}</td>
+                    <td>${entry.time}:${entry.seconds.toString().padStart(2, '0')}</td>
+                    <td>$${entry.money.toLocaleString()}</td>
+                    <td><span class="badge" style="background: ${badgeColors[entry.choice]};">${getChoiceEmoji(entry.choice)} ${entry.choice}</span></td>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            // Save to localStorage
+            localStorage.setItem('bloodMoneyLeaderboard', JSON.stringify(leaderboardData));
+        }
+
+        function getChoiceEmoji(choice) {
+            const emojis = { 'Good': '😊', 'Normal': '😐', 'Bad': '😢' };
+            return emojis[choice] || '😐';
+        }
+
+        function addToLeaderboard(name, time, money, choice) {
+            const seconds = Math.floor(Math.random() * 60);
+            leaderboardData.push({
+                name: name,
+                time: time,
+                money: money,
+                choice: choice,
+                seconds: seconds
+            });
+            updateLeaderboard();
+        }
+
         // Achievement Generator
         function generateAchievement() {
-            const achievements = [
-                { name: "💕 Blood Money Master 💕", emoji: "🏆", color: "linear-gradient(45deg, var(--cute-pink), var(--cute-purple))" },
-                { name: "🌟 Harvey's Best Friend 🌟", emoji: "🤝", color: "linear-gradient(45deg, var(--cute-blue), var(--cute-green))" },
-                { name: "✨ Eun-mi's Amazing Ally ✨", emoji: "🌸", color: "linear-gradient(45deg, var(--cute-yellow), var(--cute-pink))" },
-                { name: "🦄 Moral Compass Hero 🦄", emoji: "⚖️", color: "linear-gradient(45deg, var(--cute-purple), var(--cute-blue))" },
-                { name: "🚀 Super Speed Runner 🚀", emoji: "⭐", color: "linear-gradient(45deg, var(--cute-green), var(--cute-yellow))" }
-            ];
+            // Get user input
+            const playerName = document.getElementById('playerName').value.trim();
+            const gameTime = parseInt(document.getElementById('gameTime').value) || 15;
+            const gameMoney = parseInt(document.getElementById('gameMoney').value) || 45000;
+            const moralChoice = document.getElementById('moralChoice').value;
             
-            const achievement = achievements[Math.floor(Math.random() * achievements.length)];
-            const gameTime = Math.floor(Math.random() * 30) + 10;
-            const gameMoney = Math.floor(Math.random() * 50000) + 10000;
-            const choices = ["😊 Moral", "😐 Neutral", "😢 Ruthless"];
-            const choice = choices[Math.floor(Math.random() * choices.length)];
+            // Validate player name
+            if (!playerName) {
+                alert('💕 Please enter your name to generate achievement! 💕');
+                return;
+            }
             
+            // Calculate achievement level based on performance
+            const achievement = calculateAchievementLevel(gameTime, gameMoney);
+            
+            // Generate random seconds for display
+            const seconds = Math.floor(Math.random() * 60);
+            const timeString = `${gameTime}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Update modal content
             document.getElementById('achievementText').textContent = achievement.name;
-            document.getElementById('achievementStats').textContent = `⏱️ Time: ${gameTime}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')} | 💰 Money: $${gameMoney.toLocaleString()} | 🎯 Choice: ${choice}`;
+            document.getElementById('achievementStats').textContent = `⏱️ Time: ${timeString} | 💰 Money: $${gameMoney.toLocaleString()} | 🎯 Choice: ${moralChoice}`;
             document.getElementById('achievementEmoji').textContent = achievement.emoji;
             document.getElementById('achievementImage').style.background = achievement.color;
             
+            // Add to leaderboard (map moral choice values)
+            const choiceMapping = {
+                'Moral': 'Good',
+                'Neutral': 'Normal', 
+                'Ruthless': 'Bad'
+            };
+            addToLeaderboard(playerName, gameTime, gameMoney, choiceMapping[moralChoice]);
+            
+            // Show modal
             document.getElementById('achievementModal').style.display = 'block';
+            
+            // Add confetti effect for first time
+            if (firstAchievementGeneration) {
+                createConfetti();
+                firstAchievementGeneration = false;
+            }
         }
 
+        function calculateAchievementLevel(time, money) {
+            // Calculate performance score (0-100)
+            // Time score (faster is better, max 50 points)
+            const timeScore = Math.max(0, 50 - (time - 10) * 2);
+            
+            // Money score (more is better, max 50 points)
+            const moneyScore = Math.min(50, (money / 1000) * 5);
+            
+            // Total score
+            const totalScore = timeScore + moneyScore;
+            
+            // Determine achievement level
+            if (totalScore >= 80) {
+                return {
+                    name: "💎 Blood Money Legend 💎",
+                    emoji: "👑",
+                    color: "linear-gradient(45deg, #FFD700, #FFA500)",
+                    level: "LEGENDARY"
+                };
+            } else if (totalScore >= 65) {
+                return {
+                    name: "🏆 Ultimate Champion 🏆",
+                    emoji: "🏆",
+                    color: "linear-gradient(45deg, #FF69B4, #FF1493)",
+                    level: "MASTER"
+                };
+            } else if (totalScore >= 50) {
+                return {
+                    name: "⚡ Speed Runner Elite ⚡",
+                    emoji: "⚡",
+                    color: "linear-gradient(45deg, var(--cute-purple), var(--cute-blue))",
+                    level: "ADVANCED"
+                };
+            } else if (totalScore >= 35) {
+                return {
+                    name: "🌟 Strategic Master 🌟",
+                    emoji: "🎯",
+                    color: "linear-gradient(45deg, var(--cute-green), var(--cute-blue))",
+                    level: "SKILLED"
+                };
+            } else {
+                return {
+                    name: "💰 Novice Explorer 💰",
+                    emoji: "🎮",
+                    color: "linear-gradient(45deg, var(--cute-yellow), var(--cute-green))",
+                    level: "BEGINNER"
+                };
+            }
+        }
+
+    
         function closeAchievement() {
             document.getElementById('achievementModal').style.display = 'none';
         }
 
-        function shareAchievement() {
+        // Achievement Image Generation and Sharing Functions
+        function generateAchievementImage() {
+            return new Promise((resolve, reject) => {
+                const canvas = document.getElementById('achievementCanvas');
+                const ctx = canvas.getContext('2d');
+                
+                // Set canvas size
+                canvas.width = 600;
+                canvas.height = 400;
+                
+                // Get achievement data
+                const emoji = document.getElementById('achievementEmoji').textContent;
+                const text = document.getElementById('achievementText').textContent;
+                const stats = document.getElementById('achievementStats').textContent;
+                const achievementDiv = document.getElementById('achievementImage');
+                const backgroundImage = window.getComputedStyle(achievementDiv).background;
+                
+                // Create gradient background
+                const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                gradient.addColorStop(0, '#ff69b4');
+                gradient.addColorStop(1, '#9370db');
+                
+                // Fill background
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Add border
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 8;
+                ctx.strokeRect(4, 4, canvas.width - 8, canvas.height - 8);
+                
+                // Add shadow
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+                ctx.shadowBlur = 20;
+                ctx.shadowOffsetX = 5;
+                ctx.shadowOffsetY = 5;
+                
+                // Draw emoji
+                ctx.font = '80px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText(emoji, canvas.width / 2, 120);
+                
+                // Draw title
+                ctx.font = 'bold 36px Comic Sans MS';
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText(text, canvas.width / 2, 200);
+                
+                // Draw stats
+                ctx.font = 'bold 24px Comic Sans MS';
+                ctx.fillStyle = '#ffffff';
+                const words = stats.split(' | ');
+                words.forEach((word, index) => {
+                    ctx.fillText(word, canvas.width / 2, 250 + (index * 30));
+                });
+                
+                // Add game branding
+                ctx.font = 'bold 20px Comic Sans MS';
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText('Blood Money Game', canvas.width / 2, 360);
+                
+                canvas.toBlob((blob) => {
+                    resolve(blob);
+                }, 'image/png');
+            });
+        }
+
+        function downloadAchievement() {
+            generateAchievementImage().then(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `blood-money-achievement-${Date.now()}.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                alert('🎉 Achievement image downloaded successfully! 🎉');
+            }).catch(error => {
+                console.error('Error generating image:', error);
+                alert('💕 Sorry, there was an error downloading the image. Please try again! 💕');
+            });
+        }
+
+        function shareToReddit() {
             const text = document.getElementById('achievementText').textContent;
             const stats = document.getElementById('achievementStats').textContent;
-            shareToSocial(`Just unlocked "${text}" in Blood Money Game! ${stats}`);
+            const shareText = `Just unlocked "${text}" in Blood Money Game! 🎮\n\n${stats}\n\nCan you beat my score?`;
+            const shareUrl = `https://www.reddit.com/submit?title=${encodeURIComponent(shareText)}&url=${encodeURIComponent(window.location.href)}`;
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+
+        function shareToTikTok() {
+            const text = document.getElementById('achievementText').textContent;
+            const stats = document.getElementById('achievementStats').textContent;
+            const shareText = `Just unlocked "${text}" in Blood Money Game! 💰\n${stats}\n\n#BloodMoneyGame #GamingAchievement`;
+            
+            // For TikTok, we'll copy text to clipboard and open TikTok
+            navigator.clipboard.writeText(shareText).then(() => {
+                alert('📱 Achievement text copied to clipboard! 📱\n\nOpen TikTok and paste to share your achievement!');
+                window.open('https://www.tiktok.com/', '_blank');
+            }).catch(() => {
+                // Fallback: open TikTok directly
+                window.open('https://www.tiktok.com/', '_blank');
+            });
+        }
+
+        function shareToTwitter() {
+            const text = document.getElementById('achievementText').textContent;
+            const stats = document.getElementById('achievementStats').textContent;
+            const shareText = `Just unlocked "${text}" in Blood Money Game! 🏆\n${stats}\n\nCan you beat my score? #BloodMoneyGame #Gaming`;
+            const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(window.location.href)}`;
+            window.open(shareUrl, '_blank', 'width=600,height=400');
         }
 
         // Advanced Meme Generator with Image Selection and Draggable Text
@@ -763,6 +1090,18 @@
         let loadedImages = {};
         let selectedTextIndex = -1; // 当前选中的文字索引
         let isPreviewMode = true; // 实时预览模式
+        
+        // Voting data
+        let voteData = {
+            good: 0,
+            normal: 0,
+            bad: 0
+        };
+        let hasVoted = false; // Track if user has voted
+        let showResults = false; // Control visibility of results
+        
+        // Achievement data
+        let firstAchievementGeneration = true; // Track first time for confetti effect
 
         // Initialize canvas
         window.addEventListener('load', function() {
@@ -778,6 +1117,9 @@
             canvas.addEventListener('mousemove', drag);
             canvas.addEventListener('mouseup', endDrag);
             canvas.addEventListener('mouseleave', endDrag);
+            
+            // Initialize voting display
+            updateVotingResults();
         });
 
         function preloadImages() {
@@ -1250,8 +1592,51 @@
 
         // Ending Voting
         function voteEnding(ending) {
+            if (hasVoted) {
+                alert('🌟 You have already voted! Thank you for your participation. 🌟');
+                return;
+            }
+            
+            // Record the vote
+            voteData[ending]++;
+            hasVoted = true;
+            showResults = true;
+            
+            // Update the display
+            updateVotingResults();
+            
             alert(`🌟 Thank you for voting for the ${ending} ending! Your vote has been recorded. You're awesome! 🌟`);
-            // In a real implementation, this would update the server-side voting data
+        }
+
+        function updateVotingResults() {
+            // Calculate total votes
+            const totalVotes = voteData.good + voteData.normal + voteData.bad;
+            
+            // Update each progress bar
+            updateProgressBar('good', voteData.good, totalVotes);
+            updateProgressBar('normal', voteData.normal, totalVotes);
+            updateProgressBar('bad', voteData.bad, totalVotes);
+        }
+
+        function updateProgressBar(type, votes, totalVotes) {
+            const progressBar = document.getElementById(type + 'Progress');
+            const percentage = totalVotes > 0 ? (votes / totalVotes) * 100 : 0;
+            
+            progressBar.style.width = percentage + '%';
+            
+            // Only show vote numbers after user has voted
+            if (showResults) {
+                if (votes === 0) {
+                    progressBar.textContent = '0 votes';
+                } else if (votes === 1) {
+                    progressBar.textContent = '1 vote';
+                } else {
+                    progressBar.textContent = votes + ' votes';
+                }
+            } else {
+                // Before voting, show empty content
+                progressBar.textContent = '';
+            }
         }
 
         // Comment System
@@ -1284,6 +1669,46 @@
             alert('🌟 Comment posted successfully! Thank you for sharing! 🌟');
         }
 
+        // Confetti Effect Function
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff'];
+            const confettiCount = 150;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-10px';
+                confetti.style.opacity = Math.random() + 0.5;
+                confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.zIndex = '9999';
+                
+                document.body.appendChild(confetti);
+                
+                const animation = confetti.animate([
+                    {
+                        transform: 'translateY(-10px) rotate(0deg)',
+                        opacity: 1
+                    },
+                    {
+                        transform: 'translateY(' + (window.innerHeight + 20) + 'px) rotate(' + (Math.random() * 720 - 360) + 'deg)',
+                        opacity: 0
+                    }
+                ], {
+                    duration: Math.random() * 2000 + 2000,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                });
+                
+                animation.onfinish = () => {
+                    confetti.remove();
+                };
+            }
+        }
+
   
         // Close modal when clicking outside
         window.onclick = function(event) {
@@ -1298,6 +1723,11 @@
                 cancelEditText();
             }
         };
+
+        // Initialize leaderboard when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLeaderboard();
+        });
     </script>
 </body>
 </html>
